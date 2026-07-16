@@ -29,6 +29,17 @@ export default function ProductCard({ product }: ProductCardProps) {
               transform: isHovered ? "scale(1.05)" : "scale(1)",
             }}
           />
+
+          {/* View Label - Slides up on hover */}
+          <div className={`absolute inset-0 flex items-end justify-center pb-6 transition-opacity duration-300 ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}>
+            <span className="text-xs uppercase tracking-widest font-light text-black bg-white px-4 py-2 rounded">
+              Voir →
+            </span>
+          </div>
+
+          {/* Favorite Button */}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -38,7 +49,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           >
             <Heart
               size={20}
-              className={isFavorite ? "fill-black text-black" : "text-black"}
+              className={isFavorite ? "fill-red-600 text-red-600" : "text-black"}
             />
           </button>
         </div>

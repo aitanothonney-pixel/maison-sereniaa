@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
+import CountdownTimer from '@/components/CountdownTimer';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -62,6 +63,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Countdown Promotion */}
+      <CountdownTimer />
 
       {/* Collections Section */}
       <section className="bg-white py-24 md:py-32">

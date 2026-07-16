@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'MAISON SERENIA | Mobilier de Luxe',
-  description: "Découvrez notre collection exclusive de mobilier haut de gamme. MAISON SERENIA, l'art de vivre à la française.",
+  title: 'in & Co | Boutique de Vêtements Premium',
+  description: "Découvrez notre collection exclusive de vêtements de qualité. in & Co, le style pour tous.",
 }
 
 export default function RootLayout({

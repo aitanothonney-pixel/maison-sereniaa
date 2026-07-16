@@ -39,7 +39,7 @@ export default function Livraison() {
                 <tr className="border-b border-gray-100">
                   <td className="py-4 px-4 font-medium">Colissimo Standard</td>
                   <td className="py-4 px-4">3-5 jours</td>
-                  <td className="py-4 px-4">Gratuit >80 CHF</td>
+                  <td className="py-4 px-4">Gratuit {'>'} 80 CHF</td>
                   <td className="py-4 px-4 text-gray-600 text-xs">France, Suisse, Belgique</td>
                 </tr>
                 <tr className="border-b border-gray-100">

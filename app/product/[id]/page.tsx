@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { products } from '@/lib/products';
-import { Heart, ShoppingCart, ChevronLeft } from 'lucide-react';
+import { Heart, ShoppingCart, ChevronLeft, Share2, Copy, Check, Truck, RotateCcw, Award } from 'lucide-react';
 
 export default function ProductPage() {
   const params = useParams();
@@ -19,6 +19,33 @@ export default function ProductPage() {
   const [isFavorite, setIsFavorite] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [shareLink, setShareLink] = useState('');
+  const [shareCopied, setShareCopied] = useState(false);
+  const [recentlyViewed, setRecentlyViewed] = useState<any[]>([]);
+  const [stock] = useState(12);
+
+  useEffect(() => {
+    if (product) {
+      const recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+      const filtered = recent.filter((p: any) => p.id !== product.id);
+      filtered.unshift(product);
+      const limited = filtered.slice(0, 8);
+      localStorage.setItem('recentlyViewed', JSON.stringify(limited));
+      setRecentlyViewed(limited);
+    }
+  }, [product]);
+
+  const handleShare = () => {
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    setShareLink(url);
+  };
+
+  const handleCopyLink = () => {
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    navigator.clipboard.writeText(url);
+    setShareCopied(true);
+    setTimeout(() => setShareCopied(false), 2000);
+  };
 
   if (!product) {
     return (
@@ -89,55 +116,66 @@ export default function ProductPage() {
 
           {/* Product Info */}
           <div>
-            <p className="text-sm text-gray-500 mb-2">{product.category}</p>
-            <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+            <p className="text-xs uppercase tracking-widest text-gray-600 mb-4 font-light">{product.category}</p>
+            <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-6">{product.name}</h1>
 
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-3xl font-bold text-black">{product.price.toFixed(2)}€</span>
-              <span className="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium">
-                En stock
+            <div className="flex items-end gap-4 mb-8">
+              <span className="text-4xl font-light tracking-wide text-black">{product.price.toFixed(2)} CHF</span>
+              <span className={`text-sm px-3 py-1 rounded-full font-light ${
+                stock > 5
+                  ? 'bg-green-100 text-green-800'
+                  : stock > 0
+                  ? 'bg-yellow-100 text-yellow-800'
+                  : 'bg-red-100 text-red-800'
+              }`}>
+                {stock > 5 ? 'En stock' : stock > 0 ? 'Stock limité' : 'Rupture'}
               </span>
             </div>
+            {stock <= 5 && stock > 0 && (
+              <p className="text-xs text-gray-600 mb-4 font-light">
+                Seulement {stock} articles disponibles
+              </p>
+            )}
 
-            <p className="text-gray-700 mb-8 leading-relaxed">{product.description}</p>
+            <p className="text-gray-700 font-light leading-relaxed mb-8">{product.description}</p>
 
             {/* Size Selection */}
             <div className="mb-8">
-              <h3 className="font-bold mb-3">Taille</h3>
-              <div className="grid grid-cols-4 gap-2">
+              <h3 className="text-sm font-light uppercase tracking-widest mb-4">Taille</h3>
+              <div className="grid grid-cols-4 gap-3">
                 {product.sizes.map(size => (
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`py-3 px-4 rounded-lg font-medium transition border-2 ${
+                    className={`py-3 px-2 transition border text-sm font-light uppercase tracking-widest ${
                       selectedSize === size
                         ? 'border-black bg-black text-white'
-                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-400'
                     }`}
                   >
                     {size}
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                <Link href="#" className="underline hover:no-underline">
-                  Guide des tailles
+              <p className="text-xs text-gray-600 mt-3 font-light">
+                <Link href="#" className="hover:text-black transition">
+                  Guide des tailles →
                 </Link>
               </p>
             </div>
 
             {/* Color Selection */}
             <div className="mb-8">
-              <h3 className="font-bold mb-3">Couleur</h3>
+              <h3 className="text-sm font-light uppercase tracking-widest mb-4">Couleur</h3>
               <div className="space-y-2">
                 {product.colors.map(color => (
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`w-full py-3 px-4 rounded-lg font-medium transition border-2 text-left ${
+                    className={`w-full py-3 px-4 transition border text-left font-light ${
                       selectedColor === color
                         ? 'border-black bg-black text-white'
-                        : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                        : 'border-gray-200 text-gray-700 hover:border-gray-400'
                     }`}
                   >
                     {color}
@@ -148,65 +186,121 @@ export default function ProductPage() {
 
             {/* Quantity */}
             <div className="mb-8">
-              <h3 className="font-bold mb-3">Quantité</h3>
-              <div className="flex items-center border border-gray-200 rounded-lg w-fit">
+              <h3 className="text-sm font-light uppercase tracking-widest mb-4">Quantité</h3>
+              <div className="flex items-center border border-gray-200 w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="px-4 py-2 text-gray-600 hover:text-black transition"
+                  className="px-4 py-3 text-gray-600 hover:text-black transition font-light"
                 >
                   −
                 </button>
-                <span className="px-6 py-2 font-medium">{quantity}</span>
+                <span className="px-6 py-3 font-light border-r border-l border-gray-200">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="px-4 py-2 text-gray-600 hover:text-black transition"
+                  className="px-4 py-3 text-gray-600 hover:text-black transition font-light"
                 >
                   +
                 </button>
               </div>
             </div>
 
-            {/* Add to Cart */}
-            <div className="flex gap-4 mb-8">
+            {/* Add to Cart & Actions */}
+            <div className="space-y-4 mb-8">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 bg-black text-white py-4 rounded-lg font-bold hover:bg-gray-800 transition flex items-center justify-center gap-2"
+                disabled={stock === 0}
+                className={`w-full py-4 font-light uppercase tracking-widest text-sm transition flex items-center justify-center gap-2 ${
+                  stock === 0
+                    ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                    : 'bg-black text-white hover:bg-gray-900'
+                }`}
               >
                 <ShoppingCart size={20} />
-                {addedToCart ? 'Ajouté au panier ✓' : 'Ajouter au panier'}
+                {addedToCart ? 'Ajouté ✓' : 'Ajouter au Panier'}
               </button>
-              <button
-                onClick={() => setIsFavorite(!isFavorite)}
-                className="px-6 py-4 border-2 border-gray-200 rounded-lg font-bold hover:border-gray-300 transition"
-              >
-                <Heart
-                  size={20}
-                  className={isFavorite ? 'fill-red-500 text-red-500' : 'text-gray-400'}
-                />
-              </button>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setIsFavorite(!isFavorite)}
+                  className={`flex-1 py-3 border transition font-light uppercase tracking-widest text-xs ${
+                    isFavorite
+                      ? 'border-red-500 bg-red-50 text-red-600'
+                      : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                  }`}
+                >
+                  <Heart
+                    size={16}
+                    className={`inline mr-2 ${isFavorite ? 'fill-red-600 text-red-600' : ''}`}
+                  />
+                  Wishlist
+                </button>
+                <button
+                  onClick={handleCopyLink}
+                  className="flex-1 py-3 border border-gray-200 text-gray-700 hover:border-gray-300 transition font-light uppercase tracking-widest text-xs"
+                >
+                  {shareCopied ? (
+                    <>
+                      <Check size={16} className="inline mr-2" />
+                      Copié
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={16} className="inline mr-2" />
+                      Partager
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
-            {/* Additional Info */}
-            <div className="bg-gray-50 p-6 rounded-lg space-y-4">
-              <div className="flex justify-between">
-                <span className="text-gray-700">Livraison gratuite</span>
-                <span className="font-medium">À partir de 50€</span>
+            {/* Reassurance Badges */}
+            <div className="grid grid-cols-3 gap-4">
+              <div className="flex flex-col items-center text-center space-y-2 p-4 bg-gray-50 rounded">
+                <Truck size={24} className="text-black" />
+                <p className="text-xs uppercase tracking-widest font-light">Livraison Gratuite</p>
+                <p className="text-xs text-gray-600 font-light">{'>'} 80 CHF</p>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-700">Retours gratuits</span>
-                <span className="font-medium">30 jours</span>
+              <div className="flex flex-col items-center text-center space-y-2 p-4 bg-gray-50 rounded">
+                <RotateCcw size={24} className="text-black" />
+                <p className="text-xs uppercase tracking-widest font-light">Retours Gratuits</p>
+                <p className="text-xs text-gray-600 font-light">30 jours</p>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-700">Garantie</span>
-                <span className="font-medium">1 an</span>
+              <div className="flex flex-col items-center text-center space-y-2 p-4 bg-gray-50 rounded">
+                <Award size={24} className="text-black" />
+                <p className="text-xs uppercase tracking-widest font-light">Garantie</p>
+                <p className="text-xs text-gray-600 font-light">2 ans</p>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Recently Viewed */}
+        {recentlyViewed.length > 1 && (
+          <div className="border-t pt-12 mb-16">
+            <h2 className="text-3xl font-light tracking-wide mb-8">Vus récemment</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {recentlyViewed.slice(1, 5).map(p => (
+                <Link key={p.id} href={`/product/${p.id}`}>
+                  <div className="group cursor-pointer">
+                    <div className="bg-gray-100 rounded overflow-hidden mb-4 aspect-square">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <p className="text-xs uppercase tracking-widest text-gray-600 font-light mb-1">{p.category}</p>
+                    <h3 className="text-sm font-light group-hover:text-gray-600 transition mb-2 leading-tight">{p.name}</h3>
+                    <span className="text-sm font-light text-black">{p.price.toFixed(2)} CHF</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Related Products */}
         <div className="border-t pt-12">
-          <h2 className="text-3xl font-bold mb-8">Produits similaires</h2>
+          <h2 className="text-3xl font-light tracking-wide mb-8">Produits similaires</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products
               .filter(p => p.category === product.category && p.id !== product.id)
@@ -214,16 +308,16 @@ export default function ProductPage() {
               .map(p => (
                 <Link key={p.id} href={`/product/${p.id}`}>
                   <div className="group cursor-pointer">
-                    <div className="bg-gray-100 rounded-lg mb-4 overflow-hidden">
+                    <div className="bg-gray-100 rounded mb-4 overflow-hidden aspect-square">
                       <img
                         src={p.image}
                         alt={p.name}
-                        className="w-full h-64 object-cover group-hover:scale-105 transition duration-300"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <p className="text-sm text-gray-500 mb-1">{p.category}</p>
-                    <h3 className="font-bold mb-2 group-hover:text-gray-600 transition">{p.name}</h3>
-                    <span className="text-lg font-bold">{p.price.toFixed(2)}€</span>
+                    <p className="text-xs uppercase tracking-widest text-gray-600 font-light mb-1">{p.category}</p>
+                    <h3 className="text-sm font-light group-hover:text-gray-600 transition mb-2 leading-tight">{p.name}</h3>
+                    <span className="text-sm font-light text-black">{p.price.toFixed(2)} CHF</span>
                   </div>
                 </Link>
               ))}

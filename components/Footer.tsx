@@ -1,62 +1,62 @@
 import Link from "next/link";
-import { Heart, Mail, Share2 } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
+    <footer className="bg-white border-t border-gray-100 mt-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
+          {/* AIDE */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                <span className="text-black font-bold">in</span>
-              </div>
-              <span className="text-xl font-bold">in & Co</span>
-            </div>
-            <p className="text-gray-400 text-sm">Vêtements de qualité pour tous les styles.</p>
-          </div>
-
-          {/* Shop */}
-          <div>
-            <h3 className="font-semibold mb-4">Boutique</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li><Link href="/shop" className="hover:text-white transition">Tous les produits</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Homme</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Femme</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Enfants</Link></li>
+            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Aide</h3>
+            <ul className="space-y-3 text-sm text-gray-700">
+              <li><Link href="#" className="hover:text-black transition font-light">Service Client</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Contactez-nous</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">FAQ</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Trouver un magasin</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* SERVICES */}
           <div>
-            <h3 className="font-semibold mb-4">Entreprise</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li><Link href="#" className="hover:text-white transition">À propos</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Contact</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Livraison</Link></li>
-              <li><Link href="#" className="hover:text-white transition">Retours</Link></li>
+            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Services</h3>
+            <ul className="space-y-3 text-sm text-gray-700">
+              <li><Link href="#" className="hover:text-black transition font-light">Livraison & Retours</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Personnalisation</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Réparations</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Garantie</Link></li>
             </ul>
           </div>
 
-          {/* Social */}
+          {/* À PROPOS */}
           <div>
-            <h3 className="font-semibold mb-4">Suivez-nous</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                <Share2 size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                <Heart size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
-                <Mail size={20} />
-              </a>
-            </div>
+            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">À Propos</h3>
+            <ul className="space-y-3 text-sm text-gray-700">
+              <li><Link href="#" className="hover:text-black transition font-light">Histoire de la Maison</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Arts & Culture</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Durabilité</Link></li>
+              <li><Link href="#" className="hover:text-black transition font-light">Carrières</Link></li>
+            </ul>
+          </div>
+
+          {/* SUIVEZ-NOUS */}
+          <div>
+            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Suivez-Nous</h3>
+            <p className="text-sm text-gray-700 mb-4 font-light">Inscrivez-vous à notre newsletter pour les nouveautés exclusives.</p>
+            <input
+              type="email"
+              placeholder="Votre email"
+              className="w-full text-sm border-b border-black bg-transparent py-2 placeholder-gray-400 focus:outline-none"
+            />
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+        <div className="border-t border-gray-100 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-4">
+          <div className="flex gap-6">
+            <Link href="#" className="hover:text-black transition">Plan du Site</Link>
+            <Link href="#" className="hover:text-black transition">Mentions Légales</Link>
+            <Link href="#" className="hover:text-black transition">Cookies</Link>
+            <Link href="#" className="hover:text-black transition">Politique de Confidentialité</Link>
+          </div>
           <p>&copy; 2026 in & Co. Tous droits réservés.</p>
         </div>
       </div>

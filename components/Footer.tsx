@@ -9,10 +9,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Aide</h3>
             <ul className="space-y-3 text-sm text-gray-700">
-              <li><Link href="#" className="hover:text-black transition font-light">Service Client</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Contactez-nous</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">FAQ</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Trouver un magasin</Link></li>
+              <li><Link href="/contact" className="hover:text-black transition font-light">Service Client</Link></li>
+              <li><Link href="/contact" className="hover:text-black transition font-light">Contactez-nous</Link></li>
+              <li><Link href="/faq" className="hover:text-black transition font-light">FAQ</Link></li>
+              <li><Link href="/livraison" className="hover:text-black transition font-light">Livraison & Délais</Link></li>
             </ul>
           </div>
 
@@ -20,10 +20,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Services</h3>
             <ul className="space-y-3 text-sm text-gray-700">
-              <li><Link href="#" className="hover:text-black transition font-light">Livraison & Retours</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Personnalisation</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Réparations</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Garantie</Link></li>
+              <li><Link href="/livraison" className="hover:text-black transition font-light">Livraison Gratuite</Link></li>
+              <li><Link href="/retours" className="hover:text-black transition font-light">Retours Gratuits</Link></li>
+              <li><Link href="/faq" className="hover:text-black transition font-light">Garantie 2 Ans</Link></li>
+              <li><Link href="/contact" className="hover:text-black transition font-light">Nous Contacter</Link></li>
             </ul>
           </div>
 
@@ -31,33 +31,46 @@ export default function Footer() {
           <div>
             <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">À Propos</h3>
             <ul className="space-y-3 text-sm text-gray-700">
-              <li><Link href="#" className="hover:text-black transition font-light">Histoire de la Maison</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Arts & Culture</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Durabilité</Link></li>
-              <li><Link href="#" className="hover:text-black transition font-light">Carrières</Link></li>
+              <li><Link href="/a-propos" className="hover:text-black transition font-light">Notre Histoire</Link></li>
+              <li><Link href="/a-propos" className="hover:text-black transition font-light">Nos Valeurs</Link></li>
+              <li><Link href="/a-propos" className="hover:text-black transition font-light">Durabilité</Link></li>
+              <li><Link href="/contact" className="hover:text-black transition font-light">Carrières</Link></li>
             </ul>
           </div>
 
-          {/* SUIVEZ-NOUS */}
+          {/* NEWSLETTER */}
           <div>
-            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Suivez-Nous</h3>
-            <p className="text-sm text-gray-700 mb-4 font-light">Inscrivez-vous à notre newsletter pour les nouveautés exclusives.</p>
+            <h3 className="text-xs tracking-widest uppercase font-light mb-6 text-black">Newsletter</h3>
+            <p className="text-sm text-gray-700 mb-4 font-light">Recevez nos nouveautés exclusives et offres spéciales.</p>
             <input
               type="email"
               placeholder="Votre email"
-              className="w-full text-sm border-b border-black bg-transparent py-2 placeholder-gray-400 focus:outline-none"
+              className="w-full text-sm border-b border-black bg-transparent py-2 placeholder-gray-400 focus:outline-none font-light"
             />
           </div>
         </div>
 
-        <div className="border-t border-gray-100 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-4">
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-black transition">Plan du Site</Link>
-            <Link href="#" className="hover:text-black transition">Mentions Légales</Link>
-            <Link href="#" className="hover:text-black transition">Cookies</Link>
-            <Link href="#" className="hover:text-black transition">Politique de Confidentialité</Link>
+        {/* Payment Methods */}
+        <div className="border-t border-gray-100 py-8 mb-8">
+          <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-4 text-center">Paiements Sécurisés</p>
+          <div className="flex flex-wrap justify-center gap-6 text-center">
+            {['💳 Visa', '💳 Mastercard', '🍎 Apple Pay', '🔵 Google Pay', '💰 PayPal', '📱 Klarna'].map((method) => (
+              <div key={method} className="text-xs text-gray-600 font-light">
+                {method}
+              </div>
+            ))}
           </div>
-          <p>&copy; 2026 in & Co. Tous droits réservés.</p>
+        </div>
+
+        {/* Bottom Links */}
+        <div className="border-t border-gray-100 pt-12 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-4">
+          <div className="flex gap-6 flex-wrap justify-center md:justify-start">
+            <Link href="#" className="hover:text-black transition font-light">Plan du Site</Link>
+            <Link href="#" className="hover:text-black transition font-light">Mentions Légales</Link>
+            <Link href="#" className="hover:text-black transition font-light">Cookies</Link>
+            <Link href="#" className="hover:text-black transition font-light">Politique de Confidentialité</Link>
+          </div>
+          <p className="font-light">&copy; 2026 in & Co. Tous droits réservés.</p>
         </div>
       </div>
     </footer>

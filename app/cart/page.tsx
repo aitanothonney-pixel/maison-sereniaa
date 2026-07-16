@@ -54,7 +54,7 @@ export default function CartPage() {
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const discountAmount = (subtotal * discount) / 100;
-  const shipping = subtotal > 50 ? 0 : 8.99;
+  const shipping = subtotal > 80 ? 0 : 12.90;
   const total = subtotal - discountAmount + shipping;
 
   if (loading) {
@@ -73,9 +73,9 @@ export default function CartPage() {
     <div className="min-h-screen bg-white">
       <Header cartCount={cartItems.length} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold mb-2">Panier</h1>
-        <p className="text-gray-600 mb-12">{cartItems.length} article{cartItems.length !== 1 ? 's' : ''}</p>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+        <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-2">Votre Panier</h1>
+        <p className="text-gray-600 font-light mb-12">{cartItems.length} article{cartItems.length !== 1 ? 's' : ''}</p>
 
         {cartItems.length === 0 ? (
           <div className="text-center py-20">
@@ -111,7 +111,7 @@ export default function CartPage() {
                             {item.color} • Taille {item.size}
                           </p>
                         </div>
-                        <span className="font-bold text-lg">{(item.price * item.quantity).toFixed(2)}€</span>
+                        <span className="font-bold text-lg">{(item.price * item.quantity).toFixed(2)}CHF</span>
                       </div>
 
                       <div className="flex items-center justify-between mt-4">
@@ -153,25 +153,25 @@ export default function CartPage() {
                 <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
                   <div className="flex justify-between">
                     <span className="text-gray-700">Sous-total</span>
-                    <span className="font-medium">{subtotal.toFixed(2)}€</span>
+                    <span className="font-medium">{subtotal.toFixed(2)}CHF</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-green-600">
                       <span>Réduction ({discount}%)</span>
-                      <span className="font-medium">-{discountAmount.toFixed(2)}€</span>
+                      <span className="font-medium">-{discountAmount.toFixed(2)}CHF</span>
                     </div>
                   )}
                   <div className="flex justify-between">
                     <span className="text-gray-700">Livraison</span>
                     <span className="font-medium">
-                      {shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)}€`}
+                      {shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)}CHF`}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex justify-between items-center mb-6 text-lg font-bold">
                   <span>Total</span>
-                  <span>{total.toFixed(2)}€</span>
+                  <span>{total.toFixed(2)}CHF</span>
                 </div>
 
                 {/* Promo Code */}
@@ -210,10 +210,10 @@ export default function CartPage() {
                 </Link>
 
                 {/* Info */}
-                <div className="mt-6 pt-6 border-t border-gray-200 text-xs text-gray-600 space-y-2">
-                  <p>✓ Livraison gratuite à partir de 50€</p>
+                <div className="mt-6 pt-6 border-t border-gray-200 text-xs text-gray-600 space-y-2 font-light">
+                  <p>✓ Livraison gratuite dès 80 CHF</p>
                   <p>✓ Retours gratuits pendant 30 jours</p>
-                  <p>✓ Paiement 100% sécurisé</p>
+                  <p>✓ Paiement 100% sécurisé (SSL)</p>
                 </div>
               </div>
             </div>

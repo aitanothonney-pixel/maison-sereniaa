@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Menu, X, Heart, ShoppingCart, User } from 'lucide-react';
-import SearchBar from './SearchBar';
+import SearchModal from './SearchModal';
 
 interface HeaderPremiumProps {
   cartCount: number;
@@ -63,7 +63,19 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
 
             {/* Search Bar - Center Right */}
             <div className="hidden md:flex flex-1 max-w-xs">
-              <SearchBar />
+              <motion.button
+                onClick={() => setIsSearchOpen(true)}
+                className="w-full text-left"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="flex items-center gap-2 text-gray-400 hover:text-black transition">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" />
+                    <path d="M14.5 14.5L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                  <span className="text-sm font-light">Que recherchez-vous ?</span>
+                </div>
+              </motion.button>
             </div>
 
             {/* Right: Action Buttons */}
@@ -71,8 +83,9 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
               {/* Search Mobile */}
               <motion.button
                 className="md:hidden"
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                onClick={() => setIsSearchOpen(true)}
                 whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black"/>
@@ -141,18 +154,6 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
             </div>
           </div>
 
-          {/* Mobile Search */}
-          {isSearchOpen && (
-            <motion.div
-              className="md:hidden mt-4"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <SearchBar />
-            </motion.div>
-          )}
         </div>
 
         {/* Mobile Menu - Sidebar Style */}
@@ -283,6 +284,9 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
           </Link>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
 }

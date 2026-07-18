@@ -10,6 +10,8 @@ import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
 import CountdownTimer from '@/components/CountdownTimer';
 import HeroSection from '@/components/HeroSection';
 import TestimonialSection from '@/components/TestimonialSection';
+import CollectionsSection from '@/components/CollectionsSection';
+import FeaturedProductsSection from '@/components/FeaturedProductsSection';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -44,68 +46,11 @@ export default function Home() {
       {/* Countdown Promotion */}
       <CountdownTimer />
 
-      {/* Collections Section */}
-      <section className="bg-white py-24 md:py-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] uppercase text-gray-600 mb-4 font-light">Collections</p>
-            <h2 className="text-5xl md:text-6xl font-light tracking-wide mb-6">Nos Univers</h2>
-            <div className="w-12 h-px bg-black mx-auto"></div>
-          </div>
+      {/* Collections Section - Animated */}
+      <CollectionsSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { name: "Homme", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=800&fit=crop" },
-              { name: "Femme", image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&h=800&fit=crop" },
-            ].map((collection) => (
-              <div key={collection.name} className="relative group overflow-hidden h-96 md:h-[500px]">
-                <img
-                  src={collection.image}
-                  alt={collection.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition duration-300 flex items-center justify-center">
-                  <div className="text-center text-white space-y-4">
-                    <h3 className="text-4xl md:text-5xl font-light tracking-widest">{collection.name}</h3>
-                    <Link
-                      href="/shop"
-                      className="inline-block px-8 py-2 border border-white text-white uppercase text-xs tracking-widest font-light hover:bg-white hover:text-black transition"
-                    >
-                      Explorer
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="bg-white py-24 md:py-32 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] uppercase text-gray-600 mb-4 font-light">Sélection</p>
-            <h2 className="text-5xl md:text-6xl font-light tracking-wide mb-6">Pièces Signatures</h2>
-            <div className="w-12 h-px bg-black mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link
-              href="/shop"
-              className="inline-block px-12 py-3 border border-black text-black uppercase text-xs tracking-widest font-light hover:bg-black hover:text-white transition duration-300"
-            >
-              Voir la Collection Complète
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Featured Products - Animated */}
+      <FeaturedProductsSection />
 
       {/* Trust Strip */}
       <section className="bg-white py-16 md:py-20 border-t border-gray-100">

@@ -24,7 +24,7 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-9 z-40">
+      <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <div className="flex items-center justify-between gap-8">
             {/* Desktop Menu */}

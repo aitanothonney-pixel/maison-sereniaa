@@ -26,20 +26,6 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
       <header className="bg-white border-b border-gray-200 sticky top-9 z-40">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6">
           <div className="flex items-center justify-between gap-8">
-            {/* Left: Menu Button */}
-            <motion.button
-              className="md:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {isMenuOpen ? (
-                <X size={24} className="text-black" />
-              ) : (
-                <Menu size={24} className="text-black" />
-              )}
-            </motion.button>
-
             {/* Desktop Menu */}
             <nav className="hidden md:flex gap-8">
               {[
@@ -131,6 +117,20 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
                   )}
                 </motion.div>
               </Link>
+
+              {/* Mobile Menu Button */}
+              <motion.button
+                className="md:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isMenuOpen ? (
+                  <X size={24} className="text-black" />
+                ) : (
+                  <Menu size={24} className="text-black" />
+                )}
+              </motion.button>
             </div>
           </div>
 

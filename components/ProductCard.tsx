@@ -22,7 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           onMouseLeave={() => setIsHovered(false)}
         >
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-500"
             style={{

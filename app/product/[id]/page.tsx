@@ -14,7 +14,7 @@ export default function ProductPage() {
   const product = products.find(p => p.id === productId);
 
   const [selectedSize, setSelectedSize] = useState(product?.sizes[0] || 'M');
-  const [selectedColor, setSelectedColor] = useState(product?.colors[0] || 'Noir');
+  const [selectedColor, setSelectedColor] = useState(product?.colors[0]?.name || 'Black');
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -22,7 +22,7 @@ export default function ProductPage() {
   const [shareLink, setShareLink] = useState('');
   const [shareCopied, setShareCopied] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<any[]>([]);
-  const [stock] = useState(12);
+  const [stock] = useState(product?.stock || 12);
 
   useEffect(() => {
     if (product) {
@@ -72,7 +72,7 @@ export default function ProductPage() {
       size: selectedSize,
       color: selectedColor,
       quantity,
-      image: product.image,
+      image: product.images[0],
     };
 
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -100,15 +100,15 @@ export default function ProductPage() {
           <div className="sticky top-24 h-fit">
             <div className="bg-gray-100 rounded-lg overflow-hidden mb-4">
               <img
-                src={product.image}
+                src={product.images[0]}
                 alt={product.name}
                 className="w-full h-96 md:h-[500px] object-cover"
               />
             </div>
             <div className="flex gap-2">
-              {[...Array(3)].map((_, i) => (
+              {product.images.slice(0, 3).map((img, i) => (
                 <div key={i} className="w-16 h-16 bg-gray-100 rounded-lg cursor-pointer hover:opacity-75 transition">
-                  <img src={product.image} alt="" className="w-full h-full object-cover" />
+                  <img src={img} alt="" className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -170,15 +170,16 @@ export default function ProductPage() {
               <div className="space-y-2">
                 {product.colors.map(color => (
                   <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
-                    className={`w-full py-3 px-4 transition border text-left font-light ${
-                      selectedColor === color
+                    key={color.sku}
+                    onClick={() => setSelectedColor(color.name)}
+                    className={`w-full py-3 px-4 transition border text-left font-light flex items-center gap-3 ${
+                      selectedColor === color.name
                         ? 'border-black bg-black text-white'
                         : 'border-gray-200 text-gray-700 hover:border-gray-400'
                     }`}
                   >
-                    {color}
+                    <div className="w-4 h-4 rounded border" style={{ backgroundColor: color.hex, borderColor: selectedColor === color.name ? '#fff' : '#ccc' }}></div>
+                    {color.name}
                   </button>
                 ))}
               </div>
@@ -283,7 +284,7 @@ export default function ProductPage() {
                   <div className="group cursor-pointer">
                     <div className="bg-gray-100 rounded overflow-hidden mb-4 aspect-square">
                       <img
-                        src={p.image}
+                        src={p.images[0]}
                         alt={p.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
@@ -310,7 +311,7 @@ export default function ProductPage() {
                   <div className="group cursor-pointer">
                     <div className="bg-gray-100 rounded mb-4 overflow-hidden aspect-square">
                       <img
-                        src={p.image}
+                        src={p.images[0]}
                         alt={p.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />

@@ -34,28 +34,29 @@ export default function Shop() {
     <div className="min-h-screen bg-white">
       <HeaderPremium cartCount={cartCount} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-2">Boutique</h1>
-          <p className="text-gray-600">Explorez notre collection complète de vêtements</p>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <div className="mb-16">
+          <h1 className="text-5xl md:text-6xl font-light tracking-wide mb-4">Boutique</h1>
+          <div className="w-12 h-px bg-black mb-6"></div>
+          <p className="text-gray-600 font-light text-lg">Explorez notre collection complète de vêtements et accessoires premium</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-gray-50 p-6 rounded-lg sticky top-24">
+            <div className="sticky top-24">
               {/* Categories */}
-              <div className="mb-8">
-                <h3 className="font-bold text-lg mb-4">Catégories</h3>
-                <div className="space-y-2">
+              <div className="mb-12 pb-12 border-b border-gray-200">
+                <h3 className="text-sm font-light uppercase tracking-widest text-black mb-6">Catégories</h3>
+                <div className="space-y-3">
                   {categories.map(cat => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`block w-full text-left px-3 py-2 rounded-lg transition ${
+                      className={`block w-full text-left px-0 py-2 font-light transition border-b-2 ${
                         selectedCategory === cat
-                          ? 'bg-black text-white font-semibold'
-                          : 'text-gray-700 hover:bg-gray-200'
+                          ? 'border-black text-black'
+                          : 'border-transparent text-gray-600 hover:text-black'
                       }`}
                     >
                       {cat}
@@ -65,101 +66,88 @@ export default function Shop() {
               </div>
 
               {/* Price Range */}
-              <div className="mb-8">
-                <h3 className="font-bold text-lg mb-4">Prix</h3>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="price" value="all" defaultChecked />
-                    <span>Tous les prix</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="price" value="0-50" />
-                    <span>Moins de 50€</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="price" value="50-100" />
-                    <span>50€ - 100€</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="price" value="100+" />
-                    <span>Plus de 100€</span>
-                  </label>
+              <div className="mb-12 pb-12 border-b border-gray-200">
+                <h3 className="text-sm font-light uppercase tracking-widest text-black mb-6">Prix</h3>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Tous les prix', value: 'all' },
+                    { label: 'Moins de 50 CHF', value: '0-50' },
+                    { label: '50 - 100 CHF', value: '50-100' },
+                    { label: 'Plus de 100 CHF', value: '100+' }
+                  ].map(option => (
+                    <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
+                      <div className="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center group-hover:border-black transition">
+                        <input type="radio" name="price" value={option.value} defaultChecked={option.value === 'all'} className="hidden" />
+                        <div className="w-2.5 h-2.5 bg-black rounded-full hidden group-hover:block"></div>
+                      </div>
+                      <span className="text-sm font-light text-gray-700 group-hover:text-black transition">{option.label}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
               {/* Size */}
               <div>
-                <h3 className="font-bold text-lg mb-4">Taille</h3>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="all" defaultChecked onChange={() => setSelectedSize('Tous')} />
-                    <span>Toutes les tailles</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="xs" onChange={() => setSelectedSize('XS')} />
-                    <span>XS</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="s" onChange={() => setSelectedSize('S')} />
-                    <span>S</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="m" onChange={() => setSelectedSize('M')} />
-                    <span>M</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="l" onChange={() => setSelectedSize('L')} />
-                    <span>L</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="xl" onChange={() => setSelectedSize('XL')} />
-                    <span>XL</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="radio" name="size" value="xxl" onChange={() => setSelectedSize('XXL')} />
-                    <span>XXL</span>
-                  </label>
+                <h3 className="text-sm font-light uppercase tracking-widest text-black mb-6">Taille</h3>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Toutes les tailles', value: 'all' },
+                    { label: 'XS', value: 'xs' },
+                    { label: 'S', value: 's' },
+                    { label: 'M', value: 'm' },
+                    { label: 'L', value: 'l' },
+                    { label: 'XL', value: 'xl' },
+                    { label: 'XXL', value: 'xxl' }
+                  ].map(option => (
+                    <label key={option.value} className="flex items-center gap-3 cursor-pointer group">
+                      <div className="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center group-hover:border-black transition">
+                        <input type="radio" name="size" value={option.value} defaultChecked={option.value === 'all'} onChange={() => setSelectedSize(option.value === 'all' ? 'Tous' : option.label)} className="hidden" />
+                        <div className="w-2.5 h-2.5 bg-black rounded-full hidden group-hover:block"></div>
+                      </div>
+                      <span className="text-sm font-light text-gray-700 group-hover:text-black transition">{option.label}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
           {/* Products */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             {/* Sort */}
-            <div className="flex items-center justify-between mb-8">
-              <p className="text-gray-600">{filtered.length} produit{filtered.length > 1 ? 's' : ''}</p>
+            <div className="flex items-center justify-between mb-12 pb-8 border-b border-gray-200">
+              <p className="text-sm font-light text-gray-600">{filtered.length} produit{filtered.length > 1 ? 's' : ''}</p>
               <div className="relative">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-white border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-black cursor-pointer pr-10"
+                  className="appearance-none bg-transparent border-b border-gray-300 px-0 py-2 font-light text-sm focus:outline-none focus:border-black transition cursor-pointer pr-6"
                 >
                   <option value="popular">Les plus populaires</option>
                   <option value="newest">Nouveautés</option>
                   <option value="price-low">Prix croissant</option>
                   <option value="price-high">Prix décroissant</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-3 text-gray-500 pointer-events-none" size={18} />
+                <ChevronDown className="absolute right-0 top-2 text-gray-400 pointer-events-none" size={16} />
               </div>
             </div>
 
             {/* Grid */}
             {filtered.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                 {filtered.map(product => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16">
-                <p className="text-gray-600 text-lg mb-4">Aucun produit trouvé</p>
+              <div className="text-center py-24">
+                <p className="text-gray-600 font-light text-lg mb-6">Aucun produit trouvé</p>
                 <button
                   onClick={() => {
                     setSelectedCategory('Tous');
                     setSortBy('popular');
                   }}
-                  className="text-black hover:text-gray-600 font-medium transition"
+                  className="text-sm font-light uppercase tracking-widest text-black hover:text-gray-600 transition border-b border-black hover:border-gray-600 pb-1"
                 >
                   Réinitialiser les filtres
                 </button>

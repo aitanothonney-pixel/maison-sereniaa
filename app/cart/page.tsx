@@ -73,59 +73,62 @@ export default function CartPage() {
     <div className="min-h-screen bg-white">
       <HeaderPremium cartCount={cartItems.length} />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
-        <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-2">Votre Panier</h1>
-        <p className="text-gray-600 font-light mb-12">{cartItems.length} article{cartItems.length !== 1 ? 's' : ''}</p>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+        <div className="mb-16">
+          <h1 className="text-5xl md:text-6xl font-light tracking-wide mb-4">Votre Panier</h1>
+          <div className="w-12 h-px bg-black mb-6"></div>
+          <p className="text-gray-600 font-light text-lg">{cartItems.length} article{cartItems.length !== 1 ? 's' : ''}</p>
+        </div>
 
         {cartItems.length === 0 ? (
-          <div className="text-center py-20">
-            <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Votre panier est vide</h2>
-            <p className="text-gray-600 mb-8">Ajoutez des articles pour commencer vos achats</p>
+          <div className="text-center py-24">
+            <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-6" />
+            <h2 className="text-3xl font-light tracking-wide mb-4">Votre panier est vide</h2>
+            <p className="text-gray-600 font-light text-lg mb-8">Ajoutez des articles pour commencer vos achats</p>
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition"
+              className="inline-flex items-center gap-2 bg-black text-white px-8 py-3 font-light uppercase tracking-widest text-sm hover:bg-gray-900 transition"
             >
               Continuer vos achats
-              <ArrowRight size={20} />
+              <ArrowRight size={18} />
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Cart Items */}
-            <div className="lg:col-span-2">
-              <div className="space-y-6">
+            <div className="lg:col-span-3">
+              <div className="space-y-8">
                 {cartItems.map((item, index) => (
-                  <div key={index} className="flex gap-6 pb-6 border-b border-gray-200">
-                    <div className="w-24 h-24 bg-gray-100 rounded-lg flex-shrink-0 overflow-hidden">
+                  <div key={index} className="flex gap-6 pb-8 border-b border-gray-200">
+                    <div className="w-28 h-28 bg-gray-100 rounded overflow-hidden flex-shrink-0">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <Link href={`/product/${item.id}`} className="font-bold hover:text-gray-600 transition">
+                          <Link href={`/product/${item.id}`} className="text-base font-light hover:text-gray-600 transition">
                             {item.name}
                           </Link>
-                          <p className="text-sm text-gray-600 mt-1">
+                          <p className="text-sm text-gray-600 font-light mt-2">
                             {item.color} • Taille {item.size}
                           </p>
                         </div>
-                        <span className="font-bold text-lg">{(item.price * item.quantity).toFixed(2)}CHF</span>
+                        <span className="text-base font-light">{(item.price * item.quantity).toFixed(2)} CHF</span>
                       </div>
 
-                      <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center border border-gray-200 rounded-lg w-fit">
+                      <div className="flex items-center justify-between mt-6">
+                        <div className="flex items-center border border-gray-300 w-fit">
                           <button
                             onClick={() => handleUpdateQuantity(index, item.quantity - 1)}
-                            className="px-3 py-1 text-gray-600 hover:text-black transition"
+                            className="px-4 py-2 text-gray-600 hover:text-black transition font-light"
                           >
                             −
                           </button>
-                          <span className="px-4 py-1 font-medium">{item.quantity}</span>
+                          <span className="px-6 py-2 font-light border-r border-l border-gray-300">{item.quantity}</span>
                           <button
                             onClick={() => handleUpdateQuantity(index, item.quantity + 1)}
-                            className="px-3 py-1 text-gray-600 hover:text-black transition"
+                            className="px-4 py-2 text-gray-600 hover:text-black transition font-light"
                           >
                             +
                           </button>
@@ -133,10 +136,10 @@ export default function CartPage() {
 
                         <button
                           onClick={() => handleRemoveItem(index)}
-                          className="text-red-600 hover:text-red-800 transition flex items-center gap-2"
+                          className="text-gray-600 hover:text-red-600 transition flex items-center gap-2 font-light text-sm uppercase tracking-widest"
                         >
-                          <Trash2 size={18} />
-                          <span className="hidden sm:inline">Supprimer</span>
+                          <Trash2 size={16} />
+                          <span>Supprimer</span>
                         </button>
                       </div>
                     </div>
@@ -146,74 +149,83 @@ export default function CartPage() {
             </div>
 
             {/* Order Summary */}
-            <div className="lg:col-span-1">
-              <div className="bg-gray-50 p-6 rounded-lg sticky top-24">
-                <h2 className="font-bold text-lg mb-6">Résumé de la commande</h2>
+            <div className="lg:col-span-2">
+              <div className="border border-gray-200 p-8 sticky top-24">
+                <h2 className="text-sm font-light uppercase tracking-widest text-black mb-8">Résumé de la commande</h2>
 
-                <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
-                  <div className="flex justify-between">
-                    <span className="text-gray-700">Sous-total</span>
-                    <span className="font-medium">{subtotal.toFixed(2)}CHF</span>
+                <div className="space-y-4 mb-8 pb-8 border-b border-gray-200">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-700 font-light">Sous-total</span>
+                    <span className="font-light">{subtotal.toFixed(2)} CHF</span>
                   </div>
                   {discount > 0 && (
-                    <div className="flex justify-between text-green-600">
-                      <span>Réduction ({discount}%)</span>
-                      <span className="font-medium">-{discountAmount.toFixed(2)}CHF</span>
+                    <div className="flex justify-between text-sm text-green-700">
+                      <span className="font-light">Réduction ({discount}%)</span>
+                      <span className="font-light">-{discountAmount.toFixed(2)} CHF</span>
                     </div>
                   )}
-                  <div className="flex justify-between">
-                    <span className="text-gray-700">Livraison</span>
-                    <span className="font-medium">
-                      {shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)}CHF`}
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-700 font-light">Livraison</span>
+                    <span className="font-light">
+                      {shipping === 0 ? 'Gratuite' : `${shipping.toFixed(2)} CHF`}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center mb-6 text-lg font-bold">
-                  <span>Total</span>
-                  <span>{total.toFixed(2)}CHF</span>
+                <div className="flex justify-between items-center mb-8 text-xl">
+                  <span className="font-light">Total</span>
+                  <span className="font-light">{total.toFixed(2)} CHF</span>
                 </div>
 
                 {/* Promo Code */}
-                <div className="mb-6">
-                  <label className="text-sm text-gray-700 mb-2 block">Code promo</label>
-                  <div className="flex gap-2">
+                <div className="mb-8 pb-8 border-b border-gray-200">
+                  <label className="text-xs font-light uppercase tracking-widest text-black mb-4 block">Code promo</label>
+                  <div className="flex gap-2 mb-3">
                     <input
                       type="text"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
                       placeholder="Entrez un code"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                      className="flex-1 px-4 py-3 border-b border-gray-300 bg-transparent text-sm font-light focus:outline-none focus:border-black transition"
                     />
                     <button
                       onClick={handleApplyPromo}
-                      className="px-4 py-2 bg-gray-800 text-white rounded-lg text-sm font-medium hover:bg-black transition"
+                      className="px-6 py-3 bg-black text-white text-sm font-light uppercase tracking-widest hover:bg-gray-900 transition"
                     >
                       OK
                     </button>
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Essayez: <span className="font-medium">BIENVENUE10</span> ou <span className="font-medium">SUMMER20</span>
+                  <p className="text-xs text-gray-600 font-light">
+                    Essayez: <span className="font-light">BIENVENUE10</span> ou <span className="font-light">SUMMER20</span>
                   </p>
                 </div>
 
                 {/* Checkout Button */}
-                <button className="w-full bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800 transition mb-3">
+                <button className="w-full bg-black text-white py-4 font-light uppercase tracking-widest text-sm hover:bg-gray-900 transition mb-3">
                   Passer la commande
                 </button>
 
                 <Link
                   href="/shop"
-                  className="block w-full text-center py-3 border-2 border-black text-black rounded-lg font-bold hover:bg-gray-50 transition"
+                  className="block w-full text-center py-4 border border-black text-black font-light uppercase tracking-widest text-sm hover:bg-gray-50 transition"
                 >
                   Continuer le shopping
                 </Link>
 
                 {/* Info */}
-                <div className="mt-6 pt-6 border-t border-gray-200 text-xs text-gray-600 space-y-2 font-light">
-                  <p>✓ Livraison gratuite dès 80 CHF</p>
-                  <p>✓ Retours gratuits pendant 30 jours</p>
-                  <p>✓ Paiement 100% sécurisé (SSL)</p>
+                <div className="mt-8 pt-8 border-t border-gray-200 text-xs text-gray-600 space-y-3 font-light">
+                  <p className="flex items-start gap-2">
+                    <span className="mt-0.5">✓</span>
+                    <span>Livraison gratuite dès 80 CHF</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span className="mt-0.5">✓</span>
+                    <span>Retours gratuits pendant 30 jours</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span className="mt-0.5">✓</span>
+                    <span>Paiement 100% sécurisé (SSL)</span>
+                  </p>
                 </div>
               </div>
             </div>

@@ -8,6 +8,8 @@ import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
 import CountdownTimer from '@/components/CountdownTimer';
+import HeroSection from '@/components/HeroSection';
+import TestimonialSection from '@/components/TestimonialSection';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -36,33 +38,8 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header cartCount={cartCount} />
 
-      {/* Hero Section - Cinematic */}
-      <section className="relative h-[600px] md:h-screen bg-gray-100 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1506629082632-3bec3d3255a9?w=1920&h=1080&fit=crop"
-            alt="Hero"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/20"></div>
-        </div>
-
-        <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-4">
-          <div className="space-y-6 max-w-3xl">
-            <p className="text-xs tracking-[0.2em] uppercase font-light opacity-90">Nouvelle Collection</p>
-            <h1 className="text-6xl md:text-8xl font-light tracking-widest">in & Co</h1>
-            <p className="text-lg md:text-2xl font-light tracking-wide opacity-90">
-              L'art du vêtement de luxe à la portée de tous
-            </p>
-            <Link
-              href="/shop"
-              className="inline-block mt-8 px-12 py-3 border border-white text-white uppercase text-xs tracking-widest font-light hover:bg-white hover:text-black transition duration-300"
-            >
-              Découvrir la Collection
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section - Animated */}
+      <HeroSection />
 
       {/* Countdown Promotion */}
       <CountdownTimer />
@@ -158,34 +135,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-gray-50 py-24 md:py-32 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <p className="text-xs tracking-[0.2em] uppercase text-gray-600 mb-4 font-light">Témoignages</p>
-            <h2 className="text-5xl md:text-6xl font-light tracking-wide mb-6">Ils Nous Font Confiance</h2>
-            <div className="w-12 h-px bg-black mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: "Sophie M.", rating: 5, text: "Qualité exceptionnelle, livraison impeccable. Une vraie maison de luxe." },
-              { name: "Jean D.", rating: 5, text: "Le meilleur rapport qualité-prix du marché. Très impressionné." },
-              { name: "Marie R.", rating: 5, text: "Service client impeccable et produits de très haute qualité." },
-            ].map((testimonial, i) => (
-              <div key={i} className="bg-white p-8 space-y-4">
-                <div className="flex gap-1">
-                  {[...Array(testimonial.rating)].map((_, j) => (
-                    <span key={j} className="text-sm">★</span>
-                  ))}
-                </div>
-                <p className="text-sm text-gray-700 font-light italic">"{testimonial.text}"</p>
-                <p className="text-xs uppercase tracking-widest font-light">{testimonial.name}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials - Animated */}
+      <TestimonialSection />
 
       {/* Payment Methods */}
       <section className="bg-white py-24 md:py-32 border-t border-gray-100">

@@ -34,71 +34,80 @@ export default function Contact() {
       <HeaderPremium cartCount={0} />
 
       {/* Hero */}
-      <section className="bg-black text-white py-16 md:py-24 pt-16">
+      <section className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
           <h1 className="text-5xl md:text-6xl font-light tracking-wide mb-6">Nous Contacter</h1>
-          <p className="text-lg font-light opacity-80 max-w-2xl mx-auto">
+          <div className="w-12 h-px bg-black mx-auto mb-8"></div>
+          <p className="text-lg font-light text-gray-600 max-w-2xl mx-auto">
             Une question ? Notre équipe est là pour vous aider 7 jours sur 7.
           </p>
         </div>
       </section>
 
       {/* Contact Info */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-28">
             {/* Email */}
-            <div className="space-y-4">
-              <Mail size={32} className="text-black" />
-              <h3 className="text-lg font-light tracking-wide">Email</h3>
-              <p className="text-sm text-gray-700 font-light">
-                <a href="mailto:support@inetrco.ch" className="hover:text-black transition">
-                  support@inetco.ch
-                </a>
-              </p>
-              <p className="text-xs text-gray-600 font-light">Réponse sous 24h</p>
+            <div className="space-y-6 pb-12 md:pb-0 md:border-r md:border-gray-200">
+              <Mail size={28} className="text-black" />
+              <div>
+                <h3 className="text-sm font-light uppercase tracking-widest mb-3">Email</h3>
+                <p className="text-base text-gray-700 font-light mb-2">
+                  <a href="mailto:support@inetrco.ch" className="hover:text-gray-600 transition">
+                    support@inetco.ch
+                  </a>
+                </p>
+                <p className="text-xs text-gray-600 font-light">Réponse sous 24h</p>
+              </div>
             </div>
 
             {/* Téléphone */}
-            <div className="space-y-4">
-              <Phone size={32} className="text-black" />
-              <h3 className="text-lg font-light tracking-wide">Téléphone</h3>
-              <p className="text-sm text-gray-700 font-light">
-                <a href="tel:+41225551234" className="hover:text-black transition">
-                  +41 22 555 1234
-                </a>
-              </p>
-              <p className="text-xs text-gray-600 font-light">Lun-Ven 9h-18h</p>
+            <div className="space-y-6 pb-12 md:pb-0 md:border-r md:border-gray-200 md:px-12">
+              <Phone size={28} className="text-black" />
+              <div>
+                <h3 className="text-sm font-light uppercase tracking-widest mb-3">Téléphone</h3>
+                <p className="text-base text-gray-700 font-light mb-2">
+                  <a href="tel:+41225551234" className="hover:text-gray-600 transition">
+                    +41 22 555 1234
+                  </a>
+                </p>
+                <p className="text-xs text-gray-600 font-light">Lun-Ven 9h-18h</p>
+              </div>
             </div>
 
             {/* Adresse */}
-            <div className="space-y-4">
-              <MapPin size={32} className="text-black" />
-              <h3 className="text-lg font-light tracking-wide">Adresse</h3>
-              <p className="text-sm text-gray-700 font-light">
-                Rue de la Paix 42<br />1200 Genève, Suisse
-              </p>
+            <div className="space-y-6 pb-12 md:pb-0 md:border-r md:border-gray-200 md:px-12">
+              <MapPin size={28} className="text-black" />
+              <div>
+                <h3 className="text-sm font-light uppercase tracking-widest mb-3">Adresse</h3>
+                <p className="text-base text-gray-700 font-light">
+                  Rue de la Paix 42<br />1200 Genève, Suisse
+                </p>
+              </div>
             </div>
 
             {/* Horaires */}
-            <div className="space-y-4">
-              <Clock size={32} className="text-black" />
-              <h3 className="text-lg font-light tracking-wide">Horaires</h3>
-              <p className="text-sm text-gray-700 font-light">
-                Lun-Ven: 9h-18h<br />
-                Sam: 10h-16h<br />
-                Dim: Fermé
-              </p>
+            <div className="space-y-6 md:px-12">
+              <Clock size={28} className="text-black" />
+              <div>
+                <h3 className="text-sm font-light uppercase tracking-widest mb-3">Horaires</h3>
+                <p className="text-base text-gray-700 font-light">
+                  Lun-Ven: 9h-18h<br />
+                  Sam: 10h-16h<br />
+                  Dim: Fermé
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 border-t border-gray-200 pt-28">
             <div>
-              <h2 className="text-3xl font-light tracking-wide mb-8">Envoyez-nous un Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-12">Envoyez-nous un Message</h2>
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label className="text-xs uppercase tracking-widest font-light text-gray-600 block mb-2">
+                  <label className="text-xs uppercase tracking-widest font-light text-gray-700 block mb-3">
                     Nom
                   </label>
                   <input
@@ -107,13 +116,13 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full border-b border-black bg-transparent py-3 px-0 focus:outline-none transition text-gray-700 font-light placeholder-gray-400"
+                    className="w-full border-b border-gray-300 bg-transparent py-3 px-0 focus:outline-none focus:border-black transition text-gray-700 font-light placeholder-gray-400"
                     placeholder="Votre nom"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-widest font-light text-gray-600 block mb-2">
+                  <label className="text-xs uppercase tracking-widest font-light text-gray-700 block mb-3">
                     Email
                   </label>
                   <input
@@ -122,13 +131,13 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full border-b border-black bg-transparent py-3 px-0 focus:outline-none transition text-gray-700 font-light placeholder-gray-400"
+                    className="w-full border-b border-gray-300 bg-transparent py-3 px-0 focus:outline-none focus:border-black transition text-gray-700 font-light placeholder-gray-400"
                     placeholder="votre.email@example.com"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-widest font-light text-gray-600 block mb-2">
+                  <label className="text-xs uppercase tracking-widest font-light text-gray-700 block mb-3">
                     Sujet
                   </label>
                   <input
@@ -137,13 +146,13 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="w-full border-b border-black bg-transparent py-3 px-0 focus:outline-none transition text-gray-700 font-light placeholder-gray-400"
+                    className="w-full border-b border-gray-300 bg-transparent py-3 px-0 focus:outline-none focus:border-black transition text-gray-700 font-light placeholder-gray-400"
                     placeholder="Sujet de votre message"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs uppercase tracking-widest font-light text-gray-600 block mb-2">
+                  <label className="text-xs uppercase tracking-widest font-light text-gray-700 block mb-3">
                     Message
                   </label>
                   <textarea
@@ -152,7 +161,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full border-b border-black bg-transparent py-3 px-0 focus:outline-none transition text-gray-700 font-light placeholder-gray-400 resize-none"
+                    className="w-full border-b border-gray-300 bg-transparent py-3 px-0 focus:outline-none focus:border-black transition text-gray-700 font-light placeholder-gray-400 resize-none"
                     placeholder="Votre message..."
                   />
                 </div>
@@ -160,15 +169,16 @@ export default function Contact() {
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="px-8 py-3 border border-black text-black uppercase text-xs tracking-widest font-light hover:bg-black hover:text-white transition duration-300"
+                    className="px-8 py-3 bg-black text-white uppercase text-xs tracking-widest font-light hover:bg-gray-900 transition duration-300"
                   >
                     Envoyer
                   </button>
                 </div>
 
                 {submitted && (
-                  <div className="text-sm text-green-700 font-light">
-                    ✓ Merci ! Nous vous répondrons sous 24h.
+                  <div className="text-sm text-green-700 font-light flex items-center gap-2">
+                    <span>✓</span>
+                    <span>Merci ! Nous vous répondrons sous 24h.</span>
                   </div>
                 )}
               </form>
@@ -176,33 +186,35 @@ export default function Contact() {
 
             {/* FAQ Link */}
             <div>
-              <h2 className="text-3xl font-light tracking-wide mb-8">Questions Fréquentes ?</h2>
-              <div className="space-y-6 bg-gray-50 p-8 rounded">
-                <p className="text-gray-700 font-light leading-relaxed">
+              <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-12">Questions Fréquentes ?</h2>
+              <div className="space-y-8 border border-gray-200 p-12">
+                <p className="text-gray-700 font-light leading-relaxed text-base">
                   Avant de nous contacter, vérifiez si votre question figure dans notre FAQ. Vous y trouverez peut-être la réponse immédiatement.
                 </p>
                 <Link
                   href="/faq"
-                  className="inline-block px-6 py-2 border border-black text-black uppercase text-xs tracking-widest font-light hover:bg-black hover:text-white transition duration-300"
+                  className="inline-block px-8 py-3 bg-black text-white uppercase text-xs tracking-widest font-light hover:bg-gray-900 transition duration-300"
                 >
                   Consulter la FAQ
                 </Link>
-                <div className="pt-4 border-t border-gray-200 mt-8">
-                  <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-3">
+                <div className="pt-8 border-t border-gray-200">
+                  <p className="text-xs uppercase tracking-widest font-light text-gray-700 mb-4">
                     Besoin d'aide rapide ?
                   </p>
-                  <p className="text-sm text-gray-700 font-light mb-4">
+                  <p className="text-sm text-gray-700 font-light mb-6">
                     Consultez également nos pages :
                   </p>
-                  <ul className="space-y-2 text-sm">
+                  <ul className="space-y-3">
                     <li>
-                      <Link href="/livraison" className="text-gray-700 hover:text-black transition font-light">
-                        → Livraison & Délais
+                      <Link href="/livraison" className="text-gray-700 hover:text-black transition font-light text-base flex items-center gap-2">
+                        <span>→</span>
+                        <span>Livraison & Délais</span>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/retours" className="text-gray-700 hover:text-black transition font-light">
-                        → Retours & Échanges
+                      <Link href="/retours" className="text-gray-700 hover:text-black transition font-light text-base flex items-center gap-2">
+                        <span>→</span>
+                        <span>Retours & Échanges</span>
                       </Link>
                     </li>
                   </ul>

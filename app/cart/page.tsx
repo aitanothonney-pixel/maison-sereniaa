@@ -83,7 +83,15 @@ export default function CartPage() {
         {cartItems.length === 0 ? (
           <>
             <div className="text-center py-32">
-              <ShoppingBag className="w-20 h-20 text-gray-200 mx-auto mb-8" />
+              <div className="w-20 h-20 mx-auto mb-8">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                  <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-gray-200"/>
+                  <path d="M6 5V3.5C6 2.67157 6.67157 2 7.5 2H16.5C17.3284 2 18 2.67157 18 3.5V5" stroke="currentColor" strokeWidth="1.5" className="text-gray-200"/>
+                  <path d="M9 9V15" stroke="currentColor" strokeWidth="1.5" className="text-gray-200" strokeLinecap="round"/>
+                  <path d="M12 9V15" stroke="currentColor" strokeWidth="1.5" className="text-gray-200" strokeLinecap="round"/>
+                  <path d="M15 9V15" stroke="currentColor" strokeWidth="1.5" className="text-gray-200" strokeLinecap="round"/>
+                </svg>
+              </div>
               <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-6">Votre panier est vide</h2>
               <p className="text-gray-600 font-light text-lg mb-12 max-w-md mx-auto">Explorez notre collection et trouvez les articles parfaits pour vous</p>
               <Link

@@ -1,17 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
-import ProductCard from '@/components/ProductCard';
-import { products } from '@/lib/products';
 import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
 import CountdownTimer from '@/components/CountdownTimer';
 import HeroSection from '@/components/HeroSection';
 import TestimonialSection from '@/components/TestimonialSection';
-import CollectionsSection from '@/components/CollectionsSection';
-import FeaturedProductsSection from '@/components/FeaturedProductsSection';
 import StatsSection from '@/components/StatsSection';
 
 export default function Home() {
@@ -35,8 +30,6 @@ export default function Home() {
     setTimeout(() => setNewsletterSubmitted(false), 4000);
   };
 
-  const featuredProducts = products.slice(0, 4);
-
   return (
     <div className="min-h-screen bg-white">
       <HeaderPremium cartCount={cartCount} />
@@ -46,12 +39,6 @@ export default function Home() {
 
       {/* Countdown Promotion */}
       <CountdownTimer />
-
-      {/* Collections Section - Animated */}
-      <CollectionsSection />
-
-      {/* Featured Products - Animated */}
-      <FeaturedProductsSection />
 
       {/* Trust Strip */}
       <section className="bg-white py-16 md:py-20 border-t border-gray-100">

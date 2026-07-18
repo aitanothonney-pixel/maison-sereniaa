@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
-import { Trash2, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Trash2, ArrowRight, ShoppingBag, Heart, Award, Zap, Globe } from 'lucide-react';
 
 interface CartItem {
   id: string;
@@ -81,18 +81,57 @@ export default function CartPage() {
         </div>
 
         {cartItems.length === 0 ? (
-          <div className="text-center py-24">
-            <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-6" />
-            <h2 className="text-3xl font-light tracking-wide mb-4">Votre panier est vide</h2>
-            <p className="text-gray-600 font-light text-lg mb-8">Ajoutez des articles pour commencer vos achats</p>
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-2 bg-black text-white px-8 py-3 font-light uppercase tracking-widest text-sm hover:bg-gray-900 transition"
-            >
-              Continuer vos achats
-              <ArrowRight size={18} />
-            </Link>
-          </div>
+          <>
+            <div className="text-center py-32">
+              <ShoppingBag className="w-20 h-20 text-gray-200 mx-auto mb-8" />
+              <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-6">Votre panier est vide</h2>
+              <p className="text-gray-600 font-light text-lg mb-12 max-w-md mx-auto">Explorez notre collection et trouvez les articles parfaits pour vous</p>
+              <Link
+                href="/shop"
+                className="inline-flex items-center gap-2 bg-black text-white px-10 py-4 font-light uppercase tracking-widest text-sm hover:bg-gray-900 transition"
+              >
+                Découvrir la Boutique
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+
+            {/* Trust Badges Section */}
+            <div className="border-t border-gray-200 mt-24 pt-24">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="space-y-4 text-center">
+                  <div className="flex justify-center">
+                    <Heart size={32} className="text-black" />
+                  </div>
+                  <h3 className="text-sm font-light uppercase tracking-widest text-black">Authenticité</h3>
+                  <p className="text-xs text-gray-600 font-light leading-relaxed">Tous nos produits sont 100% authentiques et garantis</p>
+                </div>
+
+                <div className="space-y-4 text-center">
+                  <div className="flex justify-center">
+                    <Award size={32} className="text-black" />
+                  </div>
+                  <h3 className="text-sm font-light uppercase tracking-widest text-black">Qualité</h3>
+                  <p className="text-xs text-gray-600 font-light leading-relaxed">Sélection rigoureuse de produits premium</p>
+                </div>
+
+                <div className="space-y-4 text-center">
+                  <div className="flex justify-center">
+                    <Zap size={32} className="text-black" />
+                  </div>
+                  <h3 className="text-sm font-light uppercase tracking-widest text-black">Innovation</h3>
+                  <p className="text-xs text-gray-600 font-light leading-relaxed">Dernières technologies et designs</p>
+                </div>
+
+                <div className="space-y-4 text-center">
+                  <div className="flex justify-center">
+                    <Globe size={32} className="text-black" />
+                  </div>
+                  <h3 className="text-sm font-light uppercase tracking-widest text-black">Durabilité</h3>
+                  <p className="text-xs text-gray-600 font-light leading-relaxed">Engagement pour l'environnement</p>
+                </div>
+              </div>
+            </div>
+          </>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Cart Items */}

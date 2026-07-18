@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Menu, X, Search, Heart, ShoppingCart, User } from 'lucide-react';
+import { Menu, X, Heart, ShoppingCart, User } from 'lucide-react';
+import SearchBar from './SearchBar';
 
 interface HeaderPremiumProps {
   cartCount: number;
@@ -62,21 +63,7 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
 
             {/* Search Bar - Center Right */}
             <div className="hidden md:flex flex-1 max-w-xs">
-              <motion.div
-                className="flex-1 relative"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-              >
-                <input
-                  type="text"
-                  placeholder="Que recherchez-vous ?"
-                  className="w-full text-sm font-light placeholder-gray-400 bg-transparent border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-black transition"
-                />
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400">
-                  <circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
-                  <path d="M14.5 14.5L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-              </motion.div>
+              <SearchBar />
             </div>
 
             {/* Right: Action Buttons */}
@@ -155,18 +142,17 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
           </div>
 
           {/* Mobile Search */}
-          <motion.div
-            className="md:hidden mt-4"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: isSearchOpen ? 1 : 0, height: isSearchOpen ? 'auto' : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <input
-              type="text"
-              placeholder="Que recherchez-vous ?"
-              className="w-full text-sm font-light placeholder-gray-400 bg-transparent border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-black transition"
-            />
-          </motion.div>
+          {isSearchOpen && (
+            <motion.div
+              className="md:hidden mt-4"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <SearchBar />
+            </motion.div>
+          )}
         </div>
 
         {/* Mobile Menu - Sidebar Style */}

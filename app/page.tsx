@@ -12,6 +12,7 @@ import HeroSection from '@/components/HeroSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import CollectionsSection from '@/components/CollectionsSection';
 import FeaturedProductsSection from '@/components/FeaturedProductsSection';
+import StatsSection from '@/components/StatsSection';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -79,6 +80,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Stats Section - Animated */}
+      <StatsSection />
 
       {/* Testimonials - Animated */}
       <TestimonialSection />

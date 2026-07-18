@@ -149,31 +149,118 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
           </motion.div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Sidebar Style */}
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 top-24 bg-black/50 md:hidden z-30"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsMenuOpen(false)}
+          />
+        )}
         <motion.div
-          className="md:hidden border-t border-gray-200"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: isMenuOpen ? 1 : 0, height: isMenuOpen ? 'auto' : 0 }}
-          transition={{ duration: 0.3 }}
+          className="md:hidden fixed left-0 top-24 h-screen w-80 bg-white shadow-lg z-40 overflow-y-auto"
+          initial={{ x: '-100%' }}
+          animate={{ x: isMenuOpen ? 0 : '-100%' }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <nav className="px-6 py-4 space-y-4 bg-gray-50">
-            {[
-              { name: 'Boutique', href: '/shop' },
-              { name: 'Homme', href: '/shop' },
-              { name: 'Femme', href: '/shop' },
-              { name: 'Contactez-Nous', href: '/contact' },
-              { name: 'À Propos', href: '/a-propos' },
-            ].map((item) => (
-              <Link key={item.name} href={item.href}>
-                <motion.span
-                  className="block text-sm font-light uppercase tracking-widest text-black hover:text-gray-600 transition"
-                  whileHover={{ x: 10 }}
-                >
-                  {item.name}
-                </motion.span>
-              </Link>
-            ))}
-          </nav>
+          <div className="px-6 py-8 space-y-8">
+            {/* NOS COLLECTIONS */}
+            <div>
+              <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-4">
+                Nos Collections
+              </p>
+              <nav className="space-y-3">
+                {[
+                  { name: 'Tous Les Produits', href: '/shop' },
+                  { name: 'Homme', href: '/shop' },
+                  { name: 'Femme', href: '/shop' },
+                  { name: 'Nouveautés', href: '/shop' },
+                ].map((item) => (
+                  <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}>
+                    <motion.span
+                      className="block text-sm font-light text-black hover:text-gray-600 transition"
+                      whileHover={{ x: 10 }}
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            {/* OFFRES SPÉCIALES */}
+            <div>
+              <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-4">
+                Offres Spéciales
+              </p>
+              <div className="bg-black text-white p-4 rounded space-y-2">
+                <h3 className="text-sm font-light">Promotions du Moment</h3>
+                <p className="text-xs font-light opacity-80">Jusqu'à -30% sur les collections</p>
+              </div>
+            </div>
+
+            {/* AIDE & SERVICES */}
+            <div>
+              <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-4">
+                Aide & Services
+              </p>
+              <nav className="space-y-3">
+                {[
+                  { name: 'Contactez-Nous', href: '/contact' },
+                  { name: 'Suivi de Commande', href: '/contact' },
+                  { name: 'Questions Fréquentes', href: '/faq' },
+                  { name: 'Retours & Échanges', href: '/retours' },
+                  { name: 'Livraison & Délais', href: '/livraison' },
+                  { name: 'À Propos de Nous', href: '/a-propos' },
+                ].map((item) => (
+                  <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}>
+                    <motion.span
+                      className="block text-sm font-light text-black hover:text-gray-600 transition"
+                      whileHover={{ x: 10 }}
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            {/* INFORMATIONS */}
+            <div>
+              <p className="text-xs uppercase tracking-widest font-light text-gray-600 mb-4">
+                Informations
+              </p>
+              <nav className="space-y-3">
+                {[
+                  { name: 'Mentions Légales', href: '#' },
+                  { name: 'Politique de Confidentialité', href: '#' },
+                  { name: 'Conditions Générales', href: '#' },
+                  { name: 'Gestion des Cookies', href: '#' },
+                ].map((item) => (
+                  <Link key={item.name} href={item.href} onClick={() => setIsMenuOpen(false)}>
+                    <motion.span
+                      className="block text-xs font-light text-gray-700 hover:text-black transition"
+                      whileHover={{ x: 10 }}
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            {/* Footer Info */}
+            <div className="pt-8 border-t border-gray-200 space-y-3">
+              <p className="text-xs font-light text-gray-600">
+                📦 Livraison gratuite dès 80 CHF • Suisse
+              </p>
+              <p className="text-xs font-light text-gray-600">
+                © 2026 in & Co | Boutique de Vêtements Premium
+              </p>
+            </div>
+          </div>
         </motion.div>
       </header>
 

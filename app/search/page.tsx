@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import HeaderPremium from '@/components/HeaderPremium';
@@ -8,7 +9,7 @@ import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { ChevronLeft } from 'lucide-react';
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
 
@@ -65,5 +66,21 @@ export default function SearchPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white">
+        <HeaderPremium cartCount={0} />
+        <div className="flex items-center justify-center py-24">
+          <p className="text-gray-600 font-light">Chargement...</p>
+        </div>
+        <Footer />
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   );
 }

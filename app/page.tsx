@@ -6,7 +6,6 @@ import Footer from '@/components/Footer';
 import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
 import CountdownTimer from '@/components/CountdownTimer';
 import HeroSection from '@/components/HeroSection';
-import TestimonialSection from '@/components/TestimonialSection';
 import StatsSection from '@/components/StatsSection';
 
 export default function Home() {
@@ -70,28 +69,6 @@ export default function Home() {
 
       {/* Stats Section - Animated */}
       <StatsSection />
-
-      {/* Testimonials - Animated */}
-      <TestimonialSection />
-
-      {/* Payment Methods */}
-      <section className="bg-white py-24 md:py-32 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-light tracking-wide mb-6">Paiements Sécurisés</h2>
-            <div className="w-12 h-px bg-black mx-auto"></div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {['Visa', 'Mastercard', 'Apple Pay', 'Google Pay', 'PayPal', 'Virement', '3x sans frais', 'Klarna'].map((method) => (
-              <div key={method} className="p-6 border border-gray-200 space-y-2">
-                <div className="text-2xl">💳</div>
-                <p className="text-sm font-light uppercase tracking-wide">{method}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Newsletter Premium */}
       <section className="bg-black text-white py-24 md:py-32">

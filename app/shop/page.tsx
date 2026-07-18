@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
@@ -32,7 +32,7 @@ export default function Shop() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header cartCount={cartCount} />
+      <HeaderPremium cartCount={cartCount} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">

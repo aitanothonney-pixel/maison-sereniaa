@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import { Trash2, ArrowRight, ShoppingBag } from 'lucide-react';
 
@@ -60,7 +60,7 @@ export default function CartPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Header cartCount={cartItems.length} />
+        <HeaderPremium cartCount={cartItems.length} />
         <div className="flex-1 flex items-center justify-center">
           <p>Chargement...</p>
         </div>
@@ -71,7 +71,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header cartCount={cartItems.length} />
+      <HeaderPremium cartCount={cartItems.length} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
         <h1 className="text-3xl md:text-4xl font-light tracking-wide mb-2">Votre Panier</h1>

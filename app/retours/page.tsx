@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import { RotateCcw, PackageX, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function Retours() {
   return (
     <div className="min-h-screen bg-white">
-      <Header cartCount={0} />
+      <HeaderPremium cartCount={0} />
 
       {/* Hero */}
       <section className="bg-black text-white py-16 md:py-24 pt-16">

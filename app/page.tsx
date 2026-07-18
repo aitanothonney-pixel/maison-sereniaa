@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header cartCount={cartCount} />
+      <HeaderPremium cartCount={cartCount} />
 
       {/* Hero Section - Animated */}
       <HeroSection />

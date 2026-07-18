@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import { products } from '@/lib/products';
 import { Heart, ShoppingCart, ChevronLeft, Share2, Copy, Check, Truck, RotateCcw, Award } from 'lucide-react';
@@ -50,7 +50,7 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Header cartCount={cartCount} />
+        <HeaderPremium cartCount={cartCount} />
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold mb-4">Produit non trouvé</h1>
@@ -86,7 +86,7 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header cartCount={cartCount} />
+      <HeaderPremium cartCount={cartCount} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}

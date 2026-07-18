@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import Header from '@/components/Header';
+import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Header cartCount={0} />
+      <HeaderPremium cartCount={0} />
 
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center space-y-8 px-6">

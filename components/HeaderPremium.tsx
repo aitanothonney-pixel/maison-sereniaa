@@ -72,7 +72,10 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
                   placeholder="Que recherchez-vous ?"
                   className="w-full text-sm font-light placeholder-gray-400 bg-transparent border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-black transition"
                 />
-                <Search className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute right-0 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <path d="M14.5 14.5L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
               </motion.div>
             </div>
 
@@ -84,27 +87,44 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
                 onClick={() => setIsSearchOpen(!isSearchOpen)}
                 whileHover={{ scale: 1.1 }}
               >
-                <Search size={20} className="text-black" />
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="6" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-black"/>
+                  <path d="M14.5 14.5L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black"/>
+                </svg>
               </motion.button>
 
               {/* Wishlist */}
               <Link href="#" className="group relative">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                  <Heart size={20} className="text-black" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 21C12 21 3 16 3 9C3 5.5 5.5 3 8 3C9.5 3 11 4 12 5C13 4 14.5 3 16 3C18.5 3 21 5.5 21 9C21 16 12 21 12 21Z"
+                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" className="text-black"/>
+                  </svg>
                 </motion.div>
               </Link>
 
               {/* Account */}
               <Link href="#" className="group relative">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                  <User size={20} className="text-black" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5" className="text-black"/>
+                    <path d="M4 20C4 16.134 7.582 13 12 13C16.418 13 20 16.134 20 20"
+                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="text-black"/>
+                  </svg>
                 </motion.div>
               </Link>
 
               {/* Cart */}
               <Link href="/cart" className="group relative">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                  <ShoppingCart size={20} className="text-black" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 7H21L19 15C19 15.5 18.5 16 18 16H7C6.5 16 6 15.5 6 15L4 7"
+                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black"/>
+                    <path d="M7 20C7.5 20 8 20.5 8 21C8 21.5 7.5 22 7 22C6.5 22 6 21.5 6 21C6 20.5 6.5 20 7 20Z"
+                          fill="currentColor" className="text-black"/>
+                    <path d="M18 20C18.5 20 19 20.5 19 21C19 21.5 18.5 22 18 22C17.5 22 17 21.5 17 21C17 20.5 17.5 20 18 20Z"
+                          fill="currentColor" className="text-black"/>
+                  </svg>
                   {cartCount > 0 && (
                     <motion.span
                       className="absolute -top-3 -right-3 bg-black text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-light"

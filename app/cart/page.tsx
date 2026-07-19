@@ -85,12 +85,14 @@ export default function CartPage() {
             <div className="text-center py-32">
               <div className="w-20 h-20 mx-auto mb-8">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                  <path d="M2 3H4.5L7 18.5C7.2 19.5 8.1 20.2 9.1 20.2H18.9C19.9 20.2 20.8 19.5 21 18.5L23 7H5.5"
-                        stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-200"/>
-                  <path d="M9 23C9.55228 23 10 22.5523 10 22C10 21.4477 9.55228 21 9 21C8.44772 21 8 21.4477 8 22C8 22.5523 8.44772 23 9 23Z"
-                        fill="currentColor" className="text-gray-200"/>
-                  <path d="M19 23C19.5523 23 20 22.5523 20 22C20 21.4477 19.5523 21 19 21C18.4477 21 18 21.4477 18 22C18 22.5523 18.4477 23 19 23Z"
-                        fill="currentColor" className="text-gray-200"/>
+                  <path d="M6 3H3V5H4.5L7 18C7.15 19 8.1 19.8 9.1 19.8H18.9C19.9 19.8 20.85 19 21 18L23 5H4.5"
+                        stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="text-gray-200"/>
+                  <path d="M9 9V15"
+                        stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" className="text-gray-200"/>
+                  <path d="M12 9V15"
+                        stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" className="text-gray-200"/>
+                  <path d="M15 9V15"
+                        stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" className="text-gray-200"/>
                 </svg>
               </div>
               <h2 className="text-4xl md:text-5xl font-light tracking-wide mb-6">Votre panier est vide</h2>

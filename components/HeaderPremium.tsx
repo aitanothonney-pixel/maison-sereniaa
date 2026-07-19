@@ -118,11 +118,11 @@ export default function HeaderPremium({ cartCount }: HeaderPremiumProps) {
               <Link href="/cart" className="group relative">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 7H21L19 15C19 15.5 18.5 16 18 16H7C6.5 16 6 15.5 6 15L4 7"
-                          stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-black"/>
-                    <path d="M7 20C7.5 20 8 20.5 8 21C8 21.5 7.5 22 7 22C6.5 22 6 21.5 6 21C6 20.5 6.5 20 7 20Z"
+                    <path d="M2 3H4.5L7 18.5C7.2 19.5 8.1 20.2 9.1 20.2H18.9C19.9 20.2 20.8 19.5 21 18.5L23 7H5.5"
+                          stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-black"/>
+                    <path d="M9 23C9.55228 23 10 22.5523 10 22C10 21.4477 9.55228 21 9 21C8.44772 21 8 21.4477 8 22C8 22.5523 8.44772 23 9 23Z"
                           fill="currentColor" className="text-black"/>
-                    <path d="M18 20C18.5 20 19 20.5 19 21C19 21.5 18.5 22 18 22C17.5 22 17 21.5 17 21C17 20.5 17.5 20 18 20Z"
+                    <path d="M19 23C19.5523 23 20 22.5523 20 22C20 21.4477 19.5523 21 19 21C18.4477 21 18 21.4477 18 22C18 22.5523 18.4477 23 19 23Z"
                           fill="currentColor" className="text-black"/>
                   </svg>
                   {cartCount > 0 && (

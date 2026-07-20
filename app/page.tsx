@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
@@ -33,8 +34,63 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <HeaderPremium cartCount={cartCount} />
 
-      {/* Hero Section - Animated */}
+      {/* Hero Section - Animated Carousel */}
       <HeroSection />
+
+      {/* Category Showcase */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Shoes Category */}
+            <Link href="/shop">
+              <div className="group relative h-80 md:h-96 overflow-hidden rounded-lg cursor-pointer">
+                <img
+                  src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop"
+                  alt="Chaussures"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 text-white">
+                  <h3 className="text-2xl md:text-3xl font-light mb-2">Chaussures</h3>
+                  <p className="text-sm opacity-80 font-light">Explorer</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Clothing Category */}
+            <Link href="/shop">
+              <div className="group relative h-80 md:h-96 overflow-hidden rounded-lg cursor-pointer">
+                <img
+                  src="https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=800&h=600&fit=crop"
+                  alt="Vêtements"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 text-white">
+                  <h3 className="text-2xl md:text-3xl font-light mb-2">Vêtements</h3>
+                  <p className="text-sm opacity-80 font-light">Découvrir</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Accessories Category */}
+            <Link href="/shop">
+              <div className="group relative h-80 md:h-96 overflow-hidden rounded-lg cursor-pointer">
+                <img
+                  src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&h=600&fit=crop"
+                  alt="Accessoires"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 text-white">
+                  <h3 className="text-2xl md:text-3xl font-light mb-2">Accessoires</h3>
+                  <p className="text-sm opacity-80 font-light">Parcourir</p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Countdown Promotion */}
       <CountdownTimer />

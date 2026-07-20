@@ -9,6 +9,7 @@ import CountdownTimer from '@/components/CountdownTimer';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
+import LifestyleSection from '@/components/LifestyleSection';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -129,6 +130,9 @@ export default function Home() {
 
       {/* Stats Section - Animated */}
       <StatsSection />
+
+      {/* Lifestyle Section */}
+      <LifestyleSection />
 
       {/* Newsletter Premium */}
       <section className="bg-black text-white py-24 md:py-32">

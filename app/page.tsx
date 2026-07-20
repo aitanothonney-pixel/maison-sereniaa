@@ -8,6 +8,7 @@ import { Truck, Lock, RotateCcw, Star } from 'lucide-react';
 import CountdownTimer from '@/components/CountdownTimer';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
+import FeaturedProducts from '@/components/FeaturedProducts';
 
 export default function Home() {
   const [cartCount, setCartCount] = useState(0);
@@ -94,6 +95,9 @@ export default function Home() {
 
       {/* Countdown Promotion */}
       <CountdownTimer />
+
+      {/* Featured Products */}
+      <FeaturedProducts />
 
       {/* Trust Strip */}
       <section className="bg-white py-16 md:py-20 border-t border-gray-100">

@@ -10,18 +10,27 @@ import { products } from '@/lib/products';
 export default function FeaturedProducts() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const featured = products.filter(p => p.badge === 'bestseller' || p.badge === 'new').slice(0, 12);
+  // Show top-rated and featured products, sorted by rating
+  const featured = products
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 20);
 
   const itemsPerPage = 4;
   const maxIndex = Math.max(0, featured.length - itemsPerPage);
 
   const next = () => {
-    setCurrentIndex(Math.min(currentIndex + 1, maxIndex));
+    if (currentIndex < maxIndex) {
+      setCurrentIndex(currentIndex + 1);
+    }
   };
 
   const prev = () => {
-    setCurrentIndex(Math.max(currentIndex - 1, 0));
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
+
+  const visibleProducts = featured.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
     <section className="py-20 md:py-28 bg-white">
@@ -63,25 +72,40 @@ export default function FeaturedProducts() {
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-            animate={{ x: -currentIndex * 100 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          >
-            {featured.length > 0 ? (
-              featured.map((product) => (
-                <motion.div key={product.id}>
-                  <ProductCard product={product} />
-                </motion.div>
-              ))
-            ) : (
-              <div className="col-span-4 text-center py-12">
-                <p className="text-gray-600 font-light">Produits à venir...</p>
-              </div>
-            )}
-          </motion.div>
+        {/* Products Grid - Fixed visible items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {visibleProducts.length > 0 ? (
+            visibleProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-4 text-center py-12">
+              <p className="text-gray-600 font-light">Produits à venir...</p>
+            </div>
+          )}
+        </div>
+
+        {/* Carousel Dots */}
+        <div className="flex justify-center gap-2 mt-12">
+          {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === currentIndex
+                  ? 'bg-black w-8'
+                  : 'bg-gray-300 w-2 hover:bg-gray-500'
+              }`}
+              whileHover={{ scale: 1.2 }}
+            />
+          ))}
         </div>
 
         {/* Mobile Navigation */}

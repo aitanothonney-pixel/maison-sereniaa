@@ -8,6 +8,13 @@ import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { ChevronDown } from 'lucide-react';
 
+const CATEGORY_LABEL: Record<string, string> = {
+  shoes: 'Chaussures',
+  clothing: 'Vêtements',
+  accessories: 'Accessoires',
+  equipment: 'Équipement',
+};
+
 export default function Shop() {
   const [cartCount, setCartCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('Tous');
@@ -59,7 +66,7 @@ export default function Shop() {
                           : 'border-transparent text-gray-600 hover:text-black'
                       }`}
                     >
-                      {cat}
+                      {CATEGORY_LABEL[cat] ?? cat}
                     </button>
                   ))}
                 </div>

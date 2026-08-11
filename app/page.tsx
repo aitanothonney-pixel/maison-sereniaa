@@ -3,502 +3,616 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
-import { ChevronRight, Truck, Shield, RotateCcw, Star } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Star, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
 import HeaderPremium from '@/components/HeaderPremium';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 
-// ─── FadeIn wrapper ───────────────────────────────────────────────────────────
+// ─── Reveal wrapper ───────────────────────────────────────────────────────────
 
-function FadeInSection({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function Reveal({
+  children,
+  delay = 0,
+  y = 32,
+  className = '',
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  y?: number;
+  /** Applied to the animated wrapper — required when the wrapper is itself a
+   *  grid item, since layout classes on the child would not reach the grid. */
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '-60px' });
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      className={className}
+      initial={{ opacity: 0, y }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </motion.div>
   );
 }
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
+// ─── 1. Hero — split éditorial ────────────────────────────────────────────────
 
-function Hero() {
+function HeroSplit() {
+  const spotlight = [...products].sort((a, b) => b.rating - a.rating)[0];
+
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-black">
-      <img
-        src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1920&h=1200&fit=crop"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-black/60" />
-
-      <div className="relative z-10 text-center text-white px-6 max-w-3xl">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[11px] tracking-[0.4em] uppercase text-[#C9A96E] mb-5"
-        >
-          Collection Performance 2026
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-[1.1] mb-6"
-        >
-          La performance,
-          <br />
-          sans compromis.
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="divider-gold w-32 mx-auto mb-6"
-        />
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-white/70 text-sm md:text-base mb-10 max-w-lg mx-auto leading-relaxed"
-        >
-          Sneakers, hoodies et équipement sélectionnés pour celles et ceux qui
-          repoussent leurs limites.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.45 }}
-          className="flex flex-col sm:flex-row gap-3 justify-center"
-        >
-          <Link
-            href="/shop"
-            className="bg-white text-black text-[11px] font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#C9A96E] hover:text-white transition-colors"
+    <section className="relative bg-[#FAF8F5]">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] min-h-[calc(100vh-108px)]">
+        {/* LEFT — editorial panel */}
+        <div className="flex flex-col justify-center px-7 sm:px-12 lg:px-16 xl:px-24 py-16 lg:py-0">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[10px] tracking-[0.45em] uppercase text-[#A07840] mb-7"
           >
-            Découvrir la boutique
-          </Link>
-          <a
-            href="#promo"
-            className="border border-white/50 text-white text-[11px] font-bold tracking-[0.2em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-colors"
+            Édition 01 — Automne 2026
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="font-serif text-black leading-[0.95] text-[13vw] sm:text-[9vw] lg:text-[5.4vw] xl:text-[76px] mb-8"
           >
-            Voir les promotions
-          </a>
+            Courir.
+            <br />
+            <span className="italic font-normal text-neutral-400">Puis</span> recommencer.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.22 }}
+            className="text-neutral-500 text-sm sm:text-[15px] leading-relaxed max-w-md mb-11"
+          >
+            Une sélection resserrée de sneakers, de pièces techniques et
+            d&apos;accessoires. Rien de superflu — seulement ce qui tient la distance.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.32 }}
+            className="flex flex-wrap items-center gap-3 mb-14"
+          >
+            <Link
+              href="/shop"
+              className="group inline-flex items-center gap-3 bg-black text-white text-[11px] font-semibold tracking-[0.22em] uppercase px-9 py-4 hover:bg-[#C9A96E] transition-colors"
+            >
+              La boutique
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              href="/shop?category=running"
+              className="text-[11px] font-semibold tracking-[0.22em] uppercase text-black border-b border-black/25 pb-1 hover:border-black transition-colors"
+            >
+              Voir le running
+            </Link>
+          </motion.div>
+
+          {/* Meta row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.5 }}
+            className="grid grid-cols-3 gap-4 max-w-md border-t border-black/10 pt-7"
+          >
+            {[
+              { k: '49', v: 'Références' },
+              { k: '4.7', v: 'Note moyenne' },
+              { k: '48h', v: 'Expédition' },
+            ].map((s) => (
+              <div key={s.v}>
+                <p className="text-2xl text-black price-luxe leading-none mb-1.5">{s.k}</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase text-neutral-400">{s.v}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* RIGHT — image + floating product card */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative min-h-[62vh] lg:min-h-full overflow-hidden bg-neutral-200"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&h=1800&fit=crop"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+
+          {/* Floating spotlight card */}
+          {spotlight && (
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute left-5 right-5 bottom-5 sm:left-auto sm:right-8 sm:bottom-8 sm:w-[300px]"
+            >
+              <Link
+                href={`/product/${spotlight.id}`}
+                className="group block bg-white/95 backdrop-blur-md p-5 hover:bg-white transition-colors"
+              >
+                <p className="text-[9px] tracking-[0.3em] uppercase text-[#A07840] mb-2.5">
+                  Pièce du moment
+                </p>
+                <p className="font-serif font-semibold text-black text-[15px] leading-snug mb-1.5">
+                  {spotlight.name}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-black price-luxe text-sm font-bold">
+                    {spotlight.price.toFixed(2)} CHF
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-neutral-300 group-hover:text-black group-hover:translate-x-1 transition-all" />
+                </div>
+              </Link>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
   );
 }
 
-// ─── Promo banner + countdown ─────────────────────────────────────────────────
+// ─── 2. Marquee band ──────────────────────────────────────────────────────────
 
-function PromoBanner() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-
-  useEffect(() => {
-    const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 21);
-    const target = endDate.getTime();
-
-    const calc = () => {
-      const diff = target - Date.now();
-      if (diff <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-      setTimeLeft({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    };
-    calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const pad = (n: number) => String(n).padStart(2, '0');
+function MarqueeBand() {
+  const words = ['Running', 'Basketball', 'Lifestyle', 'Training', 'Hoodies', 'Accessoires'];
+  // .animate-marquee translates by -50%, so the strip must be two identical
+  // halves for the loop to be seamless. Each half is doubled so a single half
+  // is wider than any viewport, leaving no gap on large screens.
+  const half = [...words, ...words];
+  const strip = [...half, ...half];
 
   return (
-    <FadeInSection>
-      <section id="promo" className="w-full overflow-hidden relative scroll-mt-24">
-        <div className="relative min-h-[560px] md:min-h-[600px] py-14 md:py-16">
-          <img
-            src="https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=1920&h=1200&fit=crop"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-
-          <div className="relative z-10 flex flex-col items-center justify-center text-white text-center px-6 h-full">
-            <p className="text-xs tracking-[0.35em] uppercase mb-3 text-[#C9A96E]">Édition limitée</p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4 leading-tight">
-              Jusqu&apos;à −60% sur
-              <br className="hidden md:block" /> la collection Performance
-            </h2>
-            <p className="text-white/70 text-sm mb-8 max-w-md">
-              Offre valable seulement 3 semaines — dans la limite des stocks disponibles.
-            </p>
-
-            <p className="text-[11px] tracking-[0.4em] uppercase text-[#C9A96E] mb-4">
-              Offre se termine dans
-            </p>
-            <div className="flex gap-3 md:gap-5 mb-10">
-              {[
-                { value: pad(timeLeft.days), label: 'Jours' },
-                { value: pad(timeLeft.hours), label: 'Heures' },
-                { value: pad(timeLeft.minutes), label: 'Min' },
-                { value: pad(timeLeft.seconds), label: 'Sec' },
-              ].map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm border-2 border-[#C9A96E] px-4 md:px-6 py-3 md:py-4 min-w-[70px] md:min-w-[90px] shadow-2xl"
-                >
-                  <span
-                    className="text-white text-3xl md:text-5xl font-bold leading-none tabular-nums"
-                    style={{ fontFamily: 'var(--font-playfair, Georgia, serif)' }}
-                  >
-                    {value}
-                  </span>
-                  <span className="text-[9px] md:text-[10px] text-[#C9A96E] uppercase tracking-[0.25em] mt-2 md:mt-3">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/shop"
-              className="bg-white text-black text-xs font-bold tracking-widest uppercase px-8 py-3.5 hover:bg-[#C9A96E] hover:text-white transition-colors"
-            >
-              Voir les produits en promotion
-            </Link>
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-// ─── Section header ───────────────────────────────────────────────────────────
-
-function SectionHead({
-  eyebrow,
-  title,
-  href,
-}: {
-  eyebrow: string;
-  title: string;
-  href?: string;
-}) {
-  return (
-    <div className="flex items-end justify-between mb-10">
-      <div>
-        <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">{eyebrow}</p>
-        <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">{title}</h2>
+    <div className="bg-black py-5 overflow-hidden border-y border-neutral-800">
+      <div className="animate-marquee">
+        {strip.map((w, i) => (
+          <span key={i} className="flex items-center shrink-0">
+            <span className="text-white/85 text-[11px] tracking-[0.35em] uppercase px-8">{w}</span>
+            <span className="h-1 w-1 rounded-full bg-[#C9A96E] shrink-0" />
+          </span>
+        ))}
       </div>
-      {href && (
-        <Link
-          href={href}
-          className="hidden sm:flex items-center gap-1 text-xs tracking-widest uppercase text-neutral-500 hover:text-black transition-colors border-b border-neutral-200 pb-0.5"
-        >
-          Tout voir <ChevronRight className="w-3 h-3" />
-        </Link>
-      )}
     </div>
   );
 }
 
-// ─── Bestsellers ──────────────────────────────────────────────────────────────
+// ─── 3. Spotlight — le choix de la maison ─────────────────────────────────────
 
-function Bestsellers() {
-  const bestsellers = products.filter((p) => p.badge === 'bestseller').slice(0, 8);
+function Spotlight() {
+  const hero = [...products]
+    .filter((p) => p.badge === 'bestseller')
+    .sort((a, b) => b.reviewCount - a.reviewCount)[0];
+  if (!hero) return null;
 
   return (
-    <FadeInSection>
-      <section className="py-16 max-w-7xl mx-auto px-6 lg:px-10">
-        <SectionHead eyebrow="Top ventes" title="Coups de cœur" href="/shop" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {bestsellers.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-            >
-              <ProductCard product={product} />
-            </motion.div>
-          ))}
+    <section className="py-20 lg:py-28 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <Reveal>
+            <Link href={`/product/${hero.id}`} className="group block relative aspect-[4/5] overflow-hidden bg-neutral-50">
+              <img
+                src={hero.images[0]}
+                alt={hero.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+              />
+              <span className="absolute top-5 left-5 bg-black text-white text-[9px] font-bold tracking-[0.2em] uppercase px-3 py-1.5">
+                Le choix de la maison
+              </span>
+            </Link>
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <div className="lg:pl-4">
+              <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-5">
+                {hero.subcategory}
+              </p>
+              <h2 className="font-serif font-bold text-black text-3xl md:text-[42px] leading-[1.1] mb-5">
+                {hero.name}
+              </h2>
+
+              <div className="flex items-center gap-2.5 mb-6">
+                <span className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-3.5 h-3.5 ${
+                        i < Math.round(hero.rating)
+                          ? 'fill-[#C9A96E] text-[#C9A96E]'
+                          : 'text-neutral-200'
+                      }`}
+                    />
+                  ))}
+                </span>
+                <span className="text-[11px] text-neutral-400">
+                  {hero.rating} · {hero.reviewCount.toLocaleString('fr-CH')} avis
+                </span>
+              </div>
+
+              <p className="text-neutral-500 text-sm leading-relaxed mb-8 max-w-lg">
+                {hero.longDescription}
+              </p>
+
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-3 mb-9 max-w-md">
+                {hero.features.slice(0, 4).map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-[12px] text-neutral-600">
+                    <span className="mt-1.5 h-1 w-1 rounded-full bg-[#C9A96E] shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex items-end gap-4 mb-8">
+                <span className="text-3xl text-black price-luxe font-bold leading-none">
+                  {hero.price.toFixed(2)} CHF
+                </span>
+                {hero.originalPrice && (
+                  <span className="text-neutral-400 line-through price-luxe text-sm mb-1">
+                    {hero.originalPrice.toFixed(2)}
+                  </span>
+                )}
+              </div>
+
+              <Link
+                href={`/product/${hero.id}`}
+                className="group inline-flex items-center gap-3 bg-black text-white text-[11px] font-semibold tracking-[0.22em] uppercase px-10 py-4 hover:bg-[#C9A96E] transition-colors"
+              >
+                Découvrir
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
-      </section>
-    </FadeInSection>
+      </div>
+    </section>
   );
 }
 
-// ─── Categories ───────────────────────────────────────────────────────────────
+// ─── 4. Mosaïque de catégories ────────────────────────────────────────────────
 
-const CATEGORIES = [
+const TILES = [
   {
     label: 'Running',
-    desc: 'Chaussures de course',
+    desc: 'Route, trail et compétition',
     href: '/shop?category=running',
-    img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&h=1100&fit=crop',
+    img: 'https://images.unsplash.com/photo-1460353581641-a1af1d3ba3c1?w=1200&h=1400&fit=crop',
+    className: 'lg:col-span-2 lg:row-span-2 min-h-[320px] lg:min-h-[560px]',
   },
   {
     label: 'Basketball',
-    desc: 'Performance sur parquet',
+    desc: 'Sur le parquet',
     href: '/shop?category=basketball',
-    img: 'https://images.unsplash.com/photo-1539038919170-14bc4e45c047?w=900&h=1100&fit=crop',
+    img: 'https://images.unsplash.com/photo-1539038919170-14bc4e45c047?w=900&h=700&fit=crop',
+    className: 'lg:col-span-2 min-h-[260px]',
   },
   {
-    label: 'Lifestyle',
-    desc: 'Sneakers & essentiels',
-    href: '/shop?category=casual',
-    img: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=900&h=1100&fit=crop',
+    label: 'Hoodies',
+    desc: 'Sweats & polaires',
+    href: '/shop?category=hoodie',
+    img: 'https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=700&h=700&fit=crop',
+    className: 'min-h-[260px]',
+  },
+  {
+    label: 'Accessoires',
+    desc: 'Sacs, casquettes',
+    href: '/shop?category=accessories',
+    img: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&h=700&fit=crop',
+    className: 'min-h-[260px]',
   },
 ];
 
-function Categories() {
+function CategoryMosaic() {
   return (
-    <FadeInSection>
-      <section className="py-16 max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="text-center mb-12">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-neutral-400 mb-2">
-            Nos univers
-          </p>
-          <h2 className="text-2xl md:text-3xl font-serif font-bold text-black">
-            Explorer les collections
-          </h2>
-          <div className="divider-gold w-24 mx-auto mt-5" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {CATEGORIES.map((c, i) => (
-            <motion.div
-              key={c.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+    <section className="py-20 lg:py-24 bg-[#FAF8F5]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Reveal>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-12">
+            <div>
+              <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">
+                Nos univers
+              </p>
+              <h2 className="font-serif font-bold text-black text-3xl md:text-[40px] leading-tight">
+                Quatre terrains de jeu
+              </h2>
+            </div>
+            <Link
+              href="/shop"
+              className="text-[11px] font-semibold tracking-[0.22em] uppercase text-black border-b border-black/25 pb-1 hover:border-black transition-colors self-start"
             >
-              <Link href={c.href} className="group block relative h-[420px] overflow-hidden">
+              Tout parcourir
+            </Link>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:auto-rows-[270px]">
+          {TILES.map((t, i) => (
+            <Reveal key={t.label} delay={i * 0.08} className={t.className}>
+              <Link
+                href={t.href}
+                className="group relative block overflow-hidden w-full h-full"
+              >
                 <img
-                  src={c.img}
-                  alt={c.label}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  src={t.img}
+                  alt={t.label}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-7 text-white">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] mb-2">
-                    {c.desc}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#E8D5B0] mb-1.5">
+                    {t.desc}
                   </p>
-                  <h3 className="text-2xl font-serif font-bold mb-3">{c.label}</h3>
-                  <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.25em] uppercase border-b border-white/40 pb-0.5 group-hover:border-white transition-colors">
-                    Découvrir <ChevronRight className="w-3 h-3" />
+                  <h3 className="font-serif font-bold text-xl lg:text-2xl mb-2">{t.label}</h3>
+                  <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    Découvrir <ArrowRight className="w-3 h-3" />
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
-      </section>
-    </FadeInSection>
+      </div>
+    </section>
   );
 }
 
-// ─── New arrivals ─────────────────────────────────────────────────────────────
+// ─── 5. Rail horizontal ───────────────────────────────────────────────────────
 
-function NewArrivals() {
+function ProductRail() {
+  const railRef = useRef<HTMLDivElement>(null);
+  const items = [...products].sort((a, b) => b.rating - a.rating).slice(0, 12);
+
+  const scrollBy = (dir: 1 | -1) => {
+    railRef.current?.scrollBy({ left: dir * 340, behavior: 'smooth' });
+  };
+
+  return (
+    <section className="py-20 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Reveal>
+          <div className="flex items-end justify-between gap-5 mb-10">
+            <div>
+              <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">
+                Les mieux notés
+              </p>
+              <h2 className="font-serif font-bold text-black text-3xl md:text-[40px] leading-tight">
+                La sélection
+              </h2>
+            </div>
+            <div className="hidden sm:flex gap-2">
+              <button
+                onClick={() => scrollBy(-1)}
+                aria-label="Précédent"
+                className="w-11 h-11 border border-black/15 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => scrollBy(1)}
+                aria-label="Suivant"
+                className="w-11 h-11 border border-black/15 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </Reveal>
+
+        <div
+          ref={railRef}
+          className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory -mx-6 px-6 lg:mx-0 lg:px-0 pb-2"
+        >
+          {items.map((p) => (
+            <div key={p.id} className="snap-start shrink-0 w-[260px] sm:w-[290px]">
+              <ProductCard product={p} />
+            </div>
+          ))}
+        </div>
+
+        <p className="text-[11px] text-neutral-400 mt-5 sm:hidden">Faites glisser pour explorer →</p>
+      </div>
+    </section>
+  );
+}
+
+// ─── 6. Manifeste ─────────────────────────────────────────────────────────────
+
+const PILLARS = [
+  {
+    n: '01',
+    t: 'Sélection resserrée',
+    d: "Chaque référence est retenue pour une raison précise. Pas de catalogue interminable, pas de remplissage.",
+  },
+  {
+    n: '02',
+    t: 'Prix juste',
+    d: "Nous travaillons en direct pour supprimer les intermédiaires. La qualité reste, la marge superflue disparaît.",
+  },
+  {
+    n: '03',
+    t: 'Sans risque',
+    d: "Trente jours pour changer d'avis, retours gratuits. Si la paire ne vous va pas, elle repart.",
+  },
+];
+
+function Manifesto() {
+  return (
+    <section className="bg-black py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Reveal>
+          <div className="max-w-2xl mb-16">
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-5">
+              Notre approche
+            </p>
+            <h2 className="font-serif font-bold text-white text-3xl md:text-[42px] leading-[1.15]">
+              Trois principes, appliqués sans exception.
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-neutral-800">
+          {PILLARS.map((p, i) => (
+            <Reveal key={p.n} delay={i * 0.12}>
+              <div className="bg-black p-8 lg:p-10 h-full">
+                <p
+                  className="text-[#C9A96E] text-4xl mb-6 leading-none"
+                  style={{ fontFamily: 'var(--font-cinzel, Georgia, serif)' }}
+                >
+                  {p.n}
+                </p>
+                <h3 className="font-serif font-semibold text-white text-xl mb-4">{p.t}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{p.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Reassurance row */}
+        <Reveal delay={0.2}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-12 border-t border-neutral-800">
+            {[
+              { Icon: Truck, t: 'Livraison offerte', d: 'Dès 80 CHF' },
+              { Icon: RotateCcw, t: 'Retours gratuits', d: '30 jours' },
+              { Icon: ShieldCheck, t: 'Paiement sécurisé', d: 'SSL 256-bit' },
+            ].map(({ Icon, t, d }) => (
+              <div key={t} className="flex items-center gap-4">
+                <Icon className="w-5 h-5 text-[#C9A96E] shrink-0" strokeWidth={1.4} />
+                <div>
+                  <p className="text-white text-[11px] tracking-[0.2em] uppercase">{t}</p>
+                  <p className="text-white/40 text-[11px] mt-0.5">{d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ─── 7. Nouveautés ────────────────────────────────────────────────────────────
+
+function NewIn() {
   const items = products.filter((p) => p.badge === 'new').slice(0, 4);
   if (items.length === 0) return null;
 
   return (
-    <FadeInSection>
-      <section className="py-16 bg-neutral-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <SectionHead eyebrow="Vient d'arriver" title="Nouveautés" href="/shop" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {items.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-              >
-                <ProductCard product={product} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-
-const TESTIMONIALS = [
-  {
-    text: "Les Quantum Flow sont d'un confort incroyable, même sur 15 km. Rapport qualité-prix imbattable.",
-    name: 'Julien M.',
-    role: 'Marathonien amateur',
-  },
-  {
-    text: 'Commande reçue en 3 jours, emballage soigné. Le hoodie est exactement comme sur les photos.',
-    name: 'Sarah L.',
-    role: 'Cliente vérifiée',
-  },
-  {
-    text: "J'ai pris deux paires pour la salle. La qualité est au rendez-vous, je recommande sans hésiter.",
-    name: 'Thomas R.',
-    role: 'Coach sportif',
-  },
-];
-
-function Testimonials() {
-  return (
-    <FadeInSection>
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col items-center justify-center max-w-[540px] mx-auto">
-            <div className="border border-black text-black py-1 px-4 text-xs tracking-[0.2em] uppercase">
-              Témoignages
+    <section className="py-20 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        <Reveal>
+          <div className="flex items-end justify-between gap-5 mb-10">
+            <div>
+              <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-3">
+                Vient d&apos;arriver
+              </p>
+              <h2 className="font-serif font-bold text-black text-3xl md:text-[40px] leading-tight">
+                Nouveautés
+              </h2>
             </div>
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl mt-5 text-center uppercase"
-              style={{
-                fontFamily: 'var(--font-cinzel, Georgia, serif)',
-                letterSpacing: '0.12em',
-                fontWeight: 500,
-              }}
+            <Link
+              href="/shop"
+              className="text-[11px] font-semibold tracking-[0.22em] uppercase text-black border-b border-black/25 pb-1 hover:border-black transition-colors"
             >
-              Ce que disent nos clients
-            </h2>
-            <p className="text-center mt-5 text-neutral-500 text-sm">
-              Des centaines de sportifs font confiance à IN &amp; CO pour leur équipement.
-            </p>
+              Tout voir
+            </Link>
           </div>
+        </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {TESTIMONIALS.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="border border-neutral-100 p-7 bg-white card-premium"
-              >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star key={s} className="w-3.5 h-3.5 fill-[#C9A96E] text-[#C9A96E]" />
-                  ))}
-                </div>
-                <p className="text-sm text-neutral-700 leading-relaxed mb-6">“{t.text}”</p>
-                <p className="text-sm font-semibold text-black">{t.name}</p>
-                <p className="text-[11px] text-neutral-400">{t.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </FadeInSection>
-  );
-}
-
-// ─── Trust strip ──────────────────────────────────────────────────────────────
-
-function TrustStrip() {
-  const items = [
-    { icon: Truck, title: 'Livraison offerte', desc: 'Dès 80 CHF d\'achat' },
-    { icon: Shield, title: 'Paiement sécurisé', desc: 'SSL 256-bit' },
-    { icon: RotateCcw, title: 'Retours gratuits', desc: '30 jours pour changer d\'avis' },
-    { icon: Star, title: 'Qualité vérifiée', desc: 'Sélection rigoureuse' },
-  ];
-
-  return (
-    <FadeInSection>
-      <section className="border-t border-neutral-100 py-14">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {items.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="flex flex-col items-center text-center gap-3">
-              <Icon className="w-6 h-6 text-[#C9A96E]" strokeWidth={1.4} />
-              <h3 className="text-[11px] tracking-[0.25em] uppercase text-black">{title}</h3>
-              <p className="text-[11px] text-neutral-400">{desc}</p>
-            </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {items.map((p, i) => (
+            <Reveal key={p.id} delay={i * 0.08}>
+              <ProductCard product={p} />
+            </Reveal>
           ))}
         </div>
-      </section>
-    </FadeInSection>
+      </div>
+    </section>
   );
 }
 
-// ─── Newsletter ───────────────────────────────────────────────────────────────
+// ─── 8. Newsletter — split éditorial ──────────────────────────────────────────
 
-function Newsletter() {
+function NewsletterSplit() {
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="w-full bg-black py-20 px-6">
-      <div className="max-w-xl mx-auto text-center">
-        <p className="text-[10px] tracking-[0.35em] uppercase text-[#C9A96E] mb-4">
-          Inscription newsletter
-        </p>
-        <h2 className="text-3xl md:text-4xl text-white font-serif font-bold mb-4">
-          Restez en avance
-        </h2>
-        <div className="divider-gold w-24 mx-auto mb-6" />
-        <p className="text-white/60 text-sm mb-8 leading-relaxed">
-          Nouveautés, réassorts et offres exclusives — directement dans votre boîte mail.
-        </p>
+    <section className="bg-[#FAF8F5] border-t border-black/5">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <Reveal>
+            <div>
+              <p className="text-[10px] tracking-[0.4em] uppercase text-[#A07840] mb-5">
+                La lettre
+              </p>
+              <h2 className="font-serif font-bold text-black text-3xl md:text-[40px] leading-[1.15] mb-5">
+                Les réassorts partent
+                <br className="hidden sm:block" /> en quelques heures.
+              </h2>
+              <p className="text-neutral-500 text-sm leading-relaxed max-w-md">
+                Inscrivez-vous pour être prévenu avant tout le monde des nouvelles
+                pièces, des retours en stock et des ventes privées.
+              </p>
+            </div>
+          </Reveal>
 
-        {sent ? (
-          <p className="text-white/80 text-sm">Merci pour votre inscription !</p>
-        ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (email) {
-                setSent(true);
-                setEmail('');
-              }
-            }}
-            className="flex flex-col sm:flex-row gap-3 justify-center"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre@email.com"
-              required
-              className="flex-1 max-w-xs bg-white/5 border border-white/20 text-white text-sm px-4 py-3 outline-none focus:ring-1 focus:ring-[#C9A96E] placeholder:text-white/30 transition-all"
-            />
-            <button
-              type="submit"
-              className="bg-white text-black text-[11px] font-bold tracking-[0.2em] uppercase px-8 py-3 hover:bg-[#C9A96E] hover:text-white transition-colors"
-            >
-              S&apos;inscrire
-            </button>
-          </form>
-        )}
-
-        <p className="text-[11px] text-white/30 mt-6">
-          Désinscription possible à tout moment.
-        </p>
+          <Reveal delay={0.12}>
+            <div className="lg:pl-8">
+              {sent ? (
+                <div className="border border-black/10 bg-white p-8">
+                  <p className="font-serif text-black text-xl mb-2">Bienvenue.</p>
+                  <p className="text-neutral-500 text-sm">
+                    Votre inscription est confirmée — à très vite.
+                  </p>
+                </div>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (email) {
+                      setSent(true);
+                      setEmail('');
+                    }
+                  }}
+                >
+                  <div className="flex items-center border-b border-black/25 focus-within:border-black transition-colors pb-3 mb-5">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="votre@email.com"
+                      required
+                      className="flex-1 bg-transparent text-black text-sm outline-none placeholder:text-neutral-400"
+                    />
+                    <button
+                      type="submit"
+                      aria-label="S'inscrire"
+                      className="text-black hover:text-[#C9A96E] transition-colors"
+                    >
+                      <ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-neutral-400">
+                    Un message par semaine au maximum. Désinscription en un clic.
+                  </p>
+                </form>
+              )}
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -522,15 +636,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <HeaderPremium cartCount={cartCount} overHero />
-      <Hero />
-      <Bestsellers />
-      <PromoBanner />
-      <Categories />
-      <NewArrivals />
-      <Testimonials />
-      <TrustStrip />
-      <Newsletter />
+      <HeaderPremium cartCount={cartCount} />
+      <HeroSplit />
+      <MarqueeBand />
+      <Spotlight />
+      <CategoryMosaic />
+      <ProductRail />
+      <Manifesto />
+      <NewIn />
+      <NewsletterSplit />
       <Footer />
     </div>
   );

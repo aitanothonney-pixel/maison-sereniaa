@@ -1,73 +1,45 @@
 'use client'
 
-import { useState } from 'react'
-import PieceCard from './PieceCard'
-import { drops, Drop } from '@/lib/drops'
+import Link from 'next/link'
+import { products } from '@/lib/products'
 
-type Tab = { key: string; label: string; isNew?: boolean }
-
-const ALL = 'tout'
-
-/**
- * Onglets au-dessus de la grille. Le filtrage se fait en mémoire :
- * le catalogue est statique et tient largement en une page.
- */
 export default function DropTabs() {
-  const [active, setActive] = useState(ALL)
-
-  const tabs: Tab[] = [
-    { key: ALL, label: 'Tout' },
-    ...drops.map((d) => ({
-      key: d.id,
-      label: d.name,
-      isNew: d.status === 'upcoming',
-    })),
-  ]
-
-  const visible: Drop[] = active === ALL ? drops : drops.filter((d) => d.id === active)
-  const entries = visible.flatMap((d) =>
-    d.pieces.map((piece) => ({ piece, dropId: d.id, status: d.status }))
-  )
-
   return (
     <section className="pt-14 sm:pt-20">
-      {/* Onglets */}
-      <div className="px-5 lg:px-8 border-b border-line">
-        <div className="flex items-center gap-7 overflow-x-auto" role="tablist">
-          {tabs.map((t) => {
-            const isActive = active === t.key
-            return (
-              <button
-                key={t.key}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActive(t.key)}
-                className={`ui-label whitespace-nowrap pb-3 -mb-px border-b-2 transition-colors ${
-                  isActive ? 'border-foreground' : 'border-transparent text-muted hover:text-foreground'
-                }`}
-              >
-                {t.label}
-                {t.isNew && <span className="sup-new">Nouveau</span>}
-              </button>
-            )
-          })}
-        </div>
+      <div className="px-5 lg:px-8 border-b border-line pb-8 mb-8">
+        <h2 className="display text-2xl sm:text-3xl">Pièces en vente</h2>
       </div>
 
-      {/* Grille */}
-      <div className="px-5 lg:px-8 pt-8">
-        {entries.length === 0 ? (
-          <p className="text-muted text-[13px] py-16">Aucune pièce dans cette sélection.</p>
+      {/* Grille de produits */}
+      <div className="px-5 lg:px-8">
+        {products.length === 0 ? (
+          <p className="text-muted text-[13px] py-16">Aucune pièce disponible.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10">
-            {entries.map(({ piece, dropId, status }, i) => (
-              <PieceCard
-                key={`${dropId}-${piece.name}`}
-                piece={piece}
-                dropId={dropId}
-                status={status}
-                priority={i < 5}
-              />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+            {products.map((product) => (
+              <Link
+                key={product.id}
+                href={`/shop/${product.id}`}
+                className="group"
+              >
+                <div className="relative bg-surface overflow-hidden mb-4 aspect-square">
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {product.stock < 10 && (
+                    <div className="absolute top-3 left-3 bg-foreground text-background text-xs px-2 py-1">
+                      Plus que {product.stock}
+                    </div>
+                  )}
+                </div>
+                <h3 className="ui-label text-sm mb-2 group-hover:opacity-60 transition-opacity">{product.name}</h3>
+                <div className="flex justify-between items-baseline">
+                  <p className="text-sm font-bold">{product.price} CHF</p>
+                  <p className="text-xs text-muted">{product.colors.length} couleurs</p>
+                </div>
+              </Link>
             ))}
           </div>
         )}

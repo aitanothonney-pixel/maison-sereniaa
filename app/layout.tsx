@@ -1,15 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Courier_Prime } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({
+/**
+ * Une seule famille sur tout le site : une monospace de type machine
+ * à écrire. C'est elle qui porte l'identité, pas un accent décoratif.
+ */
+const mono = Courier_Prime({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
+  weight: ['400', '700'],
   variable: '--font-mono-tech',
   display: 'swap',
 })
@@ -19,8 +18,7 @@ export const metadata: Metadata = {
     default: 'Tempered — Trust the process',
     template: '%s — Tempered',
   },
-  description:
-    'Tempered. Drops limités, aucun réassort. Trust the process.',
+  description: 'Tempered. Drops limités, aucun réassort. Trust the process.',
   openGraph: {
     title: 'Tempered — Trust the process',
     description: 'Drops limités, aucun réassort.',
@@ -36,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${mono.variable}`}>
+    <html lang="fr" className={mono.variable}>
       <body>{children}</body>
     </html>
   )

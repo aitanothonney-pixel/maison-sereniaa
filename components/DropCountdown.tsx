@@ -17,13 +17,7 @@ function computeLeft(target: number): Left {
 
 const pad = (n: number) => String(n).padStart(2, '0')
 
-export default function DropCountdown({
-  releaseAt,
-  size = 'lg',
-}: {
-  releaseAt: string
-  size?: 'lg' | 'sm'
-}) {
+export default function DropCountdown({ releaseAt }: { releaseAt: string }) {
   const target = new Date(releaseAt).getTime()
 
   // Rendu différé : l'heure du serveur et celle du client diffèrent,
@@ -40,37 +34,28 @@ export default function DropCountdown({
 
   const units = left
     ? [
-        { v: pad(left.days), l: 'j' },
-        { v: pad(left.hours), l: 'h' },
-        { v: pad(left.mins), l: 'm' },
-        { v: pad(left.secs), l: 's' },
+        { v: pad(left.days), l: 'jours' },
+        { v: pad(left.hours), l: 'heures' },
+        { v: pad(left.mins), l: 'min' },
+        { v: pad(left.secs), l: 'sec' },
       ]
     : null
 
-  // 16vw débordait de la fenêtre en 390 px : quatre unités de deux chiffres,
-  // leur suffixe et les écarts dépassaient la largeur utile.
-  const numClass =
-    size === 'lg'
-      ? 'headline text-[12vw] sm:text-[11vw] lg:text-[112px]'
-      : 'headline text-3xl sm:text-4xl'
-
-  // Hauteur réservée avant l'hydratation pour éviter un saut de mise en page.
-  const reserve = size === 'lg' ? 'min-h-[18vw] sm:min-h-[12vw] lg:min-h-[120px]' : 'min-h-[44px]'
-
   if (mounted && !left) {
     return (
-      <p className={`${numClass} ${reserve} flex items-center`} role="status">
+      <p className="text-3xl sm:text-5xl tabular-nums tracking-[0.1em]" role="status">
         00:00:00:00
       </p>
     )
   }
 
   return (
-    <div className={`flex items-start gap-3 sm:gap-7 ${reserve}`} role="timer">
+    // Hauteur réservée avant l'hydratation pour éviter un saut de mise en page.
+    <div className="flex items-start gap-5 sm:gap-8 min-h-[60px] sm:min-h-[76px]" role="timer">
       {units?.map((u) => (
-        <div key={u.l} className="flex items-start">
-          <span className={`${numClass} tabular-nums`}>{u.v}</span>
-          <span className="tech text-subtle mt-1 ml-1">{u.l}</span>
+        <div key={u.l}>
+          <span className="block text-3xl sm:text-5xl tabular-nums leading-none">{u.v}</span>
+          <span className="meta block mt-2 text-dim">{u.l}</span>
         </div>
       ))}
     </div>

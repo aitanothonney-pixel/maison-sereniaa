@@ -25,11 +25,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       <>
         <Marquee />
         <SiteHeader />
-        <main className="px-5 lg:px-8 py-12 text-center">
-          <p>Produit non trouvé</p>
-          <Link href="/shop" className="ui-label mt-6 inline-block hover:opacity-60">
-            Retour à la boutique
-          </Link>
+        <main className="px-5 lg:px-8 py-12 text-center min-h-screen flex items-center justify-center">
+          <div className="max-w-md">
+            <div className="animate-pulse mb-8">
+              <div className="h-32 bg-surface rounded mb-4"></div>
+              <div className="h-4 bg-surface rounded mb-2"></div>
+              <div className="h-4 bg-surface rounded w-2/3 mx-auto"></div>
+            </div>
+            <p className="text-muted mb-4">Produit en cours de chargement...</p>
+            <Link href="/shop" className="ui-label inline-block hover:opacity-60">
+              ← Retour à la boutique
+            </Link>
+          </div>
         </main>
         <Footer />
       </>

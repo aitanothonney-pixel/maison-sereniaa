@@ -29,10 +29,10 @@ export default function HeroPair({ panels }: { panels: [HeroPanel, HeroPanel] })
             preload={i === 0}
             className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
           />
-          {/* Voile bas : garantit la lisibilité du titre sur n'importe quelle photo */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+          {/* Voile radial : plus lisibilité au centre */}
+          <div className="absolute inset-0 bg-radial-gradient" style={{backgroundImage: 'radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)'}} />
 
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-9 text-white">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 sm:p-9 text-white text-center">
             <h2 className="display text-[11vw] md:text-[5.2vw] leading-[0.88] mb-2">
               {panel.title}
             </h2>

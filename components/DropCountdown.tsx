@@ -43,7 +43,7 @@ export default function DropCountdown({ releaseAt }: { releaseAt: string }) {
 
   if (mounted && !left) {
     return (
-      <p className="text-3xl sm:text-5xl tabular-nums tracking-[0.1em]" role="status">
+      <p className="display text-4xl sm:text-6xl tabular-nums" role="status">
         00:00:00:00
       </p>
     )
@@ -51,11 +51,11 @@ export default function DropCountdown({ releaseAt }: { releaseAt: string }) {
 
   return (
     // Hauteur réservée avant l'hydratation pour éviter un saut de mise en page.
-    <div className="flex items-start gap-5 sm:gap-8 min-h-[60px] sm:min-h-[76px]" role="timer">
+    <div className="flex items-start gap-5 sm:gap-9 min-h-[66px] sm:min-h-[88px]" role="timer">
       {units?.map((u) => (
         <div key={u.l}>
-          <span className="block text-3xl sm:text-5xl tabular-nums leading-none">{u.v}</span>
-          <span className="meta block mt-2 text-dim">{u.l}</span>
+          <span className="display block text-4xl sm:text-6xl tabular-nums">{u.v}</span>
+          <span className="ui-label block mt-2 text-muted">{u.l}</span>
         </div>
       ))}
     </div>

@@ -1,15 +1,10 @@
 import type { Metadata } from 'next'
-import { Courier_Prime } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 
-/**
- * Une seule famille sur tout le site : une monospace de type machine
- * à écrire. C'est elle qui porte l'identité, pas un accent décoratif.
- */
-const mono = Courier_Prime({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-mono-tech',
+  variable: '--font-inter',
   display: 'swap',
 })
 
@@ -34,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={mono.variable}>
+    <html lang="fr" className={inter.variable}>
       <body>{children}</body>
     </html>
   )

@@ -1,116 +1,96 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Shell from '@/components/Shell'
-import DropCountdown from '@/components/DropCountdown'
-import NotifyForm from '@/components/NotifyForm'
-import { drops, featuredDrop, STATUS_LABEL, formatDate } from '@/lib/drops'
+import Marquee from '@/components/Marquee'
+import SiteHeader from '@/components/SiteHeader'
+import HeroPair from '@/components/HeroPair'
+import DropTabs from '@/components/DropTabs'
+import Footer from '@/components/Footer'
+import { drops, featuredDrop } from '@/lib/drops'
+
+const EDITORIAL =
+  'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=2400&q=80'
 
 export default function Home() {
   const next = featuredDrop()
-  const past = drops.filter((d) => d.id !== next.id)
+  const previous = drops.find((d) => d.id !== next.id) ?? next
 
   return (
-    <Shell>
-      {/* ── Drop en tête ─────────────────────────────────────────
-          La page d'accueil répond à une seule question : quand.
-          ─────────────────────────────────────────────────────── */}
-      <section className="pt-6">
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <span className="stamp">{STATUS_LABEL[next.status]}</span>
-          <span className="meta">Drop {next.number}</span>
-          <span className="meta text-dim">{formatDate(next.releaseAt)}</span>
-        </div>
+    <>
+      <Marquee />
+      <SiteHeader />
 
-        <h1 className="page-title mb-8">{next.name}</h1>
+      {/* 1 — Ouverture : deux visuels côte à côte */}
+      <HeroPair
+        panels={[
+          {
+            title: next.name,
+            subtitle: `Drop ${next.number} · Bientôt`,
+            image: next.cover,
+            href: `/drops/${next.id}`,
+          },
+          {
+            title: previous.name,
+            subtitle: 'Archive · Épuisé',
+            image: previous.cover,
+            href: `/drops/${previous.id}`,
+          },
+        ]}
+      />
 
-        <Link href={`/drops/${next.id}`} className="block relative w-full max-w-4xl aspect-[16/10] mb-10 overflow-hidden">
-          <Image
-            src={next.cover}
-            alt=""
-            fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            preload
-            className="object-cover opacity-70 hover:opacity-100 transition-opacity duration-500"
-          />
-        </Link>
+      {/* 2 — Les pièces, filtrables par drop */}
+      <DropTabs />
 
-        <p className="max-w-xl mb-12 leading-[1.9]">{next.statement}</p>
-
-        <p className="meta mb-4">Ouverture dans</p>
-        <div className="mb-10">
-          <DropCountdown releaseAt={next.releaseAt} />
-        </div>
-
-        <div className="flex flex-col sm:flex-row sm:items-end gap-8 sm:gap-12">
-          <NotifyForm />
-          <Link
-            href={`/drops/${next.id}`}
-            className="nav-item border border-foreground px-7 py-3 hover:bg-foreground hover:text-background transition-colors self-start"
-          >
-            Voir le drop
-          </Link>
+      {/* 3 — Grande image pleine largeur */}
+      <section className="relative w-full h-[70vh] min-h-[420px] mt-20 bg-surface">
+        <Image
+          src={EDITORIAL}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 text-white">
+          <p className="ui-label mb-2 tracking-[0.06em]">Trust the process</p>
+          <h2 className="display text-[12vw] sm:text-[6vw] leading-[0.88]">
+            Anneal
+          </h2>
         </div>
       </section>
 
-      {/* ── Archives ─────────────────────────────────────────── */}
-      <section className="pt-20">
-        <div className="flex items-baseline justify-between gap-6 mb-8">
-          <h2 className="page-title">Archives</h2>
-          <Link href="/drops" className="meta link-accent shrink-0">
-            Tout voir
+      {/* Rappel du fonctionnement, sans panier : le site n'encaisse pas */}
+      <section className="px-5 lg:px-8 pt-16">
+        <div className="flex items-baseline justify-between gap-6 mb-6">
+          <h2 className="display text-2xl sm:text-3xl">Comment ça marche</h2>
+          <Link href="/info" className="ui-label text-muted hover:text-foreground transition-colors shrink-0">
+            + Tout voir
           </Link>
         </div>
 
-        <ul className="border-t border-line max-w-4xl">
-          {past.map((d) => (
-            <li key={d.id}>
-              <Link
-                href={`/drops/${d.id}`}
-                className="group grid grid-cols-[3rem_1fr_auto] items-center gap-4 py-5 border-b border-line"
-              >
-                <span className="meta text-dim">{d.number}</span>
-                <span className="min-w-0">
-                  <span className="nav-item block group-hover:text-white">{d.name}</span>
-                  <span className="meta block text-dim">{formatDate(d.releaseAt)}</span>
-                </span>
-                <span className="stamp text-muted shrink-0">{STATUS_LABEL[d.status]}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* ── Fonctionnement ───────────────────────────────────── */}
-      <section className="pt-20 max-w-3xl">
-        <h2 className="page-title mb-8">Fonctionnement</h2>
-        <ul className="space-y-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-line pt-8">
           {[
-            'Chaque drop est produit en série fermée.',
-            'Aucun réassort, aucune réédition : ce qui part ne revient pas.',
-            'La date est annoncée à l’avance par mail et sur Instagram.',
-            'Expédition depuis Genève sous 48 heures ouvrées après clôture.',
-            'Trente jours pour renvoyer une pièce non portée.',
-          ].map((line) => (
-            <li key={line} className="flex gap-3">
-              <span className="text-dim shrink-0" aria-hidden>
-                •
-              </span>
-              <span>{line}</span>
-            </li>
+            {
+              t: 'Série fermée',
+              d: 'Chaque drop est produit en quantité fixe. Ce qui part ne revient pas.',
+            },
+            {
+              t: 'Aucun réassort',
+              d: 'Pas de réédition. La pièce vit sur une seule fenêtre de vente.',
+            },
+            {
+              t: 'Annoncé en amont',
+              d: 'La date part par mail et sur Instagram. Rien d’autre à surveiller.',
+            },
+          ].map((item) => (
+            <div key={item.t}>
+              <p className="ui-label mb-2">{item.t}</p>
+              <p className="text-[13px] text-muted leading-[1.7]">{item.d}</p>
+            </div>
           ))}
-        </ul>
-
-        <p className="meta text-dim mt-10">
-          Voir les{' '}
-          <Link href="/info" className="link-accent">
-            conditions complètes
-          </Link>
-        </p>
+        </div>
       </section>
 
-      <p className="meta text-dim text-center pt-24">
-        Copyright © {new Date().getFullYear()}, Tempered · TTP
-      </p>
-    </Shell>
+      <Footer />
+    </>
   )
 }

@@ -2,113 +2,115 @@
 
 /* ──────────────────────────────────────────────────────────────
    Tempered — jetons de style
-   Registre terminal : fond noir, monospace jaune, filet rouge en
-   tête de page. La navigation vit dans une colonne fixe à gauche,
-   le contenu occupe le reste.
+   Fond clair, typographie grasse en capitales, vignettes produit
+   sur aplat gris. Le rouge ne sert qu'aux mentions « nouveau ».
    ────────────────────────────────────────────────────────────── */
 
 :root {
-  --background: #000000;
-  /* Jaune de lecture : ~14:1 sur noir, confortable en corps de texte. */
-  --foreground: #ffd400;
-  --dim: #8a7400;
-  --muted: #b39500;
-  --accent: #e63946;
-  --line: #2a2400;
-  --white: #ffffff;
+  --background: #ffffff;
+  --foreground: #111111;
+  --muted: #6b6b6b;
+  --dim: #9a9a9a;
+  /* Aplat des vignettes produit */
+  --surface: #e9e9e9;
+  --line: #e2e2e2;
+  --accent: #e01b24;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-dim: var(--dim);
   --color-muted: var(--muted);
-  --color-accent: var(--accent);
+  --color-dim: var(--dim);
+  --color-surface: var(--surface);
   --color-line: var(--line);
-  --color-white: var(--white);
-  --font-mono: var(--font-mono-tech, ui-monospace, monospace);
-  --font-sans: var(--font-mono-tech, ui-monospace, monospace);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
 }
 
 * {
   border-color: var(--line);
 }
 
-/* Le monospace n'est pas un accent : c'est la police du site. */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.7;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* ── Libellés de navigation ───────────────────────────────────
-   Capitales très espacées, la signature de la colonne de gauche.
+/* ── Titres d'affiche ─────────────────────────────────────────
+   Capitales très grasses, chasse resserrée : les surtitres posés
+   sur les visuels d'ouverture.
    ─────────────────────────────────────────────────────────── */
-.nav-item {
-  font-size: 12px;
+.display {
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  line-height: 2.1;
-  color: var(--foreground);
-  transition: color 0.15s ease;
-}
-.nav-item:hover {
-  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
 }
 
-/* ── Titres de page ─────────────────────────────────────────── */
-.page-title {
-  font-size: clamp(20px, 4vw, 30px);
+/* ── Libellés d'interface ─────────────────────────────────────
+   Navigation, onglets, noms de pièces.
+   ─────────────────────────────────────────────────────────── */
+.ui-label {
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.26em;
-  color: var(--foreground);
+  letter-spacing: 0.02em;
+  font-size: 13px;
 }
 
-/* ── Données secondaires ────────────────────────────────────── */
-.meta {
+/* ── Pastille posée sur une vignette ────────────────────────── */
+.badge {
+  font-weight: 700;
+  text-transform: uppercase;
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--muted);
-}
-
-/* ── Pastille de statut ─────────────────────────────────────── */
-.stamp {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  padding: 4px 9px;
-  border: 1px solid currentColor;
+  letter-spacing: 0.02em;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 5px 9px;
   display: inline-block;
-  line-height: 1;
+  line-height: 1.1;
 }
 
-/* ── Liens dans le corps de texte ───────────────────────────── */
-.link-accent {
+/* ── Exposant « nouveau » ───────────────────────────────────── */
+.sup-new {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  vertical-align: super;
+  margin-left: 3px;
+  letter-spacing: 0.04em;
 }
-.link-accent:hover {
-  color: var(--white);
+
+/* ── Bandeau défilant ─────────────────────────────────────────
+   Deux moitiés identiques : la translation de -50 % boucle alors
+   sans saut. Voir le composant Marquee.
+   ─────────────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
 }
 
 /* ── Accessibilité ──────────────────────────────────────────── */
 :focus-visible {
-  outline: 1px solid var(--foreground);
-  outline-offset: 3px;
-}
-
-::selection {
-  background: var(--foreground);
-  color: var(--background);
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
 }
 
 .line-clamp-2 {
@@ -123,6 +125,7 @@ html {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }

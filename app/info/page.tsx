@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import Shell from '@/components/Shell'
+import Marquee from '@/components/Marquee'
+import SiteHeader from '@/components/SiteHeader'
+import Footer from '@/components/Footer'
 import NotifyForm from '@/components/NotifyForm'
 
 export const metadata: Metadata = {
@@ -51,48 +53,48 @@ const SECTIONS = [
 
 export default function Info() {
   return (
-    <Shell>
-      <div className="max-w-2xl mx-auto pt-6">
-        <h1 className="page-title text-center mb-16">Info</h1>
+    <>
+      <Marquee />
+      <SiteHeader />
 
-        {SECTIONS.map((s) => (
-          <section key={s.t} className="mb-12">
-            <h2 className="nav-item mb-4">{s.t}</h2>
-            <ul className="space-y-2">
-              {s.lines.map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="text-dim shrink-0" aria-hidden>
-                    •
-                  </span>
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+      <main className="px-5 lg:px-8 pt-12">
+        <h1 className="display text-[13vw] sm:text-[7vw] lg:text-[80px] mb-12">Info</h1>
 
-        <section className="mb-12">
-          <h2 className="nav-item mb-4">Nous écrire</h2>
-          <a href="mailto:contact@tempered.com" className="link-accent">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10 max-w-4xl border-t border-line pt-10">
+          {SECTIONS.map((s) => (
+            <section key={s.t}>
+              <h2 className="ui-label mb-3">{s.t}</h2>
+              <ul className="space-y-2">
+                {s.lines.map((line) => (
+                  <li key={line} className="text-[13px] text-muted leading-[1.8]">
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+
+        <section className="mt-16 pt-10 border-t border-line max-w-md">
+          <h2 className="ui-label mb-3">Nous écrire</h2>
+          <a
+            href="mailto:contact@tempered.com"
+            className="display text-xl sm:text-2xl hover:opacity-60 transition-opacity inline-block mb-2"
+          >
             contact@tempered.com
           </a>
-          <p className="meta text-dim mt-2">Réponse sous un jour ouvré.</p>
-        </section>
-
-        <section className="mb-16">
+          <p className="text-[13px] text-muted mb-10">Réponse sous un jour ouvré.</p>
           <NotifyForm compact />
         </section>
 
-        <p className="meta text-center">
-          <Link href="/drops" className="link-accent">
-            Voir les drops
+        <div className="pt-12">
+          <Link href="/drops" className="ui-label text-muted hover:text-foreground transition-colors">
+            Voir les drops →
           </Link>
-        </p>
+        </div>
+      </main>
 
-        <p className="meta text-dim text-center pt-20">
-          Copyright © {new Date().getFullYear()}, Tempered · TTP
-        </p>
-      </div>
-    </Shell>
+      <Footer />
+    </>
   )
 }

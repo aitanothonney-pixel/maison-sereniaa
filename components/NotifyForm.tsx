@@ -13,8 +13,8 @@ export default function NotifyForm({ compact = false }: { compact?: boolean }) {
 
   if (sent) {
     return (
-      <p className="meta text-foreground" role="status">
-        Inscrit. Vous serez prévenu à l&apos;ouverture.
+      <p className="ui-label" role="status">
+        Inscrit. Vous serez prévenu.
       </p>
     )
   }
@@ -27,8 +27,8 @@ export default function NotifyForm({ compact = false }: { compact?: boolean }) {
       }}
       className={compact ? 'w-full max-w-xs' : 'w-full max-w-sm'}
     >
-      <label htmlFor="notify-email" className="meta block mb-3">
-        Être prévenu de l&apos;ouverture
+      <label htmlFor="notify-email" className="ui-label block mb-3">
+        Être prévenu du prochain drop
       </label>
 
       <div className="flex items-center border border-foreground">
@@ -39,11 +39,11 @@ export default function NotifyForm({ compact = false }: { compact?: boolean }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="votre@email.com"
-          className="flex-1 min-w-0 bg-transparent px-3 h-10 text-[13px] outline-none placeholder:text-dim"
+          className="flex-1 min-w-0 bg-transparent px-3 h-11 text-[13px] outline-none placeholder:text-dim"
         />
         <button
           type="submit"
-          className="nav-item shrink-0 h-10 px-5 border-l border-foreground hover:bg-foreground hover:text-background transition-colors"
+          className="ui-label shrink-0 h-11 px-5 bg-foreground text-background hover:bg-background hover:text-foreground border-l border-foreground transition-colors"
         >
           OK
         </button>

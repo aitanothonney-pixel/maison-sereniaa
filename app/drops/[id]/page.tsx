@@ -2,10 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Shell from '@/components/Shell'
+import Marquee from '@/components/Marquee'
+import SiteHeader from '@/components/SiteHeader'
+import Footer from '@/components/Footer'
 import DropCountdown from '@/components/DropCountdown'
 import NotifyForm from '@/components/NotifyForm'
-import { drops, getDrop, STATUS_LABEL, formatPrice, formatDate } from '@/lib/drops'
+import PieceCard from '@/components/PieceCard'
+import { drops, getDrop, STATUS_LABEL, formatDate } from '@/lib/drops'
 
 export function generateStaticParams() {
   return drops.map((d) => ({ id: d.id }))
@@ -28,97 +31,82 @@ export default async function DropPage({ params }: { params: Promise<{ id: strin
   if (!drop) notFound()
 
   const isUpcoming = drop.status === 'upcoming'
-  const isSoldOut = drop.status === 'sold-out'
 
   return (
-    <Shell>
-      <div className="pt-6">
-        <div className="flex flex-wrap items-center gap-4 mb-6">
-          <span className={`stamp ${isSoldOut ? 'text-muted' : 'text-foreground'}`}>
-            {STATUS_LABEL[drop.status]}
-          </span>
-          <span className="meta">Drop {drop.number}</span>
-          <span className="meta text-dim">{formatDate(drop.releaseAt)}</span>
-        </div>
+    <>
+      <Marquee />
+      <SiteHeader />
 
-        <h1 className="page-title mb-8">{drop.name}</h1>
-
-        <div className="relative w-full max-w-4xl aspect-[16/10] mb-10 overflow-hidden">
-          <Image
-            src={drop.cover}
-            alt=""
-            fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            preload
-            className={`object-cover ${isSoldOut ? 'opacity-45 grayscale' : 'opacity-80'}`}
-          />
-        </div>
-
-        <p className="max-w-xl leading-[1.9]">{drop.statement}</p>
-      </div>
-
-      {/* Compte à rebours : seulement si le drop n'est pas encore ouvert */}
-      {isUpcoming && (
-        <section className="pt-14">
-          <p className="meta mb-4">Ouverture dans</p>
-          <div className="mb-8">
-            <DropCountdown releaseAt={drop.releaseAt} />
-          </div>
-          <NotifyForm />
-        </section>
-      )}
-
-      {/* ── Contenu du drop ──────────────────────────────────── */}
-      <section className="pt-20">
-        <div className="flex items-baseline justify-between gap-6 mb-8 max-w-4xl">
-          <h2 className="page-title">Contenu</h2>
-          <p className="meta shrink-0">
-            {drop.pieces.length} {drop.pieces.length > 1 ? 'pièces' : 'pièce'}
+      {/* Visuel d'ouverture pleine largeur */}
+      <section className="relative w-full h-[62vh] min-h-[380px] bg-surface">
+        <Image
+          src={drop.cover}
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          className={`object-cover ${drop.status === 'sold-out' ? 'opacity-70' : ''}`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 text-white">
+          <p className="ui-label mb-2 tracking-[0.06em]">
+            Drop {drop.number} · {formatDate(drop.releaseAt)} · {STATUS_LABEL[drop.status]}
           </p>
+          <h1 className="display text-[13vw] sm:text-[7vw] leading-[0.88]">{drop.name}</h1>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12 max-w-5xl">
-          {drop.pieces.map((piece) => (
-            <article key={piece.name}>
-              <div className="relative aspect-[4/5] mb-4 overflow-hidden">
-                <Image
-                  src={piece.image}
-                  alt={piece.name}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  className={`object-cover ${isSoldOut ? 'opacity-35 grayscale' : 'opacity-80'}`}
-                />
-                {isSoldOut && (
-                  <span className="stamp absolute top-3 left-3 bg-background">Épuisé</span>
-                )}
-              </div>
-
-              <p className="nav-item">{piece.name}</p>
-              <p className="tabular-nums">{formatPrice(piece.price)}</p>
-              <p className="meta text-dim mt-2">
-                {piece.colors.join(' / ')} · {piece.sizes.join(' ')}
-              </p>
-            </article>
-          ))}
-        </div>
-
-        {/* Pas de panier : le site annonce, il ne vend pas. */}
-        <p className="meta text-dim mt-12 max-w-md leading-[1.9]">
-          {isUpcoming
-            ? 'Prix et tailles donnés à titre indicatif. La vente ouvre à la date annoncée.'
-            : 'Ce drop est clos. Aucun réassort n’est prévu.'}
-        </p>
       </section>
 
-      <div className="pt-16">
-        <Link href="/drops" className="meta link-accent">
-          ← Tous les drops
-        </Link>
-      </div>
+      <main className="px-5 lg:px-8 pt-12">
+        <p className="text-[14px] leading-[1.8] max-w-xl mb-14">{drop.statement}</p>
 
-      <p className="meta text-dim text-center pt-24">
-        Copyright © {new Date().getFullYear()}, Tempered · TTP
-      </p>
-    </Shell>
+        {/* Compte à rebours : seulement si le drop n'est pas encore ouvert */}
+        {isUpcoming && (
+          <section className="border-t border-line pt-10 mb-16">
+            <p className="ui-label text-muted mb-5">Ouverture dans</p>
+            <div className="mb-9">
+              <DropCountdown releaseAt={drop.releaseAt} />
+            </div>
+            <NotifyForm />
+          </section>
+        )}
+
+        {/* Contenu du drop */}
+        <section className="border-t border-line pt-10">
+          <div className="flex items-baseline justify-between gap-6 mb-8">
+            <h2 className="display text-2xl sm:text-3xl">Contenu</h2>
+            <p className="ui-label text-muted shrink-0">
+              {drop.pieces.length} {drop.pieces.length > 1 ? 'pièces' : 'pièce'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10">
+            {drop.pieces.map((piece, i) => (
+              <PieceCard
+                key={piece.name}
+                piece={piece}
+                dropId={drop.id}
+                status={drop.status}
+                priority={i < 5}
+              />
+            ))}
+          </div>
+
+          {/* Pas de panier : le site annonce, il ne vend pas. */}
+          <p className="text-[13px] text-muted mt-10 max-w-md leading-[1.7]">
+            {isUpcoming
+              ? 'Prix et tailles donnés à titre indicatif. La vente ouvre à la date annoncée.'
+              : 'Ce drop est clos. Aucun réassort n’est prévu.'}
+          </p>
+        </section>
+
+        <div className="pt-12">
+          <Link href="/drops" className="ui-label text-muted hover:text-foreground transition-colors">
+            ← Tous les drops
+          </Link>
+        </div>
+      </main>
+
+      <Footer />
+    </>
   )
 }

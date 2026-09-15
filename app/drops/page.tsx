@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import Shell from '@/components/Shell'
+import Marquee from '@/components/Marquee'
+import SiteHeader from '@/components/SiteHeader'
+import Footer from '@/components/Footer'
 import { drops, STATUS_LABEL, formatDate } from '@/lib/drops'
 
 export const metadata: Metadata = {
@@ -11,51 +13,46 @@ export const metadata: Metadata = {
 
 export default function Drops() {
   return (
-    <Shell>
-      <div className="pt-6 flex items-baseline justify-between gap-6 mb-10">
-        <h1 className="page-title">Drops</h1>
-        <p className="meta shrink-0">{drops.length} au total</p>
-      </div>
+    <>
+      <Marquee />
+      <SiteHeader />
 
-      <ul className="border-t border-line max-w-4xl">
-        {drops.map((d) => (
-          <li key={d.id}>
-            <Link href={`/drops/${d.id}`} className="group block border-b border-line py-7">
-              <div className="grid grid-cols-1 sm:grid-cols-[10rem_1fr_auto] items-start gap-5 sm:gap-8">
-                <div className="relative w-full sm:w-40 aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={d.cover}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 100vw, 160px"
-                    className="object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                </div>
+      <main className="px-5 lg:px-8 pt-12">
+        <div className="flex items-baseline justify-between gap-6 mb-10">
+          <h1 className="display text-[13vw] sm:text-[7vw] lg:text-[80px]">Drops</h1>
+          <p className="ui-label text-muted shrink-0">{drops.length} au total</p>
+        </div>
 
-                <div className="min-w-0">
-                  <p className="meta text-dim mb-1">
-                    Drop {d.number} · {formatDate(d.releaseAt)}
-                  </p>
-                  <p className="nav-item group-hover:text-white">{d.name}</p>
-                  <p className="text-muted mt-2 max-w-md line-clamp-2">{d.statement}</p>
-                </div>
-
-                <span
-                  className={`stamp shrink-0 ${
-                    d.status === 'sold-out' ? 'text-muted' : 'text-foreground'
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-12">
+          {drops.map((d, i) => (
+            <Link key={d.id} href={`/drops/${d.id}`} className="group block">
+              <div className="relative aspect-[4/5] bg-surface overflow-hidden mb-4">
+                <Image
+                  src={d.cover}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  preload={i === 0}
+                  className={`object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
+                    d.status === 'sold-out' ? 'opacity-60' : ''
                   }`}
-                >
-                  {STATUS_LABEL[d.status]}
-                </span>
+                />
+                <span className="badge absolute top-3 left-3">{STATUS_LABEL[d.status]}</span>
               </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
 
-      <p className="meta text-dim text-center pt-24">
-        Copyright © {new Date().getFullYear()}, Tempered · TTP
-      </p>
-    </Shell>
+              <p className="ui-label text-muted mb-1">
+                Drop {d.number} · {formatDate(d.releaseAt)}
+              </p>
+              <h2 className="display text-2xl mb-2 group-hover:opacity-60 transition-opacity">
+                {d.name}
+              </h2>
+              <p className="text-[13px] text-muted leading-[1.7] line-clamp-2">{d.statement}</p>
+            </Link>
+          ))}
+        </div>
+      </main>
+
+      <Footer />
+    </>
   )
 }

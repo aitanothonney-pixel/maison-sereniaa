@@ -53,10 +53,21 @@ html {
    ─────────────────────────────────────────────────────────── */
 .display {
   font-family: var(--font-display, Georgia, serif);
-  font-weight: 900;
+  font-weight: 700;
+  font-style: italic;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   line-height: 0.9;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.tagline {
+  font-family: var(--font-body, Georgia, serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
   font-feature-settings: "liga" 1, "calt" 1;
 }
 

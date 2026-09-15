@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Cormorant_Garamond, Bodoni_Moda, Cinzel, Fraunces, Abril_Fatface, EB_Garamond, Libre_Baskerville, DM_Serif_Display, Tangerine, Great_Vibes, Parisienne, Allura, Satisfy } from 'next/font/google'
 import './globals.css'
 
-const playfair = Playfair_Display({
+const bodoniMain = Bodoni_Moda({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['700', '900'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
 })
 
@@ -121,7 +121,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
+    <html lang="fr" className={`${bodoniMain.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
       <body>{children}</body>
     </html>
   )

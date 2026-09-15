@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Cormorant_Garamond, Bodoni_Moda, Cinzel, Fraunces, Abril_Fatface, EB_Garamond, Libre_Baskerville, DM_Serif_Display } from 'next/font/google'
+import { Playfair_Display, Cormorant_Garamond, Bodoni_Moda, Cinzel, Fraunces, Abril_Fatface, EB_Garamond, Libre_Baskerville, DM_Serif_Display, Tangerine, Great_Vibes, Parisienne, Allura, Satisfy } from 'next/font/google'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -58,6 +58,41 @@ const dmSerif = DM_Serif_Display({
   display: 'swap',
 })
 
+const tangerine = Tangerine({
+  subsets: ['latin'],
+  variable: '--font-script-1',
+  weight: ['400', '700'],
+  display: 'swap',
+})
+
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  variable: '--font-script-2',
+  weight: ['400'],
+  display: 'swap',
+})
+
+const parisienne = Parisienne({
+  subsets: ['latin'],
+  variable: '--font-script-3',
+  weight: ['400'],
+  display: 'swap',
+})
+
+const allura = Allura({
+  subsets: ['latin'],
+  variable: '--font-script-4',
+  weight: ['400'],
+  display: 'swap',
+})
+
+const satisfy = Satisfy({
+  subsets: ['latin'],
+  variable: '--font-script-5',
+  weight: ['400'],
+  display: 'swap',
+})
+
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   variable: '--font-body',
@@ -86,7 +121,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${cormorant.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
       <body>{children}</body>
     </html>
   )

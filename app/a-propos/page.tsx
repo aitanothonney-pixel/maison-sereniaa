@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'À propos',
-  description: 'ASTR4 — comment nous dessinons, choisissons nos matières et travaillons.',
+  description: 'Tempered — comment nous dessinons, choisissons nos matières et travaillons.',
 }
 
 const SECTIONS = [
@@ -37,15 +37,16 @@ export default function APropos() {
 
       <main className="px-5 sm:px-8 pt-12 sm:pt-16">
         <div className="max-w-3xl">
-          <p className="label mb-5">À propos</p>
+          <p className="label mb-5">Trust the process</p>
           <h1 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px] mb-8">
             Nous dessinons peu de pièces, et nous les reprenons jusqu’à ce qu’elles
             tombent juste.
           </h1>
           <p className="text-[13px] text-muted leading-[1.9] max-w-xl">
-            ASTR4 est une marque de vêtements essentiels basée à Genève. Nous
-            travaillons sur un catalogue restreint, pensé pour se porter toute
-            l’année et se compléter d’une saison à l’autre.
+            Tempered est une marque de vêtements essentiels basée à Genève. Le nom
+            vient du travail de la matière : on tempère l’acier et le verre pour
+            les rendre plus résistants, par un procédé lent qu’on ne peut pas
+            brusquer. C’est la manière dont nous abordons chaque pièce.
           </p>
         </div>
 
@@ -76,10 +77,10 @@ export default function APropos() {
             Écrivez-nous, nous répondons sous un jour ouvré.
           </p>
           <a
-            href="mailto:contact@astr4.com"
+            href="mailto:contact@tempered.com"
             className="link-underline text-[13px] tracking-[0.06em]"
           >
-            contact@astr4.com
+            contact@tempered.com
           </a>
         </div>
 

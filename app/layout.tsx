@@ -10,13 +10,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'ASTR4',
-    template: '%s — ASTR4',
+    default: 'Tempered — Trust the process',
+    template: '%s — Tempered',
   },
   description:
-    'ASTR4 — vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.',
+    'Tempered — vêtements essentiels. Des pièces sobres, coupées net, faites pour durer. Trust the process.',
   openGraph: {
-    title: 'ASTR4',
+    title: 'Tempered — Trust the process',
     description: 'Vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.',
     type: 'website',
     locale: 'fr_CH',

@@ -38,7 +38,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12 md:gap-8">
           {/* Marque + inscription */}
           <div className="max-w-xs">
-            <Logo size="md" className="mb-5" />
+            <Logo size="md" tagline className="mb-6" />
             <p className="text-[12px] text-muted leading-relaxed mb-7">
               Vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.
             </p>
@@ -77,7 +77,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 pt-7 border-t border-line flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-          <p className="label">© {new Date().getFullYear()} ASTR4</p>
+          <p className="label">
+            © {new Date().getFullYear()} Tempered <span aria-hidden>·</span> TTP
+          </p>
           <p className="label">Genève, Suisse</p>
         </div>
       </div>

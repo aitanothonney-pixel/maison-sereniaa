@@ -8,7 +8,7 @@ import { products, CATEGORIES, Product } from '@/lib/products'
 
 export const metadata: Metadata = {
   title: 'Boutique',
-  description: 'Tous les essentiels ASTR4 : hauts, bas, pièces d’extérieur et accessoires.',
+  description: 'Tous les essentiels Tempered : hauts, bas, pièces d’extérieur et accessoires.',
 }
 
 export default async function Boutique({

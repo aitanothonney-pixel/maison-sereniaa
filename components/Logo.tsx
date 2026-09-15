@@ -11,20 +11,28 @@ export default function Logo({
   href = '/',
   onClick,
   className = '',
+  /** Affiche la devise sous le nom — réservé au pied de page. */
+  tagline = false,
 }: {
   size?: keyof typeof SIZES
   href?: string
   onClick?: () => void
   className?: string
+  tagline?: boolean
 }) {
   return (
     <Link
       href={href}
       onClick={onClick}
-      aria-label="ASTR4 — accueil"
-      className={`headline inline-block ${SIZES[size]} ${className}`}
+      aria-label="Tempered — accueil"
+      className={`inline-block ${className}`}
     >
-      ASTR4
+      <span className={`headline block ${SIZES[size]}`}>Tempered</span>
+      {tagline && (
+        <span className="block text-[9px] tracking-[0.3em] uppercase text-muted mt-1.5">
+          Trust the process
+        </span>
+      )}
     </Link>
   )
 }

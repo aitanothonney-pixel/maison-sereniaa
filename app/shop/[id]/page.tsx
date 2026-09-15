@@ -14,6 +14,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const { addItem } = useCart()
 
+  // Debug: log available products
+  console.log('Available products:', products.map(p => ({ id: p.id, name: p.name })))
+  console.log('Looking for product:', params.id)
+  console.log('Found product:', product)
+
   const [hoodieSize, setHoodieSize] = useState('')
   const [pantsSize, setPantsSize] = useState('')
   const [quantity, setQuantity] = useState(1)

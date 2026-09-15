@@ -37,7 +37,7 @@ export default function DropTabs() {
                 <h3 className="ui-label text-sm mb-2 group-hover:opacity-60 transition-opacity">{product.name}</h3>
                 <div className="flex justify-between items-baseline">
                   <p className="text-sm font-bold">{product.price} CHF</p>
-                  <p className="text-xs text-muted">{product.colors.length} couleurs</p>
+                  <p className="text-xs text-muted">{product.color}</p>
                 </div>
               </Link>
             ))}

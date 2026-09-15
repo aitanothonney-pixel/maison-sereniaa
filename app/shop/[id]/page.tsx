@@ -71,29 +71,33 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       <Marquee />
       <SiteHeader />
 
-      <main className="px-5 lg:px-8 py-12">
-        <Link href="/shop" className="ui-label text-muted hover:text-foreground mb-8 inline-block transition-opacity">
-          ← Retour à la boutique
+      <main className="px-5 lg:px-8 py-8 lg:py-12">
+        <Link href="/shop" className="ui-label text-muted hover:text-foreground mb-12 inline-block transition-opacity">
+          ← RETOUR À LA BOUTIQUE
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          {/* Galerie — Amélioration visuelle */}
-          <div className="space-y-6">
-            <div className="bg-surface aspect-square overflow-hidden group cursor-zoom-in">
+        {/* Grille principale — Images côte à côte + Infos */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
+          {/* GALERIE — 2 colonnes d'images */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* Image principale */}
+            <div className="bg-surface aspect-square overflow-hidden group">
               <img
                 src={product.images[imageIndex]}
                 alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
+
+            {/* Thumbnails */}
             {product.images.length > 1 && (
-              <div className="flex gap-3">
+              <div className="grid grid-cols-4 gap-2">
                 {product.images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setImageIndex(i)}
-                    className={`w-20 h-20 bg-surface border-2 overflow-hidden hover:opacity-80 transition-all ${
-                      i === imageIndex ? 'border-foreground' : 'border-line'
+                    className={`aspect-square bg-surface overflow-hidden border-2 transition-all ${
+                      i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
                     }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
@@ -103,40 +107,51 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             )}
           </div>
 
-          {/* Infos — Design amélioré */}
-          <div className="space-y-8 flex flex-col justify-between">
+          {/* INFOS PRODUIT — Design Premium */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Header */}
             <div>
-              <h1 className="display text-5xl sm:text-6xl mb-6 leading-tight">{product.name}</h1>
-              <div className="flex items-baseline gap-4 mb-4">
-                <p className="text-3xl font-bold">{product.price} CHF</p>
-                {product.stock < 10 && product.stock > 0 && (
-                  <p className="text-sm text-yellow-600 font-medium">Plus que {product.stock} en stock</p>
+              <div className="mb-4">
+                <p className="text-xs tracking-widest text-muted mb-2">{product.category.toUpperCase()}</p>
+                <h1 className="display text-4xl lg:text-5xl leading-tight">{product.name}</h1>
+              </div>
+
+              <div className="flex items-baseline gap-6 mb-6 pt-4 border-t border-line">
+                <p className="text-3xl lg:text-4xl font-bold">{product.price} CHF</p>
+                {product.stock > 0 && (
+                  <span className="text-xs text-green-600 font-medium">● En stock • Livraison 24h</span>
                 )}
                 {product.stock === 0 && (
-                  <p className="text-sm text-red-600 font-medium">Épuisé</p>
+                  <span className="text-xs text-red-600 font-medium">● Épuisé</span>
                 )}
               </div>
-              <p className="text-sm leading-relaxed text-muted mb-2">{product.description}</p>
+
+              <p className="text-sm leading-relaxed text-muted max-w-md">{product.description}</p>
             </div>
 
-            {/* Couleur */}
+            {/* Couleur affichée */}
             <div>
-              <p className="ui-label mb-4 text-xs tracking-widest">COULEUR</p>
-              <div className="inline-block px-5 py-3 border-2 border-foreground bg-foreground text-background text-sm font-bold">
-                {product.color}
+              <p className="text-xs tracking-widest ui-label mb-3">COULEUR</p>
+              <div className="flex gap-2 items-center">
+                <div className="w-12 h-12 bg-surface border border-line"></div>
+                <span className="text-sm font-medium">{product.color}</span>
               </div>
             </div>
 
-            {/* Tailles Hoodie et Pantalon */}
-            <div className="space-y-6">
+            {/* Tailles avec meilleur layout */}
+            <div className="space-y-8">
+              {/* Hoodie Size */}
               <div>
-                <p className="ui-label mb-4 text-xs tracking-widest">TAILLE HOODIE</p>
-                <div className="grid grid-cols-6 gap-2 mb-3">
+                <div className="flex items-baseline justify-between mb-3">
+                  <p className="text-xs tracking-widest ui-label">TAILLE HOODIE</p>
+                  {hoodieSize && <p className="text-xs text-muted">Sélectionné: {hoodieSize}</p>}
+                </div>
+                <div className="grid grid-cols-6 gap-2">
                   {product.sizes.map((size) => (
                     <button
                       key={`hoodie-${size}`}
                       onClick={() => setHoodieSize(size)}
-                      className={`py-3 border text-sm font-bold transition-all ${
+                      className={`py-3 text-sm font-bold border-2 transition-all ${
                         hoodieSize === size
                           ? 'border-foreground bg-foreground text-background'
                           : 'border-line hover:border-foreground'
@@ -148,14 +163,18 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
 
+              {/* Pants Size */}
               <div>
-                <p className="ui-label mb-4 text-xs tracking-widest">TAILLE PANTALON</p>
-                <div className="grid grid-cols-6 gap-2 mb-3">
+                <div className="flex items-baseline justify-between mb-3">
+                  <p className="text-xs tracking-widest ui-label">TAILLE PANTALON</p>
+                  {pantsSize && <p className="text-xs text-muted">Sélectionné: {pantsSize}</p>}
+                </div>
+                <div className="grid grid-cols-6 gap-2">
                   {product.sizes.map((size) => (
                     <button
                       key={`pants-${size}`}
                       onClick={() => setPantsSize(size)}
-                      className={`py-3 border text-sm font-bold transition-all ${
+                      className={`py-3 text-sm font-bold border-2 transition-all ${
                         pantsSize === size
                           ? 'border-foreground bg-foreground text-background'
                           : 'border-line hover:border-foreground'
@@ -168,58 +187,59 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors">
-              Guide des tailles complet →
+            <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block">
+              Consulter le guide des tailles →
             </Link>
 
-            {/* Quantité */}
-            <div>
-              <p className="ui-label mb-4 text-xs tracking-widest">QUANTITÉ</p>
-              <div className="flex items-center gap-4 mb-2">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-12 h-12 border border-line flex items-center justify-center hover:bg-surface transition-colors text-lg font-bold"
-                >
-                  −
-                </button>
-                <span className="w-8 text-center text-xl font-bold">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-12 h-12 border border-line flex items-center justify-center hover:bg-surface transition-colors text-lg font-bold"
-                >
-                  +
-                </button>
+            {/* Quantité & Bouton d'achat */}
+            <div className="space-y-4">
+              <div>
+                <p className="text-xs tracking-widest ui-label mb-3">QUANTITÉ</p>
+                <div className="flex items-center gap-3 border border-line w-fit">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-10 h-10 flex items-center justify-center hover:bg-surface transition-colors"
+                  >
+                    −
+                  </button>
+                  <span className="w-8 text-center font-bold text-lg">{quantity}</span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-10 h-10 flex items-center justify-center hover:bg-surface transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
+
+              <button
+                onClick={handleAddToCart}
+                disabled={product.stock === 0}
+                className={`w-full py-4 text-center ui-label font-bold tracking-widest transition-all ${
+                  added
+                    ? 'bg-foreground text-background'
+                    : product.stock === 0
+                    ? 'bg-surface text-muted cursor-not-allowed'
+                    : 'bg-foreground text-background hover:opacity-85'
+                }`}
+              >
+                {added ? '✓ AJOUTÉ AU PANIER' : product.stock === 0 ? 'ÉPUISÉ' : 'AJOUTER AU PANIER'}
+              </button>
             </div>
 
-            {/* Bouton ajouter */}
-            <button
-              onClick={handleAddToCart}
-              disabled={product.stock === 0}
-              className={`w-full py-5 text-center ui-label font-bold tracking-widest transition-all ${
-                added
-                  ? 'bg-foreground text-background'
-                  : product.stock === 0
-                  ? 'bg-surface text-muted cursor-not-allowed'
-                  : 'bg-foreground text-background hover:opacity-80'
-              }`}
-            >
-              {added ? '✓ AJOUTÉ AU PANIER' : product.stock === 0 ? 'ÉPUISÉ' : 'AJOUTER AU PANIER'}
-            </button>
-
-            {/* Détails */}
-            <div className="border-t border-line pt-8 space-y-6 text-sm">
+            {/* Détails supplémentaires */}
+            <div className="border-t border-line pt-8 space-y-6 text-xs">
               <div>
-                <p className="ui-label mb-2 text-xs tracking-widest">COMPOSITION</p>
-                <p className="text-muted leading-relaxed">{product.material}</p>
+                <p className="ui-label mb-2">COMPOSITION</p>
+                <p className="text-muted">{product.material}</p>
               </div>
               <div>
-                <p className="ui-label mb-2 text-xs tracking-widest">ENTRETIEN</p>
-                <p className="text-muted leading-relaxed">{product.care}</p>
+                <p className="ui-label mb-2">ENTRETIEN</p>
+                <p className="text-muted">{product.care}</p>
               </div>
               <div>
-                <p className="ui-label mb-2 text-xs tracking-widest">GARANTIE</p>
-                <p className="text-muted leading-relaxed">Garantie à vie sur les défauts de fabrication. Réparations gratuites sur demande.</p>
+                <p className="ui-label mb-2">GARANTIE & RETOURS</p>
+                <p className="text-muted">Garantie à vie sur défauts de fabrication. Retours gratuits 30 jours.</p>
               </div>
             </div>
           </div>

@@ -23,12 +23,15 @@ export default function Home() {
           ─────────────────────────────────────────────────────────── */}
       <section className="relative h-[78vh] min-h-[520px] bg-surface">
         <Image
-          src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=2400&q=80"
+          src="https://i.ibb.co/k2hjGqdF/IMG-1501.avif"
           alt=""
           fill
           sizes="100vw"
           preload
-          className="object-cover"
+          // Cadrage centré : sur un large bandeau, une photo verticale est
+          // fortement rognée en hauteur. Centrer garde le sujet ; l'ancrer en
+          // haut ne laisserait voir que la bande supérieure du cliché.
+          className="object-cover object-center"
         />
         {/* Voile bas : garantit le contraste du titre quelle que soit la photo. */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25" />

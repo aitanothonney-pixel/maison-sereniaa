@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { featuredDrop } from '@/lib/drops'
+import CartSlideOver from '@/components/CartSlideOver'
 
 const NAV = [
   { label: 'Drops', href: '/drops' },
@@ -107,6 +108,7 @@ export default function SiteHeader() {
             >
               <IconSearch />
             </button>
+            <CartSlideOver />
             <Link href="/info" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
               <IconMail />
             </Link>

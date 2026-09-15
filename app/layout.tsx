@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Cormorant_Garamond, Bodoni_Moda, Cinzel, Fraunces, Abril_Fatface, EB_Garamond, Libre_Baskerville, DM_Serif_Display, Tangerine, Great_Vibes, Parisienne, Allura, Satisfy } from 'next/font/google'
+import { CartProvider } from '@/lib/cart-context'
 import './globals.css'
 
 const bodoniMain = Bodoni_Moda({
@@ -122,7 +123,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${bodoniMain.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+      <body>
+        <CartProvider>{children}</CartProvider>
+      </body>
     </html>
   )
 }

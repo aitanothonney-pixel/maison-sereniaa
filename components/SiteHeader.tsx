@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { featuredDrop } from '@/lib/drops'
 
@@ -11,6 +11,15 @@ const NAV = [
   { label: 'Livraison', href: '/info' },
   { label: 'Contact', href: '/info' },
 ]
+
+function IconSearch() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-[22px] h-[22px]" aria-hidden>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
+  )
+}
 
 function IconInstagram() {
   return (
@@ -33,6 +42,8 @@ function IconMail() {
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const next = featuredDrop()
 
   useEffect(() => {
@@ -45,6 +56,12 @@ export default function SiteHeader() {
       document.body.style.overflow = ''
     }
   }, [open])
+
+  useEffect(() => {
+    if (searchOpen) {
+      searchInputRef.current?.focus()
+    }
+  }, [searchOpen])
 
   return (
     <>
@@ -83,6 +100,13 @@ export default function SiteHeader() {
               Drop {next.number}
               <span className="sup-new">Bientôt</span>
             </Link>
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              aria-label="Rechercher"
+              className="hover:opacity-60 transition-opacity"
+            >
+              <IconSearch />
+            </button>
             <Link href="/info" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
               <IconMail />
             </Link>
@@ -98,6 +122,28 @@ export default function SiteHeader() {
           </div>
         </div>
       </header>
+
+      {/* Barre de recherche animée */}
+      {searchOpen && (
+        <div className="absolute inset-x-0 top-16 bg-background border-b border-line z-40 animate-search">
+          <div className="flex items-center gap-3 px-5 lg:px-8 py-4">
+            <IconSearch />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="SEARCH FOR..."
+              className="flex-1 bg-transparent outline-none placeholder:text-dim text-foreground ui-label"
+            />
+            <button
+              onClick={() => setSearchOpen(false)}
+              aria-label="Fermer la recherche"
+              className="text-dim hover:text-foreground transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Panneau mobile */}
       {open && (

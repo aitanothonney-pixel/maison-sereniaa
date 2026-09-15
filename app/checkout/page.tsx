@@ -196,10 +196,12 @@ export default function CheckoutPage() {
 
               <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
                 {items.map((item) => (
-                  <div key={`${item.id}-${item.size}-${item.color}`} className="flex justify-between text-sm pb-4 border-b border-line">
+                  <div key={`${item.id}-${item.hoodieSizeSize}-${item.pantsSizeSize}-${item.color}`} className="flex justify-between text-sm pb-4 border-b border-line">
                     <div>
                       <p className="font-bold">{item.name}</p>
-                      <p className="text-xs text-muted">{item.color} / {item.size} x{item.quantity}</p>
+                      <p className="text-xs text-muted">{item.color}</p>
+                      <p className="text-xs text-muted">Hoodie: {item.hoodieSizeSize} / Pantalon: {item.pantsSizeSize}</p>
+                      <p className="text-xs text-muted">x{item.quantity}</p>
                     </div>
                     <p className="font-bold">{item.price * item.quantity} CHF</p>
                   </div>

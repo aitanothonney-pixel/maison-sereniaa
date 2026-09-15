@@ -6,7 +6,8 @@ export interface CartItem {
   id: string
   name: string
   price: number
-  size: string
+  hoodieSizeSize: string
+  pantsSizeSize: string
   color: string
   quantity: number
   image: string
@@ -15,8 +16,8 @@ export interface CartItem {
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
-  removeItem: (id: string, size: string, color: string) => void
-  updateQuantity: (id: string, size: string, color: string, quantity: number) => void
+  removeItem: (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string) => void
+  updateQuantity: (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string, quantity: number) => void
   clearCart: () => void
   total: number
 }
@@ -42,11 +43,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addItem = (newItem: CartItem) => {
     setItems((prev) => {
       const existing = prev.find(
-        (item) => item.id === newItem.id && item.size === newItem.size && item.color === newItem.color
+        (item) => item.id === newItem.id && item.hoodieSizeSize === newItem.hoodieSizeSize && item.pantsSizeSize === newItem.pantsSizeSize && item.color === newItem.color
       )
       if (existing) {
         return prev.map((item) =>
-          item.id === newItem.id && item.size === newItem.size && item.color === newItem.color
+          item.id === newItem.id && item.hoodieSizeSize === newItem.hoodieSizeSize && item.pantsSizeSize === newItem.pantsSizeSize && item.color === newItem.color
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item
         )
@@ -55,18 +56,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  const removeItem = (id: string, size: string, color: string) => {
-    setItems((prev) => prev.filter((item) => !(item.id === id && item.size === size && item.color === color)))
+  const removeItem = (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string) => {
+    setItems((prev) => prev.filter((item) => !(item.id === id && item.hoodieSizeSize === hoodieSizeSize && item.pantsSizeSize === pantsSizeSize && item.color === color)))
   }
 
-  const updateQuantity = (id: string, size: string, color: string, quantity: number) => {
+  const updateQuantity = (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string, quantity: number) => {
     if (quantity <= 0) {
-      removeItem(id, size, color)
+      removeItem(id, hoodieSizeSize, pantsSizeSize, color)
       return
     }
     setItems((prev) =>
       prev.map((item) =>
-        item.id === id && item.size === size && item.color === color ? { ...item, quantity } : item
+        item.id === id && item.hoodieSizeSize === hoodieSizeSize && item.pantsSizeSize === pantsSizeSize && item.color === color ? { ...item, quantity } : item
       )
     )
   }

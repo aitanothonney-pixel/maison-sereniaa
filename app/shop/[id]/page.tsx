@@ -14,8 +14,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const router = useRouter()
   const { addItem } = useCart()
 
-  const [selectedColor, setSelectedColor] = useState(product?.colors[0] || '')
-  const [selectedSize, setSelectedSize] = useState('')
+  const [hoodieSize, setHoodieSize] = useState('')
+  const [pantsSize, setPantsSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [imageIndex, setImageIndex] = useState(0)
   const [added, setAdded] = useState(false)
@@ -37,8 +37,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   }
 
   const handleAddToCart = () => {
-    if (!selectedSize) {
-      alert('Sélectionnez une taille')
+    if (!hoodieSize || !pantsSize) {
+      alert('Sélectionnez la taille du hoodie et du pantalon')
       return
     }
 
@@ -46,8 +46,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       id: product.id,
       name: product.name,
       price: product.price,
-      size: selectedSize,
-      color: selectedColor,
+      hoodieSizeSize: hoodieSize,
+      pantsSizeSize: pantsSize,
+      color: product.color,
       quantity,
       image: product.images[0],
     })
@@ -56,7 +57,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  const relatedProducts = products.filter(p => p.id !== product.id).slice(0, 4)
+  const relatedProducts = products.filter(p => p.id !== product.id).slice(0, 3)
 
   return (
     <>
@@ -111,48 +112,58 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               <p className="text-sm leading-relaxed text-muted mb-2">{product.description}</p>
             </div>
 
-            {/* Couleurs */}
+            {/* Couleur */}
             <div>
               <p className="ui-label mb-4 text-xs tracking-widest">COULEUR</p>
-              <div className="flex flex-wrap gap-3">
-                {product.colors.map((color) => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}
-                    className={`px-5 py-3 border-2 text-sm font-medium transition-all ${
-                      selectedColor === color
-                        ? 'border-foreground bg-foreground text-background'
-                        : 'border-line hover:border-foreground'
-                    }`}
-                  >
-                    {color}
-                  </button>
-                ))}
+              <div className="inline-block px-5 py-3 border-2 border-foreground bg-foreground text-background text-sm font-bold">
+                {product.color}
               </div>
             </div>
 
-            {/* Tailles */}
-            <div>
-              <p className="ui-label mb-4 text-xs tracking-widest">TAILLE</p>
-              <div className="grid grid-cols-6 gap-2 mb-3">
-                {product.sizes.map((size) => (
-                  <button
-                    key={size}
-                    onClick={() => setSelectedSize(size)}
-                    className={`py-3 border text-sm font-bold transition-all ${
-                      selectedSize === size
-                        ? 'border-foreground bg-foreground text-background'
-                        : 'border-line hover:border-foreground'
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
+            {/* Tailles Hoodie et Pantalon */}
+            <div className="space-y-6">
+              <div>
+                <p className="ui-label mb-4 text-xs tracking-widest">TAILLE HOODIE</p>
+                <div className="grid grid-cols-6 gap-2 mb-3">
+                  {product.sizes.map((size) => (
+                    <button
+                      key={`hoodie-${size}`}
+                      onClick={() => setHoodieSize(size)}
+                      className={`py-3 border text-sm font-bold transition-all ${
+                        hoodieSize === size
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-line hover:border-foreground'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors">
-                Guide des tailles complet →
-              </Link>
+
+              <div>
+                <p className="ui-label mb-4 text-xs tracking-widest">TAILLE PANTALON</p>
+                <div className="grid grid-cols-6 gap-2 mb-3">
+                  {product.sizes.map((size) => (
+                    <button
+                      key={`pants-${size}`}
+                      onClick={() => setPantsSize(size)}
+                      className={`py-3 border text-sm font-bold transition-all ${
+                        pantsSize === size
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-line hover:border-foreground'
+                      }`}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors">
+              Guide des tailles complet →
+            </Link>
 
             {/* Quantité */}
             <div>

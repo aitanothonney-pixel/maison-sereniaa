@@ -9,7 +9,7 @@ const NAV = [
   { label: 'Drops', href: '/drops' },
   { label: 'Archives', href: '/drops' },
   { label: 'Info', href: '/info' },
-  { label: 'Livraison', href: '/info' },
+  { label: 'Livraison', href: '/livraison' },
   { label: 'Contact', href: '/contact' },
 ]
 

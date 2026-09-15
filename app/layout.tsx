@@ -2,11 +2,26 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'MAISON SERENIA | Mobilier de Luxe',
-  description: "Découvrez notre collection exclusive de mobilier haut de gamme. MAISON SERENIA, l'art de vivre à la française.",
+  title: {
+    default: 'ASTR4',
+    template: '%s — ASTR4',
+  },
+  description:
+    'ASTR4 — vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.',
+  openGraph: {
+    title: 'ASTR4',
+    description: 'Vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.',
+    type: 'website',
+    locale: 'fr_CH',
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({
@@ -16,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.variable}>
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

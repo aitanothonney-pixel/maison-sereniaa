@@ -2,22 +2,17 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 import { getProduct, products } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = getProduct(params.id)
-  const router = useRouter()
+export default function ProductPage() {
+  const { id } = useParams<{ id: string }>()
+  const product = getProduct(id)
   const { addItem } = useCart()
-
-  // Debug: log available products
-  console.log('Available products:', products.map(p => ({ id: p.id, name: p.name })))
-  console.log('Looking for product:', params.id)
-  console.log('Found product:', product)
 
   const [hoodieSize, setHoodieSize] = useState('')
   const [pantsSize, setPantsSize] = useState('')
@@ -32,12 +27,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         <SiteHeader />
         <main className="px-5 lg:px-8 py-12 text-center min-h-screen flex items-center justify-center">
           <div className="max-w-md">
-            <div className="animate-pulse mb-8">
-              <div className="h-32 bg-surface rounded mb-4"></div>
-              <div className="h-4 bg-surface rounded mb-2"></div>
-              <div className="h-4 bg-surface rounded w-2/3 mx-auto"></div>
-            </div>
-            <p className="text-muted mb-4">Produit en cours de chargement...</p>
+            <h1 className="display text-3xl mb-4">PRODUIT INTROUVABLE</h1>
+            <p className="text-muted mb-8">Ce produit n&apos;existe pas ou n&apos;est plus disponible.</p>
             <Link href="/shop" className="ui-label inline-block hover:opacity-60">
               ← Retour à la boutique
             </Link>

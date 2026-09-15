@@ -50,17 +50,14 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-/* ── Wordmark ─────────────────────────────────────────────────
-   Le nom se lit toujours de la même façon : capitales,
-   interlettrage large, graisse medium.
+/* ── Titres d'affiche ─────────────────────────────────────────
+   Capitales, très grasses, chasse resserrée.
    ─────────────────────────────────────────────────────────── */
-.wordmark {
-  font-weight: 500;
+.headline {
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.34em;
-  /* L'interlettrage ajoute un vide à droite du dernier caractère :
-     on le retire pour que le bloc reste optiquement centré. */
-  text-indent: 0.34em;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
 
 /* ── Micro-libellés ───────────────────────────────────────────
@@ -106,14 +103,6 @@ h1, h2, h3, h4 {
 }
 
 /* ── Utilitaires ─────────────────────────────────────────────── */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;

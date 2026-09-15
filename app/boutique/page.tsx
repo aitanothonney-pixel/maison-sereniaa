@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import CountdownBar from '@/components/CountdownBar'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
@@ -32,11 +33,12 @@ export default async function Boutique({
 
   return (
     <>
+      <CountdownBar />
       <Header />
 
-      <main className="mx-auto max-w-[1400px] px-5 sm:px-8 pt-12 sm:pt-16">
+      <main className="px-5 sm:px-8 pt-12 sm:pt-16">
         <div className="flex items-baseline justify-between gap-6 mb-8">
-          <h1 className="text-[28px] sm:text-[36px] font-light leading-none">{heading}</h1>
+          <h1 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px]">{heading}</h1>
           <p className="label tabular-nums shrink-0">
             {visible.length} {visible.length > 1 ? 'pièces' : 'pièce'}
           </p>

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import CountdownBar from '@/components/CountdownBar'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
@@ -34,9 +35,10 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
   return (
     <>
+      <CountdownBar />
       <Header />
 
-      <main className="mx-auto max-w-[1400px] px-5 sm:px-8 pt-8 sm:pt-12">
+      <main className="px-5 sm:px-8 pt-8 sm:pt-12">
         {/* Fil d'ariane */}
         <nav className="flex items-center gap-2 label mb-8">
           <Link href="/boutique" className="hover:text-foreground transition-colors">
@@ -67,10 +69,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           {/* Informations */}
           <div className="md:pt-4 md:max-w-md">
             <p className="label mb-3">{categoryLabel(product.category)}</p>
-            <h1 className="text-[26px] sm:text-[32px] font-light leading-tight mb-2">
-              {product.name}
-            </h1>
-            <p className="text-[15px] tabular-nums mb-8">{formatPrice(product.price)}</p>
+            <h1 className="headline text-[30px] sm:text-[40px] mb-3">{product.name}</h1>
+            <p className="headline text-[15px] tabular-nums mb-8">{formatPrice(product.price)}</p>
 
             <p className="text-[13px] text-muted leading-[1.8] mb-10">{product.detail}</p>
 
@@ -101,7 +101,9 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         {/* Pièces liées */}
         {related.length > 0 && (
           <section className="pt-24 sm:pt-32">
-            <h2 className="text-[13px] tracking-[0.06em] mb-8 sm:mb-10">Dans la même famille</h2>
+            <h2 className="headline text-[8vw] sm:text-[5vw] lg:text-[42px] mb-8 sm:mb-10">
+              Dans la même famille
+            </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 sm:gap-x-6">
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />

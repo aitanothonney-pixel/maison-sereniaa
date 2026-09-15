@@ -7,13 +7,18 @@ import Logo from './Logo'
 const NAV = [
   { label: 'Boutique', href: '/boutique' },
   { label: 'Nouveautés', href: '/boutique?filtre=nouveautes' },
-  { label: 'À propos', href: '/a-propos' },
+  { label: 'Livraison & retours', href: '/a-propos' },
+  { label: 'Contact', href: '/a-propos' },
 ]
 
-export default function Header() {
+export default function Header({
+  /** Pose le header par-dessus le visuel d'ouverture, en blanc. */
+  overlay = false,
+}: {
+  overlay?: boolean
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
 
-  // Verrouille le défilement du corps tant que le panneau mobile est ouvert.
   useEffect(() => {
     if (!menuOpen) return
     const onKey = (e: KeyboardEvent) => {
@@ -27,26 +32,22 @@ export default function Header() {
     }
   }, [menuOpen])
 
+  const tone = overlay ? 'text-white' : 'text-foreground'
+  const shell = overlay
+    ? 'absolute top-0 left-0 right-0 z-30'
+    : 'relative bg-background border-b border-line'
+
+  const linkClass = `headline text-[12px] tracking-[0.01em] hover:opacity-60 transition-opacity`
+
   return (
     <>
-      {/* Bandeau de service — une seule ligne, sans animation. */}
-      <div className="border-b border-line">
-        <p className="label text-center py-2.5 px-4">
-          Livraison offerte dès 150 CHF · Retours sous 30 jours
-        </p>
-      </div>
-
-      <header className="sticky top-0 z-40 bg-background border-b border-line">
-        <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-14 sm:h-16">
+      <header className={shell}>
+        <div className="px-5 sm:px-8">
+          <div className="grid grid-cols-[auto_1fr_auto] lg:grid-cols-3 items-center h-16 gap-4">
             {/* Gauche — navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className={`hidden lg:flex items-center gap-7 ${tone}`}>
               {NAV.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="link-underline text-[12px] tracking-[0.06em]"
-                >
+                <Link key={item.label} href={item.href} className={linkClass}>
                   {item.label}
                 </Link>
               ))}
@@ -55,52 +56,52 @@ export default function Header() {
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Ouvrir le menu"
-              className="md:hidden flex flex-col gap-[5px] w-6 justify-self-start"
+              className={`lg:hidden flex flex-col gap-[5px] w-6 ${tone}`}
             >
-              <span className="block h-px w-5 bg-foreground" />
-              <span className="block h-px w-5 bg-foreground" />
+              <span className="block h-[2px] w-6 bg-current" />
+              <span className="block h-[2px] w-6 bg-current" />
+              <span className="block h-[2px] w-4 bg-current" />
             </button>
 
             {/* Centre — nom */}
-            <Logo size="md" />
+            <div className={`flex justify-center ${tone}`}>
+              <Logo size="md" />
+            </div>
 
-            {/* Droite — panier */}
-            <div className="flex items-center justify-end gap-6">
-              <Link
-                href="/boutique"
-                className="hidden sm:inline link-underline text-[12px] tracking-[0.06em]"
-              >
-                Rechercher
+            {/* Droite — compte et panier */}
+            <div className={`flex items-center justify-end gap-6 ${tone}`}>
+              <Link href="/a-propos" className={`hidden sm:inline ${linkClass}`}>
+                Compte
               </Link>
-              <Link href="/panier" className="link-underline text-[12px] tracking-[0.06em]">
-                Panier <span className="text-muted">(0)</span>
+              <Link href="/panier" className={linkClass}>
+                Panier (0)
               </Link>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Panneau mobile — plein écran, sans fioriture. */}
+      {/* Panneau mobile */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 bg-background md:hidden flex flex-col">
-          <div className="flex items-center justify-between h-14 px-5 border-b border-line">
+        <div className="fixed inset-0 z-50 bg-background flex flex-col lg:hidden">
+          <div className="flex items-center justify-between h-16 px-5 border-b border-line">
             <Logo size="md" onClick={() => setMenuOpen(false)} />
             <button
               onClick={() => setMenuOpen(false)}
               aria-label="Fermer le menu"
-              className="text-[12px] tracking-[0.06em]"
+              className="headline text-[12px]"
             >
               Fermer
             </button>
           </div>
 
-          <nav className="flex flex-col px-5 pt-10 gap-7">
+          <nav className="flex flex-col px-5 pt-10 gap-6">
             {NAV.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-2xl font-light"
+                className="headline text-3xl"
               >
                 {item.label}
               </Link>
@@ -108,7 +109,13 @@ export default function Header() {
           </nav>
 
           <div className="mt-auto px-5 pb-8">
-            <p className="label">Livraison offerte dès 150 CHF</p>
+            <Link
+              href="/panier"
+              onClick={() => setMenuOpen(false)}
+              className="headline text-[12px]"
+            >
+              Panier (0)
+            </Link>
           </div>
         </div>
       )}

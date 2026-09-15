@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import CountdownBar from '@/components/CountdownBar'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -10,10 +11,11 @@ export const metadata: Metadata = {
 export default function Panier() {
   return (
     <>
+      <CountdownBar />
       <Header />
 
-      <main className="mx-auto max-w-[1400px] px-5 sm:px-8 pt-12 sm:pt-16">
-        <h1 className="text-[28px] sm:text-[36px] font-light leading-none mb-10 pb-8 border-b border-line">
+      <main className="px-5 sm:px-8 pt-12 sm:pt-16">
+        <h1 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px] mb-10 pb-8 border-b border-line">
           Panier
         </h1>
 

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import CountdownBar from '@/components/CountdownBar'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
@@ -31,12 +32,13 @@ const SECTIONS = [
 export default function APropos() {
   return (
     <>
+      <CountdownBar />
       <Header />
 
-      <main className="mx-auto max-w-[1400px] px-5 sm:px-8 pt-12 sm:pt-16">
+      <main className="px-5 sm:px-8 pt-12 sm:pt-16">
         <div className="max-w-3xl">
           <p className="label mb-5">À propos</p>
-          <h1 className="text-[30px] sm:text-[46px] font-light leading-[1.1] mb-8">
+          <h1 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px] mb-8">
             Nous dessinons peu de pièces, et nous les reprenons jusqu’à ce qu’elles
             tombent juste.
           </h1>

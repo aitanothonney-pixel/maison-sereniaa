@@ -25,7 +25,8 @@
   --color-surface: var(--surface);
   --color-line: var(--line);
   --color-accent: var(--accent);
-  --font-sans: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
+  --font-sans: var(--font-body, Georgia, serif);
+  --font-serif: var(--font-display, Georgia, serif);
 }
 
 * {
@@ -35,7 +36,9 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-body, Georgia, serif);
+  font-weight: 400;
+  font-feature-settings: "liga" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -45,14 +48,16 @@ html {
 }
 
 /* ── Titres d'affiche ─────────────────────────────────────────
-   Capitales très grasses, chasse resserrée : les surtitres posés
-   sur les visuels d'ouverture.
+   Serif d'époque avec italiques légères, très grasses pour l'impact.
+   Capitales resserrées pour le luxe.
    ─────────────────────────────────────────────────────────── */
 .display {
+  font-family: var(--font-display, Georgia, serif);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   line-height: 0.9;
+  font-feature-settings: "liga" 1, "calt" 1;
 }
 
 /* ── Libellés d'interface ─────────────────────────────────────

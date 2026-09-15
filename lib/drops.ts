@@ -125,6 +125,13 @@ export const drops: Drop[] = [
     cover: IMG.cover1,
     pieces: [
       {
+        name: 'Veste coach',
+        price: 155,
+        colors: ['Noir'],
+        sizes: ['S', 'M', 'L', 'XL'],
+        image: IMG.jacket,
+      },
+      {
         name: 'T-shirt coton lourd',
         price: 45,
         colors: ['Noir'],

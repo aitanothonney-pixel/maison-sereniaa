@@ -74,20 +74,6 @@ export const products: Product[] = [
     featured: true,
     category: 'tracksuit',
   },
-  {
-    id: 'tracksuit-white',
-    name: 'Tracksuit Blanc Édition Limitée',
-    price: 220,
-    description: 'Édition spéciale — Ensemble jogging ultra-premium en écru naturel. Hoodie oversize avec drawcords en cuir cognac et jogging ample. Chaque pièce peut avoir sa propre taille. Customise cette page à ta guise!',
-    material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio Certifié',
-    care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat. Éviter les produits de blanchiment.',
-    images: [IMAGES.tracksuit, IMAGES.tracksuit],
-    color: 'Blanc',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    stock: 12,
-    featured: true,
-    category: 'tracksuit',
-  },
 ]
 
 export function getProduct(id: string): Product | undefined {

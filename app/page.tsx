@@ -1,133 +1,117 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import CountdownBar from '@/components/CountdownBar'
-import Header from '@/components/Header'
+import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import ProductCard from '@/components/ProductCard'
-import { products, CATEGORIES, getProduct } from '@/lib/products'
+import DropCountdown from '@/components/DropCountdown'
+import NotifyForm from '@/components/NotifyForm'
+import { drops, featuredDrop, STATUS_LABEL, formatDate } from '@/lib/drops'
 
 export default function Home() {
-  const hero = getProduct('pantalon-cargo') ?? products[0]
-
-  const latest = [...products.filter((p) => p.isNew), ...products.filter((p) => !p.isNew)].slice(
-    0,
-    8
-  )
+  const next = featuredDrop()
+  const past = drops.filter((d) => d.id !== next.id)
 
   return (
     <>
-      <CountdownBar />
-
-      {/* ── Ouverture ──────────────────────────────────────────────
-          Le header se pose sur le visuel, le titre occupe le bas.
-          ─────────────────────────────────────────────────────────── */}
-      <section className="relative h-[78vh] min-h-[520px] bg-surface">
-        <Image
-          src="https://i.ibb.co/k2hjGqdF/IMG-1501.avif"
-          alt=""
-          fill
-          sizes="100vw"
-          preload
-          // Cadrage centré : sur un large bandeau, une photo verticale est
-          // fortement rognée en hauteur. Centrer garde le sujet ; l'ancrer en
-          // haut ne laisserait voir que la bande supérieure du cliché.
-          className="object-cover object-center"
-        />
-        {/* Voile bas : garantit le contraste du titre quelle que soit la photo. */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-black/25" />
-
-        <Header overlay />
-
-        <div className="absolute bottom-0 left-0 right-0 px-5 sm:px-8 pb-10 sm:pb-14">
-          <h1 className="headline text-white text-[13vw] sm:text-[8vw] lg:text-[76px] mb-6">
-            {hero.name}
-          </h1>
-          <Link
-            href={`/produit/${hero.id}`}
-            className="headline inline-block bg-foreground text-background text-[12px] px-8 py-4 hover:bg-background hover:text-foreground transition-colors"
-          >
-            Acheter
-          </Link>
-        </div>
-      </section>
+      <Nav />
 
       <main>
-        {/* ── Dernières arrivées ─────────────────────────────────── */}
-        <section className="px-5 sm:px-8 pt-16 sm:pt-24">
-          <h2 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px] mb-10 sm:mb-14">
-            Les dernières arrivées
-          </h2>
+        {/* ── Prochain drop ────────────────────────────────────────
+            Toute la page d'accueil tient sur une question : quand.
+            ─────────────────────────────────────────────────────── */}
+        <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-end overflow-hidden">
+          <Image
+            src={next.cover}
+            alt=""
+            fill
+            sizes="100vw"
+            preload
+            className="object-cover object-center opacity-45"
+          />
+          {/* Assombrit le bas : le compteur et le formulaire s'y posent. */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-12 sm:gap-x-6">
-            {latest.map((product, i) => (
-              <ProductCard key={product.id} product={product} priority={i < 4} />
-            ))}
+          <div className="relative px-5 sm:px-8 pb-12 sm:pb-16 pt-24">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <span className="stamp">{STATUS_LABEL[next.status]}</span>
+              <span className="tech">Drop {next.number}</span>
+              <span className="tech text-subtle">{formatDate(next.releaseAt)}</span>
+            </div>
+
+            <h1 className="headline text-[18vw] sm:text-[13vw] lg:text-[150px] mb-8">
+              {next.name}
+            </h1>
+
+            <p className="text-[13px] sm:text-[15px] text-muted leading-relaxed max-w-lg mb-12">
+              {next.statement}
+            </p>
+
+            <p className="tech mb-4">Ouverture dans</p>
+            <div className="mb-12">
+              <DropCountdown releaseAt={next.releaseAt} />
+            </div>
+
+            <div className="flex flex-col lg:flex-row lg:items-end gap-10 lg:gap-16">
+              <NotifyForm />
+              <Link
+                href={`/drops/${next.id}`}
+                className="headline inline-block self-start border border-foreground text-[12px] px-8 py-4 hover:bg-foreground hover:text-background transition-colors"
+              >
+                Voir le drop
+              </Link>
+            </div>
           </div>
+        </section>
 
-          <div className="mt-14 sm:mt-16">
-            <Link
-              href="/boutique"
-              className="headline inline-block border-2 border-foreground text-[12px] px-10 py-4 hover:bg-foreground hover:text-background transition-colors"
-            >
-              Voir toute la collection
+        {/* ── Drops passés ─────────────────────────────────────── */}
+        <section className="px-5 sm:px-8 pt-20 sm:pt-28">
+          <div className="flex items-baseline justify-between gap-6 mb-8">
+            <h2 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px]">Archives</h2>
+            <Link href="/drops" className="tech link-underline hover:text-foreground shrink-0">
+              Tout voir
             </Link>
           </div>
-        </section>
 
-        {/* ── Catégories ─────────────────────────────────────────── */}
-        <section className="px-5 sm:px-8 pt-20 sm:pt-32">
-          <h2 className="headline text-[10vw] sm:text-[6vw] lg:text-[56px] mb-10 sm:mb-14">
-            Catégories
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {CATEGORIES.map((cat) => {
-              const first = products.find((p) => p.category === cat.slug)
-              return (
+          <ul className="border-t border-line">
+            {past.map((d) => (
+              <li key={d.id}>
                 <Link
-                  key={cat.slug}
-                  href={`/boutique?categorie=${cat.slug}`}
-                  className="group relative block aspect-[4/5] bg-surface overflow-hidden"
+                  href={`/drops/${d.id}`}
+                  className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 sm:gap-8 py-7 border-b border-line"
                 >
-                  {first && (
-                    <Image
-                      src={first.images[0]}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition-colors" />
-                  <span className="headline absolute bottom-5 left-5 right-5 text-white text-xl sm:text-2xl">
-                    {cat.label}
+                  <span className="tech text-subtle w-10">{d.number}</span>
+                  <span className="min-w-0">
+                    <span className="headline block text-2xl sm:text-4xl group-hover:opacity-60 transition-opacity">
+                      {d.name}
+                    </span>
+                    <span className="tech block mt-2">{formatDate(d.releaseAt)}</span>
                   </span>
+                  <span className="stamp text-muted shrink-0">{STATUS_LABEL[d.status]}</span>
                 </Link>
-              )
-            })}
-          </div>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        {/* ── Services ───────────────────────────────────────────── */}
+        {/* ── Fonctionnement ───────────────────────────────────── */}
         <section className="px-5 sm:px-8 pt-20 sm:pt-28">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 border-t border-line pt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-12 border-t border-line pt-10">
             {[
               {
-                t: 'Livraison offerte',
-                d: 'Dès 150 CHF en Suisse. Expédition sous 48 heures ouvrées.',
+                t: 'Quantités fixes',
+                d: 'Chaque drop est produit en série fermée. Ce qui part ne revient pas.',
               },
               {
-                t: 'Retours 30 jours',
-                d: 'Renvoyez une pièce non portée, frais de retour à notre charge.',
+                t: 'Aucun réassort',
+                d: 'Pas de réédition, pas de retour en stock. La pièce vit sur une seule fenêtre.',
               },
               {
-                t: 'Paiement sécurisé',
-                d: 'Transaction chiffrée. Carte, TWINT et virement acceptés.',
+                t: 'Annonce en amont',
+                d: 'Date communiquée à l’avance par mail et sur Instagram. Rien d’autre à surveiller.',
               },
             ].map((item) => (
               <div key={item.t}>
-                <p className="headline text-[13px] mb-3">{item.t}</p>
-                <p className="text-[12px] text-muted leading-[1.8] max-w-xs">{item.d}</p>
+                <p className="headline text-[14px] mb-3">{item.t}</p>
+                <p className="text-[12px] text-muted leading-[1.8]">{item.d}</p>
               </div>
             ))}
           </div>

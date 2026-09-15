@@ -1,10 +1,16 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono-tech',
   display: 'swap',
 })
 
@@ -14,10 +20,10 @@ export const metadata: Metadata = {
     template: '%s — Tempered',
   },
   description:
-    'Tempered — vêtements essentiels. Des pièces sobres, coupées net, faites pour durer. Trust the process.',
+    'Tempered. Drops limités, aucun réassort. Trust the process.',
   openGraph: {
     title: 'Tempered — Trust the process',
-    description: 'Vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.',
+    description: 'Drops limités, aucun réassort.',
     type: 'website',
     locale: 'fr_CH',
   },
@@ -30,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr" className={`${inter.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   )

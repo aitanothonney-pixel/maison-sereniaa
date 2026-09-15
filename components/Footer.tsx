@@ -1,86 +1,41 @@
 import Link from 'next/link'
-import Logo from './Logo'
-
-const COLUMNS = [
-  {
-    title: 'Boutique',
-    links: [
-      { label: 'Tout voir', href: '/boutique' },
-      { label: 'Hauts', href: '/boutique?categorie=hauts' },
-      { label: 'Bas', href: '/boutique?categorie=bas' },
-      { label: 'Pièces d’extérieur', href: '/boutique?categorie=exterieur' },
-      { label: 'Accessoires', href: '/boutique?categorie=accessoires' },
-    ],
-  },
-  {
-    title: 'Aide',
-    links: [
-      { label: 'Livraison', href: '/a-propos' },
-      { label: 'Retours', href: '/a-propos' },
-      { label: 'Guide des tailles', href: '/a-propos' },
-      { label: 'Nous écrire', href: '/a-propos' },
-    ],
-  },
-  {
-    title: 'Maison',
-    links: [
-      { label: 'À propos', href: '/a-propos' },
-      { label: 'Matières', href: '/a-propos' },
-      { label: 'Instagram', href: 'https://instagram.com' },
-    ],
-  },
-]
 
 export default function Footer() {
   return (
     <footer className="border-t border-line mt-24">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12 md:gap-8">
-          {/* Marque + inscription */}
-          <div className="max-w-xs">
-            <Logo size="md" tagline className="mb-6" />
-            <p className="text-[12px] text-muted leading-relaxed mb-7">
-              Vêtements essentiels. Des pièces sobres, coupées net, faites pour durer.
+      <div className="px-5 sm:px-8 py-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+          <div>
+            <p className="headline text-[13vw] sm:text-[8vw] lg:text-[92px] leading-[0.82]">
+              Trust the
+              <br />
+              process
             </p>
-
-            <form className="border-b border-foreground pb-2 flex items-center gap-3">
-              <label htmlFor="footer-email" className="sr-only">
-                Adresse e-mail
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                required
-                placeholder="Recevoir nos sorties"
-                className="flex-1 min-w-0 bg-transparent text-[12px] outline-none placeholder:text-subtle"
-              />
-              <button type="submit" className="text-[12px] tracking-[0.06em] shrink-0">
-                OK
-              </button>
-            </form>
           </div>
 
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <p className="label mb-5">{col.title}</p>
-              <ul className="space-y-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="link-underline text-[12px]">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <nav className="flex flex-col gap-3 sm:text-right shrink-0">
+            <Link href="/drops" className="tech link-underline hover:text-foreground">
+              Drops
+            </Link>
+            <Link href="/info" className="tech link-underline hover:text-foreground">
+              Info
+            </Link>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="tech link-underline hover:text-foreground"
+            >
+              Instagram
+            </a>
+          </nav>
         </div>
 
-        <div className="mt-16 pt-7 border-t border-line flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
-          <p className="label">
-            © {new Date().getFullYear()} Tempered <span aria-hidden>·</span> TTP
+        <div className="mt-12 pt-6 border-t border-line flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between">
+          <p className="tech text-subtle">
+            © {new Date().getFullYear()} Tempered · TTP
           </p>
-          <p className="label">Genève, Suisse</p>
+          <p className="tech text-subtle">Genève, Suisse</p>
         </div>
       </div>
     </footer>

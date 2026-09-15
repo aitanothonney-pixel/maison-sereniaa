@@ -10,7 +10,7 @@ const NAV = [
   { label: 'Archives', href: '/drops' },
   { label: 'Info', href: '/info' },
   { label: 'Livraison', href: '/info' },
-  { label: 'Contact', href: '/info' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 function IconSearch() {
@@ -109,7 +109,7 @@ export default function SiteHeader() {
               <IconSearch />
             </button>
             <CartSlideOver />
-            <Link href="/info" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
+            <Link href="/contact" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
               <IconMail />
             </Link>
             <a

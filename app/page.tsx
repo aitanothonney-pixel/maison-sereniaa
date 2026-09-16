@@ -7,8 +7,7 @@ import DropTabs from '@/components/DropTabs'
 import Footer from '@/components/Footer'
 import { drops, featuredDrop } from '@/lib/drops'
 
-const EDITORIAL =
-  'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=2400&q=80'
+const EDITORIAL = 'https://i.ibb.co/d4G5RsLh/IMG-7956.jpg'
 
 export default function Home() {
   const next = featuredDrop()
@@ -47,9 +46,10 @@ export default function Home() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover"
+          quality={90}
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 text-white">
           <p className="ui-label mb-2 tracking-[0.06em]">Trust the process</p>
           <h2 className="display text-[12vw] sm:text-[6vw] leading-[0.88]">

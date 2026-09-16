@@ -2,39 +2,31 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
-import HeroPair from '@/components/HeroPair'
 import DropTabs from '@/components/DropTabs'
 import Footer from '@/components/Footer'
-import { drops, featuredDrop } from '@/lib/drops'
 
+const HERO =
+  'https://i.ibb.co/DfNvXyrm/3-A0-C1226-5-C9-E-4-FBD-BD10-AC94772268-E0.jpg'
 const EDITORIAL = 'https://i.ibb.co/d4G5RsLh/IMG-7956.jpg'
 
 export default function Home() {
-  const next = featuredDrop()
-  const previous = drops.find((d) => d.id !== next.id) ?? next
-
   return (
     <>
       <Marquee />
       <SiteHeader />
 
-      {/* 1 — Ouverture : deux visuels côte à côte */}
-      <HeroPair
-        panels={[
-          {
-            title: next.name,
-            subtitle: `Drop ${next.number} · Bientôt`,
-            image: next.cover,
-            href: `/drops/${next.id}`,
-          },
-          {
-            title: previous.name,
-            subtitle: 'Archive · Épuisé',
-            image: previous.cover,
-            href: `/drops/${previous.id}`,
-          },
-        ]}
-      />
+      {/* 1 — Ouverture : un seul visuel plein cadre */}
+      <section className="relative h-[58vh] md:h-[calc(100vh-7.5rem)] min-h-[380px] bg-surface">
+        <Image
+          src={HERO}
+          alt=""
+          fill
+          sizes="100vw"
+          quality={90}
+          preload
+          className="object-cover object-center"
+        />
+      </section>
 
       {/* 2 — Les pièces, filtrables par drop */}
       <DropTabs />

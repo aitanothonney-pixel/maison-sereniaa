@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
@@ -57,36 +58,27 @@ export default function ShippingPage() {
             </div>
           </div>
 
-          {/* Suivi de commande */}
+          {/* Suivi & retours — détaillés sur leurs pages dédiées */}
           <div>
-            <h2 className="display text-2xl mb-6">SUIVI DE COMMANDE</h2>
-            <p className="text-sm leading-relaxed mb-4">
-              Une fois votre commande expédiée, vous recevrez un e-mail avec un numéro de suivi. Vous pourrez suivre votre colis en temps réel grâce à ce lien.
-            </p>
-            <p className="text-sm text-muted">
-              Si vous n'avez pas reçu d'e-mail de suivi 48h après votre achat, vérifiez votre dossier spam ou contactez-nous.
-            </p>
-          </div>
-
-          {/* Retours */}
-          <div>
-            <h2 className="display text-2xl mb-6">POLITIQUE DE RETOUR</h2>
+            <h2 className="display text-2xl mb-6">SUIVI & RETOURS</h2>
             <div className="space-y-4 text-sm">
-              <div>
-                <p className="font-bold mb-2">Délai de rétractation</p>
-                <p className="text-muted">30 jours à partir de la réception de votre commande. Aucune question posée.</p>
+              <div className="border-b border-line pb-4">
+                <p className="font-bold mb-2">Suivre votre colis</p>
+                <p className="text-muted">
+                  Un numéro de suivi vous est envoyé par e-mail dès l&apos;expédition.{' '}
+                  <Link href="/suivi" className="underline hover:opacity-60">
+                    Voir le suivi de commande
+                  </Link>
+                </p>
               </div>
-              <div>
-                <p className="font-bold mb-2">Conditions</p>
-                <p className="text-muted">Les articles doivent être retournés dans leur état d'origine, avec étiquettes attachées et dans l'emballage TEMPORED.</p>
-              </div>
-              <div>
-                <p className="font-bold mb-2">Frais de retour</p>
-                <p className="text-muted">Gratuit pour la Suisse et l'UE. Un label de retour vous sera envoyé par e-mail.</p>
-              </div>
-              <div>
-                <p className="font-bold mb-2">Remboursement</p>
-                <p className="text-muted">Une fois reçu et inspecté, remboursement sous 7-10 jours ouvrés. Frais d'expédition initiaux non remboursés.</p>
+              <div className="border-b border-line pb-4">
+                <p className="font-bold mb-2">Retours & remboursements</p>
+                <p className="text-muted">
+                  30 jours pour changer d&apos;avis, retours gratuits en Suisse et dans l&apos;UE.{' '}
+                  <Link href="/retours" className="underline hover:opacity-60">
+                    Voir les conditions de retour
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

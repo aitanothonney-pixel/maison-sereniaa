@@ -6,11 +6,10 @@ import { featuredDrop } from '@/lib/drops'
 import CartSlideOver from '@/components/CartSlideOver'
 
 const NAV = [
-  { label: 'Drops', href: '/drops' },
-  { label: 'Archives', href: '/drops' },
-  { label: 'Info', href: '/info' },
-  { label: 'Livraison', href: '/livraison' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Shop now', href: '/shop' },
+  { label: 'Track your order', href: '/suivi' },
+  { label: 'Refunds/Returns', href: '/retours' },
+  { label: 'Contact us', href: '/contact' },
 ]
 
 function IconSearch() {
@@ -69,9 +68,13 @@ export default function SiteHeader() {
       <header className="bg-background border-b border-line">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 lg:px-8 h-16">
           {/* Gauche — navigation */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {NAV.map((item) => (
-              <Link key={item.label} href={item.href} className="ui-label hover:opacity-60 transition-opacity">
+              <Link
+                key={item.label}
+                href={item.href}
+                className="ui-label whitespace-nowrap hover:opacity-60 transition-opacity"
+              >
                 {item.label}
               </Link>
             ))}

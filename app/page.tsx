@@ -7,7 +7,13 @@ import Footer from '@/components/Footer'
 
 const HERO =
   'https://i.ibb.co/DfNvXyrm/3-A0-C1226-5-C9-E-4-FBD-BD10-AC94772268-E0.jpg'
-const EDITORIAL = 'https://i.ibb.co/d4G5RsLh/IMG-7956.jpg'
+
+const EDITORIAL = [
+  'https://i.ibb.co/d4G5RsLh/IMG-7956.jpg',
+  'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=2400&q=80',
+  'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=2400&q=80',
+  'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=2400&q=80',
+]
 
 export default function Home() {
   return (
@@ -31,24 +37,21 @@ export default function Home() {
       {/* 2 — Les pièces, filtrables par drop */}
       <DropTabs />
 
-      {/* 3 — Grande image pleine largeur */}
-      <section className="relative w-full h-[70vh] min-h-[420px] mt-20 bg-surface">
-        <Image
-          src={EDITORIAL}
-          alt=""
-          fill
-          sizes="100vw"
-          quality={90}
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 text-white">
-          <p className="ui-label mb-2 tracking-[0.06em]">Trust the process</p>
-          <h2 className="display text-[12vw] sm:text-[6vw] leading-[0.88]">
-            Anneal
-          </h2>
-        </div>
-      </section>
+      {/* 3 — Série éditoriale : aperçu des pièces à venir */}
+      <div className="mt-20 space-y-4">
+        {EDITORIAL.map((src) => (
+          <section key={src} className="relative w-full h-[70vh] min-h-[420px] bg-surface">
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="100vw"
+              quality={90}
+              className="object-cover object-center"
+            />
+          </section>
+        ))}
+      </div>
 
       {/* Rappel du fonctionnement, sans panier : le site n'encaisse pas */}
       <section className="px-5 lg:px-8 pt-16">

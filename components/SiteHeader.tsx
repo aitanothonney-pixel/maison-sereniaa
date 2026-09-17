@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { featuredDrop } from '@/lib/drops'
 import CartSlideOver from '@/components/CartSlideOver'
+import { IconSearch, IconMail, IconInstagram } from '@/components/Icons'
 
 const NAV = [
   { label: 'Shop now', href: '/shop' },
@@ -11,34 +12,6 @@ const NAV = [
   { label: 'Refunds/Returns', href: '/retours' },
   { label: 'Contact us', href: '/contact' },
 ]
-
-function IconSearch() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-[22px] h-[22px]" aria-hidden>
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
-  )
-}
-
-function IconInstagram() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-[22px] h-[22px]" aria-hidden>
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-
-function IconMail() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-[22px] h-[22px]" aria-hidden>
-      <rect x="2" y="4" width="20" height="16" rx="2" />
-      <path d="M2.5 6.5 12 13l9.5-6.5" />
-    </svg>
-  )
-}
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)

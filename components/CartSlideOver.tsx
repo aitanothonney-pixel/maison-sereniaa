@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useCart, cartItemKey } from '@/lib/cart-context'
 import { VARIANT_LABELS } from '@/lib/products'
+import { IconBag } from '@/components/Icons'
 
 export default function CartSlideOver() {
   const [open, setOpen] = useState(false)
@@ -16,13 +17,9 @@ export default function CartSlideOver() {
         className="relative hover:opacity-60 transition-opacity"
         aria-label="Panier"
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" className="w-[22px] h-[22px]">
-          <circle cx="9" cy="21" r="1" />
-          <circle cx="20" cy="21" r="1" />
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-        </svg>
+        <IconBag />
         {items.length > 0 && (
-          <span className="absolute -top-2 -right-2 bg-foreground text-background text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+          <span className="absolute -top-1.5 -right-2 bg-foreground text-background text-[10px] leading-none w-[17px] h-[17px] rounded-full flex items-center justify-center font-bold">
             {items.length}
           </span>
         )}

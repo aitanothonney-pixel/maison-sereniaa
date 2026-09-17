@@ -38,7 +38,7 @@ export default function Home() {
       <DropTabs />
 
       {/* 3 — Série éditoriale : aperçu des pièces à venir */}
-      <div className="mt-20 space-y-4">
+      <div className="mt-20">
         {EDITORIAL.map((src) => (
           <section key={src} className="relative w-full h-[70vh] min-h-[420px] bg-surface">
             <Image

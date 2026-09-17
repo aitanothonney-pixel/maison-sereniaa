@@ -124,10 +124,10 @@ html {
 }
 
 /* ── Barre de recherche ────────────────────────────────────── */
-@keyframes slide-in-from-top {
+@keyframes search-in {
   from {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -135,7 +135,19 @@ html {
   }
 }
 .animate-search {
-  animation: slide-in-from-top 0.3s ease-out;
+  animation: search-in 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes veil-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animate-veil {
+  animation: veil-in 0.24s ease-out;
 }
 
 /* ── Accessibilité ──────────────────────────────────────────── */

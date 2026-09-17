@@ -6,14 +6,17 @@ import { useParams } from 'next/navigation'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
-import { getProduct, products } from '@/lib/products'
+import { getProduct, products, fromPrice, VARIANT_LABELS, type Variant } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
+
+const VARIANT_ORDER: Variant[] = ['set', 'hoodie', 'pants']
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>()
   const product = getProduct(id)
   const { addItem } = useCart()
 
+  const [variant, setVariant] = useState<Variant>('set')
   const [hoodieSize, setHoodieSize] = useState('')
   const [pantsSize, setPantsSize] = useState('')
   const [quantity, setQuantity] = useState(1)
@@ -39,18 +42,26 @@ export default function ProductPage() {
     )
   }
 
+  const needsHoodieSize = variant === 'set' || variant === 'hoodie'
+  const needsPantsSize = variant === 'set' || variant === 'pants'
+
   const handleAddToCart = () => {
-    if (!hoodieSize || !pantsSize) {
-      alert('Sélectionnez la taille du hoodie et du pantalon')
+    if (needsHoodieSize && !hoodieSize) {
+      alert('Sélectionnez la taille du pull')
+      return
+    }
+    if (needsPantsSize && !pantsSize) {
+      alert('Sélectionnez la taille du jogging')
       return
     }
 
     addItem({
       id: product.id,
       name: product.name,
-      price: product.price,
-      hoodieSizeSize: hoodieSize,
-      pantsSizeSize: pantsSize,
+      price: product.prices[variant],
+      variant,
+      hoodieSize: needsHoodieSize ? hoodieSize : undefined,
+      pantsSize: needsPantsSize ? pantsSize : undefined,
       color: product.color,
       quantity,
       image: product.images[0],
@@ -113,7 +124,7 @@ export default function ProductPage() {
               </div>
 
               <div className="flex items-baseline gap-6 mb-6 pt-4 border-t border-line">
-                <p className="text-3xl lg:text-4xl font-bold">{product.price} CHF</p>
+                <p className="text-3xl lg:text-4xl font-bold">{product.prices[variant]} CHF</p>
                 {product.stock > 0 && (
                   <span className="text-xs text-green-600 font-medium">● En stock • Livraison 24h</span>
                 )}
@@ -134,53 +145,82 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* Tailles avec meilleur layout */}
-            <div className="space-y-8">
-              {/* Hoodie Size */}
-              <div>
-                <div className="flex items-baseline justify-between mb-3">
-                  <p className="text-xs tracking-widest ui-label">TAILLE HOODIE</p>
-                  {hoodieSize && <p className="text-xs text-muted">Sélectionné: {hoodieSize}</p>}
-                </div>
-                <div className="grid grid-cols-6 gap-2">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={`hoodie-${size}`}
-                      onClick={() => setHoodieSize(size)}
-                      className={`py-3 text-sm font-bold border-2 transition-all ${
-                        hoodieSize === size
-                          ? 'border-foreground bg-foreground text-background'
-                          : 'border-line hover:border-foreground'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
+            {/* Pull seul, jogging seul ou l'ensemble */}
+            <div>
+              <p className="text-xs tracking-widest ui-label mb-3">VOTRE CHOIX</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {VARIANT_ORDER.map((v) => (
+                  <button
+                    key={v}
+                    onClick={() => setVariant(v)}
+                    className={`p-4 text-left border-2 transition-all ${
+                      variant === v
+                        ? 'border-foreground bg-foreground text-background'
+                        : 'border-line hover:border-foreground'
+                    }`}
+                  >
+                    <span className="block text-sm font-bold">{VARIANT_LABELS[v]}</span>
+                    <span className="block text-xs mt-1 opacity-70">{product.prices[v]} CHF</span>
+                  </button>
+                ))}
               </div>
+              {variant === 'set' && (
+                <p className="text-xs text-muted mt-3">
+                  Économie de {product.prices.hoodie + product.prices.pants - product.prices.set} CHF
+                  par rapport aux pièces achetées séparément.
+                </p>
+              )}
+            </div>
 
-              {/* Pants Size */}
-              <div>
-                <div className="flex items-baseline justify-between mb-3">
-                  <p className="text-xs tracking-widest ui-label">TAILLE PANTALON</p>
-                  {pantsSize && <p className="text-xs text-muted">Sélectionné: {pantsSize}</p>}
+            {/* Tailles — seulement celles que la sélection demande */}
+            <div className="space-y-8">
+              {needsHoodieSize && (
+                <div>
+                  <div className="flex items-baseline justify-between mb-3">
+                    <p className="text-xs tracking-widest ui-label">TAILLE PULL</p>
+                    {hoodieSize && <p className="text-xs text-muted">Sélectionné: {hoodieSize}</p>}
+                  </div>
+                  <div className="grid grid-cols-6 gap-2">
+                    {product.sizes.map((size) => (
+                      <button
+                        key={`hoodie-${size}`}
+                        onClick={() => setHoodieSize(size)}
+                        className={`py-3 text-sm font-bold border-2 transition-all ${
+                          hoodieSize === size
+                            ? 'border-foreground bg-foreground text-background'
+                            : 'border-line hover:border-foreground'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="grid grid-cols-6 gap-2">
-                  {product.sizes.map((size) => (
-                    <button
-                      key={`pants-${size}`}
-                      onClick={() => setPantsSize(size)}
-                      className={`py-3 text-sm font-bold border-2 transition-all ${
-                        pantsSize === size
-                          ? 'border-foreground bg-foreground text-background'
-                          : 'border-line hover:border-foreground'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
+              )}
+
+              {needsPantsSize && (
+                <div>
+                  <div className="flex items-baseline justify-between mb-3">
+                    <p className="text-xs tracking-widest ui-label">TAILLE JOGGING</p>
+                    {pantsSize && <p className="text-xs text-muted">Sélectionné: {pantsSize}</p>}
+                  </div>
+                  <div className="grid grid-cols-6 gap-2">
+                    {product.sizes.map((size) => (
+                      <button
+                        key={`pants-${size}`}
+                        onClick={() => setPantsSize(size)}
+                        className={`py-3 text-sm font-bold border-2 transition-all ${
+                          pantsSize === size
+                            ? 'border-foreground bg-foreground text-background'
+                            : 'border-line hover:border-foreground'
+                        }`}
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block">
@@ -256,7 +296,7 @@ export default function ProductPage() {
                     />
                   </div>
                   <h3 className="ui-label text-sm mb-2 group-hover:opacity-60 transition-opacity">{p.name}</h3>
-                  <p className="text-sm font-bold">{p.price} CHF</p>
+                  <p className="text-sm font-bold">Dès {fromPrice(p)} CHF</p>
                 </Link>
               ))}
             </div>

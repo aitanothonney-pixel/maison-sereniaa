@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
-import { products } from '@/lib/products'
+import { products, fromPrice } from '@/lib/products'
 
 export const metadata: Metadata = {
   title: 'Shop',
@@ -40,7 +40,7 @@ export default function ShopPage() {
               </div>
               <h3 className="ui-label text-sm mb-2">{product.name}</h3>
               <div className="flex justify-between items-baseline">
-                <p className="text-sm font-bold">{product.price} CHF</p>
+                <p className="text-sm font-bold">Dès {fromPrice(product)} CHF</p>
                 <p className="text-xs text-muted">{product.color}</p>
               </div>
             </Link>

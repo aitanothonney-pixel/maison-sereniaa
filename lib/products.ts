@@ -1,7 +1,15 @@
+export type Variant = 'hoodie' | 'pants' | 'set'
+
+export const VARIANT_LABELS: Record<Variant, string> = {
+  hoodie: 'Pull seul',
+  pants: 'Jogging seul',
+  set: 'Ensemble complet',
+}
+
 export interface Product {
   id: string
   name: string
-  price: number
+  prices: Record<Variant, number>
   description: string
   material: string
   care: string
@@ -24,7 +32,7 @@ export const products: Product[] = [
   {
     id: 'tracksuit-grey',
     name: 'Tracksuit Gris',
-    price: 195,
+    prices: { hoodie: 120, pants: 95, set: 195 },
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
@@ -38,7 +46,7 @@ export const products: Product[] = [
   {
     id: 'tracksuit-black',
     name: 'Tracksuit Noir',
-    price: 195,
+    prices: { hoodie: 120, pants: 95, set: 195 },
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
@@ -52,7 +60,7 @@ export const products: Product[] = [
   {
     id: 'tracksuit-blue',
     name: 'Tracksuit Bleu',
-    price: 195,
+    prices: { hoodie: 120, pants: 95, set: 195 },
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
@@ -66,7 +74,7 @@ export const products: Product[] = [
   {
     id: 'tracksuit-red',
     name: 'Tracksuit Rouge',
-    price: 195,
+    prices: { hoodie: 120, pants: 95, set: 195 },
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
@@ -81,6 +89,10 @@ export const products: Product[] = [
 
 export function getProduct(id: string): Product | undefined {
   return products.find((p) => p.id === id)
+}
+
+export function fromPrice(product: Product): number {
+  return Math.min(...Object.values(product.prices))
 }
 
 export function getProductsByCategory(category: string): Product[] {

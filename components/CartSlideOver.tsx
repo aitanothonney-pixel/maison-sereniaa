@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useCart } from '@/lib/cart-context'
+import { useCart, cartItemKey } from '@/lib/cart-context'
+import { VARIANT_LABELS } from '@/lib/products'
 
 export default function CartSlideOver() {
   const [open, setOpen] = useState(false)
@@ -58,35 +59,42 @@ export default function CartSlideOver() {
           {items.length === 0 ? (
             <p className="text-muted text-sm">Votre panier est vide</p>
           ) : (
-            items.map((item) => (
-              <div key={`${item.id}-${item.hoodieSizeSize}-${item.pantsSizeSize}-${item.color}`} className="border-b border-line pb-6">
+            items.map((item) => {
+              const key = cartItemKey(item)
+              return (
+              <div key={key} className="border-b border-line pb-6">
                 <div className="flex gap-4">
                   <img src={item.image} alt={item.name} className="w-20 h-20 bg-surface object-cover" />
                   <div className="flex-1">
                     <p className="ui-label text-sm">{item.name}</p>
                     <p className="text-xs text-muted mt-1">
-                      {item.color}
+                      {VARIANT_LABELS[item.variant]} · {item.color}
                     </p>
                     <p className="text-xs text-muted">
-                      Hoodie: {item.hoodieSizeSize} / Pantalon: {item.pantsSizeSize}
+                      {[
+                        item.hoodieSize && `Pull: ${item.hoodieSize}`,
+                        item.pantsSize && `Jogging: ${item.pantsSize}`,
+                      ]
+                        .filter(Boolean)
+                        .join(' / ')}
                     </p>
                     <p className="text-sm font-bold mt-2">{item.price * item.quantity} CHF</p>
                     <div className="flex items-center gap-2 mt-3">
                       <button
-                        onClick={() => updateQuantity(item.id, item.hoodieSizeSize, item.pantsSizeSize, item.color, item.quantity - 1)}
+                        onClick={() => updateQuantity(key, item.quantity - 1)}
                         className="w-6 h-6 border border-line flex items-center justify-center text-xs hover:bg-surface"
                       >
                         −
                       </button>
                       <span className="w-8 text-center text-sm">{item.quantity}</span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.hoodieSizeSize, item.pantsSizeSize, item.color, item.quantity + 1)}
+                        onClick={() => updateQuantity(key, item.quantity + 1)}
                         className="w-6 h-6 border border-line flex items-center justify-center text-xs hover:bg-surface"
                       >
                         +
                       </button>
                       <button
-                        onClick={() => removeItem(item.id, item.hoodieSizeSize, item.pantsSizeSize, item.color)}
+                        onClick={() => removeItem(key)}
                         className="ml-auto text-xs text-muted hover:text-foreground"
                       >
                         Retirer
@@ -95,7 +103,8 @@ export default function CartSlideOver() {
                   </div>
                 </div>
               </div>
-            ))
+              )
+            })
           )}
         </div>
 

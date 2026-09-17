@@ -1,23 +1,29 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import type { Variant } from '@/lib/products'
 
 export interface CartItem {
   id: string
   name: string
   price: number
-  hoodieSizeSize: string
-  pantsSizeSize: string
+  variant: Variant
+  hoodieSize?: string
+  pantsSize?: string
   color: string
   quantity: number
   image: string
 }
 
+export function cartItemKey(item: CartItem): string {
+  return [item.id, item.variant, item.hoodieSize ?? '', item.pantsSize ?? '', item.color].join('|')
+}
+
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
-  removeItem: (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string) => void
-  updateQuantity: (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string, quantity: number) => void
+  removeItem: (key: string) => void
+  updateQuantity: (key: string, quantity: number) => void
   clearCart: () => void
   total: number
 }
@@ -27,27 +33,23 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
 
-  // Charger le panier depuis localStorage
   useEffect(() => {
-    const savedCart = localStorage.getItem('tempered-cart')
+    const savedCart = localStorage.getItem('tempered-cart-v2')
     if (savedCart) {
       setItems(JSON.parse(savedCart))
     }
   }, [])
 
-  // Sauvegarder le panier dans localStorage
   useEffect(() => {
-    localStorage.setItem('tempered-cart', JSON.stringify(items))
+    localStorage.setItem('tempered-cart-v2', JSON.stringify(items))
   }, [items])
 
   const addItem = (newItem: CartItem) => {
     setItems((prev) => {
-      const existing = prev.find(
-        (item) => item.id === newItem.id && item.hoodieSizeSize === newItem.hoodieSizeSize && item.pantsSizeSize === newItem.pantsSizeSize && item.color === newItem.color
-      )
-      if (existing) {
+      const key = cartItemKey(newItem)
+      if (prev.some((item) => cartItemKey(item) === key)) {
         return prev.map((item) =>
-          item.id === newItem.id && item.hoodieSizeSize === newItem.hoodieSizeSize && item.pantsSizeSize === newItem.pantsSizeSize && item.color === newItem.color
+          cartItemKey(item) === key
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item
         )
@@ -56,19 +58,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     })
   }
 
-  const removeItem = (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string) => {
-    setItems((prev) => prev.filter((item) => !(item.id === id && item.hoodieSizeSize === hoodieSizeSize && item.pantsSizeSize === pantsSizeSize && item.color === color)))
+  const removeItem = (key: string) => {
+    setItems((prev) => prev.filter((item) => cartItemKey(item) !== key))
   }
 
-  const updateQuantity = (id: string, hoodieSizeSize: string, pantsSizeSize: string, color: string, quantity: number) => {
+  const updateQuantity = (key: string, quantity: number) => {
     if (quantity <= 0) {
-      removeItem(id, hoodieSizeSize, pantsSizeSize, color)
+      removeItem(key)
       return
     }
     setItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.hoodieSizeSize === hoodieSizeSize && item.pantsSizeSize === pantsSizeSize && item.color === color ? { ...item, quantity } : item
-      )
+      prev.map((item) => (cartItemKey(item) === key ? { ...item, quantity } : item))
     )
   }
 

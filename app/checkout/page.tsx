@@ -5,7 +5,8 @@ import Link from 'next/link'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
-import { useCart } from '@/lib/cart-context'
+import { useCart, cartItemKey } from '@/lib/cart-context'
+import { VARIANT_LABELS } from '@/lib/products'
 
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart()
@@ -196,11 +197,18 @@ export default function CheckoutPage() {
 
               <div className="space-y-4 mb-6 max-h-96 overflow-y-auto">
                 {items.map((item) => (
-                  <div key={`${item.id}-${item.hoodieSizeSize}-${item.pantsSizeSize}-${item.color}`} className="flex justify-between text-sm pb-4 border-b border-line">
+                  <div key={cartItemKey(item)} className="flex justify-between text-sm pb-4 border-b border-line">
                     <div>
                       <p className="font-bold">{item.name}</p>
-                      <p className="text-xs text-muted">{item.color}</p>
-                      <p className="text-xs text-muted">Hoodie: {item.hoodieSizeSize} / Pantalon: {item.pantsSizeSize}</p>
+                      <p className="text-xs text-muted">{VARIANT_LABELS[item.variant]} · {item.color}</p>
+                      <p className="text-xs text-muted">
+                        {[
+                          item.hoodieSize && `Pull: ${item.hoodieSize}`,
+                          item.pantsSize && `Jogging: ${item.pantsSize}`,
+                        ]
+                          .filter(Boolean)
+                          .join(' / ')}
+                      </p>
                       <p className="text-xs text-muted">x{item.quantity}</p>
                     </div>
                     <p className="font-bold">{item.price * item.quantity} CHF</p>

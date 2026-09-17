@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import Image from 'next/image'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
@@ -59,38 +58,6 @@ export default function Home() {
           </section>
         ))}
       </div>
-
-      {/* Rappel du fonctionnement, sans panier : le site n'encaisse pas */}
-      <section className="px-5 lg:px-8 pt-16">
-        <div className="flex items-baseline justify-between gap-6 mb-6">
-          <h2 className="display text-2xl sm:text-3xl">Comment ça marche</h2>
-          <Link href="/info" className="ui-label text-muted hover:text-foreground transition-colors shrink-0">
-            + Tout voir
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 border-t border-line pt-8">
-          {[
-            {
-              t: 'Série fermée',
-              d: 'Chaque drop est produit en quantité fixe. Ce qui part ne revient pas.',
-            },
-            {
-              t: 'Aucun réassort',
-              d: 'Pas de réédition. La pièce vit sur une seule fenêtre de vente.',
-            },
-            {
-              t: 'Annoncé en amont',
-              d: 'La date part par mail et sur Instagram. Rien d’autre à surveiller.',
-            },
-          ].map((item) => (
-            <div key={item.t}>
-              <p className="ui-label mb-2">{item.t}</p>
-              <p className="text-[13px] text-muted leading-[1.7]">{item.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <Footer />
     </>

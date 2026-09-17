@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { featuredDrop } from '@/lib/drops'
 import CartSlideOver from '@/components/CartSlideOver'
-import { IconSearch, IconMail, IconInstagram } from '@/components/Icons'
+import SiteSearch from '@/components/SiteSearch'
+import { IconMail, IconInstagram } from '@/components/Icons'
 
 const NAV = [
   { label: 'Shop now', href: '/shop' },
@@ -15,9 +15,6 @@ const NAV = [
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)
-  const [searchOpen, setSearchOpen] = useState(false)
-  const searchInputRef = useRef<HTMLInputElement>(null)
-  const next = featuredDrop()
 
   useEffect(() => {
     if (!open) return
@@ -29,12 +26,6 @@ export default function SiteHeader() {
       document.body.style.overflow = ''
     }
   }, [open])
-
-  useEffect(() => {
-    if (searchOpen) {
-      searchInputRef.current?.focus()
-    }
-  }, [searchOpen])
 
   return (
     <>
@@ -68,22 +59,9 @@ export default function SiteHeader() {
             <span className="display text-xl sm:text-2xl">Tempered</span>
           </Link>
 
-          {/* Droite — pas de panier : le site n'encaisse pas */}
+          {/* Droite — recherche, panier, contact */}
           <div className="flex items-center justify-end gap-5">
-            <Link
-              href={`/drops/${next.id}`}
-              className="ui-label hidden sm:inline hover:opacity-60 transition-opacity"
-            >
-              Drop {next.number}
-              <span className="sup-new">Bientôt</span>
-            </Link>
-            <button
-              onClick={() => setSearchOpen(!searchOpen)}
-              aria-label="Rechercher"
-              className="hover:opacity-60 transition-opacity"
-            >
-              <IconSearch />
-            </button>
+            <SiteSearch />
             <CartSlideOver />
             <Link href="/contact" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
               <IconMail />
@@ -100,28 +78,6 @@ export default function SiteHeader() {
           </div>
         </div>
       </header>
-
-      {/* Barre de recherche animée */}
-      {searchOpen && (
-        <div className="absolute inset-x-0 top-16 bg-background border-b border-line z-40 animate-search">
-          <div className="flex items-center gap-3 px-5 lg:px-8 py-4">
-            <IconSearch />
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="SEARCH FOR..."
-              className="flex-1 bg-transparent outline-none placeholder:text-dim text-foreground ui-label"
-            />
-            <button
-              onClick={() => setSearchOpen(false)}
-              aria-label="Fermer la recherche"
-              className="text-dim hover:text-foreground transition-colors"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Panneau mobile */}
       {open && (

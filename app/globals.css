@@ -144,6 +144,13 @@ html {
   outline-offset: 2px;
 }
 
+/* Le panneau de recherche n'existe que pour ce champ, et il est focalisé
+   d'office à l'ouverture : l'anneau n'y ajoute rien et se lit comme une
+   bordure parasite. Le trait sous le champ tient lieu de repère. */
+.search-field:focus-visible {
+  outline: none;
+}
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;

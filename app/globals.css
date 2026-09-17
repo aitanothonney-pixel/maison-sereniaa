@@ -107,7 +107,8 @@ html {
 
 /* ── Bandeau défilant ─────────────────────────────────────────
    Deux moitiés identiques : la translation de -50 % boucle alors
-   sans saut. Voir le composant Marquee.
+   sans saut. La durée est posée par le composant Marquee, pour que
+   la vitesse ne change pas avec le nombre de motifs.
    ─────────────────────────────────────────────────────────── */
 @keyframes marquee-scroll {
   from {
@@ -120,7 +121,7 @@ html {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 32s linear infinite;
+  animation: marquee-scroll linear infinite;
 }
 
 /* ── Barre de recherche ────────────────────────────────────── */

@@ -2,12 +2,17 @@
  * Bandeau défilant en tête de page.
  *
  * L'animation translate la piste de -50 %. Pour que la boucle soit
- * invisible, la piste doit donc contenir exactement deux moitiés
- * identiques : on répète le motif, puis on duplique l'ensemble.
+ * invisible, la piste doit contenir exactement deux moitiés identiques,
+ * et chaque moitié doit être au moins aussi large que l'écran : sinon un
+ * vide apparaît en fin de course et le défilement semble s'interrompre.
  */
+
+// Durée par motif, pour que la vitesse ne dépende pas du nombre de motifs.
+const SECONDS_PER_REPEAT = 5.33
+
 export default function Marquee({
   text = 'Trust the process',
-  repeat = 6,
+  repeat = 18,
 }: {
   text?: string
   repeat?: number
@@ -17,7 +22,11 @@ export default function Marquee({
 
   return (
     <div className="bg-foreground text-background overflow-hidden py-2.5">
-      <div className="marquee-track" aria-hidden>
+      <div
+        className="marquee-track"
+        style={{ animationDuration: `${repeat * SECONDS_PER_REPEAT}s` }}
+        aria-hidden
+      >
         {track.map((_, i) => (
           <span key={i} className="flex items-center shrink-0">
             <span className="ui-label whitespace-nowrap px-6">{text}</span>

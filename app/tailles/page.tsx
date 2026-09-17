@@ -14,10 +14,10 @@ export default function SizesPage() {
       <Marquee />
       <SiteHeader />
 
-      <main className="px-5 lg:px-8 py-12 max-w-3xl mx-auto">
+      <main className="px-5 lg:px-8 py-12">
         <h1 className="display text-[13vw] sm:text-[7vw] lg:text-[80px] mb-12">GUIDE DES TAILLES</h1>
 
-        <div className="space-y-12">
+        <div className="space-y-12 max-w-3xl">
           {/* Tableau tailles */}
           <section>
             <h2 className="display text-2xl mb-6">HOODIE OVERSIZE</h2>

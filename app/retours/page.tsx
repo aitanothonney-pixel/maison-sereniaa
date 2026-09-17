@@ -15,10 +15,10 @@ export default function ReturnsPage() {
       <Marquee />
       <SiteHeader />
 
-      <main className="px-5 lg:px-8 py-12 max-w-3xl mx-auto">
+      <main className="px-5 lg:px-8 py-12">
         <h1 className="display text-[13vw] sm:text-[7vw] lg:text-[80px] mb-12">RETOURS</h1>
 
-        <section className="space-y-12">
+        <section className="space-y-12 max-w-3xl">
           <div>
             <p className="text-sm leading-relaxed">
               Une pièce ne tombe pas comme prévu ? Vous avez 30 jours pour la renvoyer, sans avoir à

@@ -8,13 +8,13 @@ const HERO =
   'https://i.ibb.co/DfNvXyrm/3-A0-C1226-5-C9-E-4-FBD-BD10-AC94772268-E0.jpg'
 
 // `focus` décide quelle partie de la photo survit au recadrage : la bande
-// est bien plus large que haute, donc une photo verticale y perd le haut et
-// le bas. 'center' convient à un sujet centré, 'top' à un visage haut placé.
+// reste plus large que haute sur écran, donc une photo verticale y perd du
+// haut et du bas. 'center' garde le milieu, '30%' remonte, '70%' descend.
 const EDITORIAL: { src: string; focus: string }[] = [
-  { src: 'https://i.ibb.co/1t314nKQ/IMG-5755.jpg', focus: 'center 35%' },
-  { src: 'https://i.ibb.co/qFMJK90v/IMG-5753.jpg', focus: 'center 35%' },
-  { src: 'https://i.ibb.co/V0HX0qKC/IMG-5979.jpg', focus: 'center 35%' },
-  { src: 'https://i.ibb.co/0jpr3MQP/IMG-5924.jpg', focus: 'center 35%' },
+  { src: 'https://i.ibb.co/1t314nKQ/IMG-5755.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/qFMJK90v/IMG-5753.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/V0HX0qKC/IMG-5979.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/0jpr3MQP/IMG-5924.jpg', focus: 'center' },
 ]
 
 export default function Home() {
@@ -42,7 +42,10 @@ export default function Home() {
       {/* 3 — Série éditoriale : aperçu des pièces à venir */}
       <div className="mt-20">
         {EDITORIAL.map(({ src, focus }, i) => (
-          <section key={src} className="relative w-full h-svh min-h-[520px] bg-surface">
+          <section
+            key={src}
+            className="relative w-full aspect-[3/4] md:aspect-auto md:h-[120svh] md:min-h-[640px] bg-surface"
+          >
             <Image
               src={src}
               alt=""

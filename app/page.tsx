@@ -44,7 +44,7 @@ export default function Home() {
         {EDITORIAL.map(({ src, focus }, i) => (
           <section
             key={src}
-            className="relative w-full aspect-[3/4] md:aspect-auto md:h-[120svh] md:min-h-[640px] bg-surface"
+            className="relative w-full h-[58vh] md:h-[calc(100vh-7.5rem)] min-h-[380px] bg-surface"
           >
             <Image
               src={src}

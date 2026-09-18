@@ -42,7 +42,7 @@ export default function Home() {
       {/* 3 — Série éditoriale : aperçu des pièces à venir */}
       <div className="mt-20">
         {EDITORIAL.map(({ src, focus }, i) => (
-          <section key={src} className="relative w-full h-[70vh] min-h-[420px] bg-surface">
+          <section key={src} className="relative w-full h-svh min-h-[520px] bg-surface">
             <Image
               src={src}
               alt=""

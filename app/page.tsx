@@ -7,11 +7,14 @@ import Footer from '@/components/Footer'
 const HERO =
   'https://i.ibb.co/DfNvXyrm/3-A0-C1226-5-C9-E-4-FBD-BD10-AC94772268-E0.jpg'
 
-const EDITORIAL = [
-  'https://i.ibb.co/d4G5RsLh/IMG-7956.jpg',
-  'https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?w=2400&q=80',
-  'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=2400&q=80',
-  'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=2400&q=80',
+// `focus` décide quelle partie de la photo survit au recadrage : la bande
+// est bien plus large que haute, donc une photo verticale y perd le haut et
+// le bas. 'center' convient à un sujet centré, 'top' à un visage haut placé.
+const EDITORIAL: { src: string; focus: string }[] = [
+  { src: 'https://i.ibb.co/1t314nKQ/IMG-5755.jpg', focus: 'center 35%' },
+  { src: 'https://i.ibb.co/qFMJK90v/IMG-5753.jpg', focus: 'center 35%' },
+  { src: 'https://i.ibb.co/V0HX0qKC/IMG-5979.jpg', focus: 'center 35%' },
+  { src: 'https://i.ibb.co/0jpr3MQP/IMG-5924.jpg', focus: 'center 35%' },
 ]
 
 export default function Home() {
@@ -38,7 +41,7 @@ export default function Home() {
 
       {/* 3 — Série éditoriale : aperçu des pièces à venir */}
       <div className="mt-20">
-        {EDITORIAL.map((src, i) => (
+        {EDITORIAL.map(({ src, focus }, i) => (
           <section key={src} className="relative w-full h-[70vh] min-h-[420px] bg-surface">
             <Image
               src={src}
@@ -46,7 +49,8 @@ export default function Home() {
               fill
               sizes="100vw"
               quality={90}
-              className="object-cover object-center"
+              style={{ objectPosition: focus }}
+              className="object-cover"
             />
             {/* Adoucit la jointure : deux photos sans rapport se coupent net. */}
             {i > 0 && (

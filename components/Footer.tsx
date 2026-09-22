@@ -59,7 +59,15 @@ export default function Footer() {
           <p className="text-[12px] text-dim">
             © {new Date().getFullYear()} Tempered · TTP
           </p>
-          <p className="text-[12px] text-dim">Genève, Suisse</p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/conditions"
+              className="text-[12px] text-dim hover:text-foreground transition-colors"
+            >
+              Conditions générales
+            </Link>
+            <p className="text-[12px] text-dim">Genève, Suisse</p>
+          </div>
         </div>
       </div>
     </footer>

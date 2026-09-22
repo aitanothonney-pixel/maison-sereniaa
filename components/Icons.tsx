@@ -35,15 +35,6 @@ export function IconBag() {
   )
 }
 
-export function IconMail() {
-  return (
-    <Icon>
-      <rect x="2.75" y="5.25" width="18.5" height="13.5" rx="2.2" />
-      <path d="m3.9 6.6 8.1 5.9 8.1-5.9" />
-    </Icon>
-  )
-}
-
 export function IconInstagram() {
   return (
     <Icon>

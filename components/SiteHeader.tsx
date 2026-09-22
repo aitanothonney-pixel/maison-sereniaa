@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import CartSlideOver from '@/components/CartSlideOver'
 import SiteSearch from '@/components/SiteSearch'
-import { IconMail, IconInstagram } from '@/components/Icons'
+import { IconInstagram } from '@/components/Icons'
 
 const NAV = [
   { label: 'Shop now', href: '/shop' },
@@ -59,13 +59,10 @@ export default function SiteHeader() {
             <span className="display text-xl sm:text-2xl">Tempered</span>
           </Link>
 
-          {/* Droite — recherche, panier, contact */}
+          {/* Droite — recherche, panier, réseaux */}
           <div className="flex items-center justify-end gap-5">
             <SiteSearch />
             <CartSlideOver />
-            <Link href="/contact" aria-label="Nous écrire" className="hover:opacity-60 transition-opacity">
-              <IconMail />
-            </Link>
             <a
               href="https://www.instagram.com/temperedgarments/"
               target="_blank"

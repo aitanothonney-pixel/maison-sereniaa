@@ -23,7 +23,7 @@ const COLUMNS = [
     links: [
       { label: 'Info', href: '/info' },
       { label: 'Matières', href: '/info' },
-      { label: 'Instagram', href: 'https://instagram.com' },
+      { label: 'Instagram', href: 'https://www.instagram.com/temperedgarments/' },
     ],
   },
 ]

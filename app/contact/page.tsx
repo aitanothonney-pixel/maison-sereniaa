@@ -150,7 +150,7 @@ export default function ContactPage() {
             <div>
               <h2 className="ui-label mb-4">RÉSEAUX</h2>
               <div className="flex gap-6">
-                <a href="https://instagram.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">
+                <a href="https://www.instagram.com/temperedgarments/" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">
                   Instagram
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">

@@ -67,7 +67,7 @@ export default function SiteHeader() {
               <IconMail />
             </Link>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/temperedgarments/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

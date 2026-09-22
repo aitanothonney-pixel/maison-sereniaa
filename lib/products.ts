@@ -15,6 +15,9 @@ export interface Product {
   care: string
   images: string[]
   color: string
+  // Teinte de la pastille en boutique : la nuance réelle du vêtement, pas
+  // la couleur pure, sinon les pastilles jurent avec les photos.
+  swatch: string
   sizes: string[]
   stock: number
   featured?: boolean
@@ -38,6 +41,7 @@ export const products: Product[] = [
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
     images: [IMAGES.grey, IMAGES.grey],
     color: 'Gris',
+    swatch: '#9b9b9b',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     stock: 20,
     featured: true,
@@ -52,6 +56,7 @@ export const products: Product[] = [
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
     images: [IMAGES.black, IMAGES.black],
     color: 'Noir',
+    swatch: '#1a1a1a',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     stock: 24,
     featured: true,
@@ -66,6 +71,7 @@ export const products: Product[] = [
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
     images: [IMAGES.blue, IMAGES.blue],
     color: 'Bleu',
+    swatch: '#2f4370',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     stock: 18,
     featured: true,
@@ -80,6 +86,7 @@ export const products: Product[] = [
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
     images: [IMAGES.red, IMAGES.red],
     color: 'Rouge',
+    swatch: '#9e2b2b',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     stock: 16,
     featured: true,

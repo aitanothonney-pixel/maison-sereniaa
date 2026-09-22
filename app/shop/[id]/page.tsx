@@ -136,12 +136,32 @@ export default function ProductPage() {
               <p className="text-sm leading-relaxed text-muted max-w-md">{product.description}</p>
             </div>
 
-            {/* Couleur affichée */}
+            {/* Couleurs — chaque teinte est une fiche distincte */}
             <div>
-              <p className="text-xs tracking-widest ui-label mb-3">COULEUR</p>
-              <div className="flex gap-2 items-center">
-                <div className="w-12 h-12 bg-surface border border-line"></div>
-                <span className="text-sm font-medium">{product.color}</span>
+              <p className="text-xs tracking-widest ui-label mb-3">
+                COULEUR — <span className="text-muted">{product.color}</span>
+              </p>
+              <div className="flex gap-3 items-center">
+                {products.map((p) =>
+                  p.id === product.id ? (
+                    <span
+                      key={p.id}
+                      aria-current="true"
+                      title={p.color}
+                      style={{ backgroundColor: p.swatch }}
+                      className="w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
+                    />
+                  ) : (
+                    <Link
+                      key={p.id}
+                      href={`/shop/${p.id}`}
+                      aria-label={`Voir le tracksuit ${p.color}`}
+                      title={p.color}
+                      style={{ backgroundColor: p.swatch }}
+                      className="w-10 h-10 ring-1 ring-line hover:ring-foreground transition-shadow"
+                    />
+                  )
+                )}
               </div>
             </div>
 

@@ -134,7 +134,7 @@ export default function ContactPage() {
               <div className="space-y-4 text-sm">
                 <div>
                   <p className="font-bold mb-2">Délais de livraison?</p>
-                  <p className="text-muted">Suisse: 3-5 jours. EU: 5-10 jours. Expédition 48h après drop.</p>
+                  <p className="text-muted">1 à 2 semaines ouvrées. Expédition 48h après achat.</p>
                 </div>
                 <div>
                   <p className="font-bold mb-2">Problème avec ma commande?</p>

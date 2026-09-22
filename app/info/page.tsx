@@ -30,7 +30,7 @@ const SECTIONS = [
     t: 'Livraison',
     lines: [
       'Expédition depuis Genève sous 48 heures ouvrées après la clôture d’un drop.',
-      'Suisse : 3 à 5 jours ouvrés. Union européenne : 5 à 10 jours ouvrés.',
+      'Livraison sous 1 à 2 semaines ouvrées, en Suisse comme à l’étranger.',
       'Les droits et taxes à l’import restent à la charge du destinataire.',
     ],
   },

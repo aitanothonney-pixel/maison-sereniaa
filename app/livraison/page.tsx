@@ -25,15 +25,15 @@ export default function ShippingPage() {
             <div className="space-y-4 text-sm">
               <div className="border-b border-line pb-4">
                 <p className="font-bold mb-2">Suisse</p>
-                <p className="text-muted">3-5 jours ouvrés. Expédition 48h après votre achat.</p>
+                <p className="text-muted">1 à 2 semaines ouvrées. Expédition 48h après votre achat.</p>
               </div>
               <div className="border-b border-line pb-4">
                 <p className="font-bold mb-2">Union Européenne</p>
-                <p className="text-muted">5-10 jours ouvrés. Expédition 48h après votre achat.</p>
+                <p className="text-muted">1 à 2 semaines ouvrées. Expédition 48h après votre achat.</p>
               </div>
               <div className="border-b border-line pb-4">
                 <p className="font-bold mb-2">Autres pays</p>
-                <p className="text-muted">10-21 jours ouvrés. Délais variables selon le pays de destination.</p>
+                <p className="text-muted">1 à 2 semaines ouvrées. Délais variables selon le pays de destination.</p>
               </div>
               <p className="text-xs text-muted mt-4">Les délais commencent après confirmation du paiement. Les weekends et jours fériés ne sont pas comptés.</p>
             </div>

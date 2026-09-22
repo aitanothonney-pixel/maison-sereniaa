@@ -126,7 +126,7 @@ export default function ProductPage() {
               <div className="flex items-baseline gap-6 mb-6 pt-4 border-t border-line">
                 <p className="text-3xl lg:text-4xl font-bold">{product.prices[variant]} CHF</p>
                 {product.stock > 0 && (
-                  <span className="text-xs text-green-600 font-medium">● En stock • Livraison 24h</span>
+                  <span className="text-xs text-green-600 font-medium">● En stock • Livraison 1 à 2 semaines</span>
                 )}
                 {product.stock === 0 && (
                   <span className="text-xs text-red-600 font-medium">● Épuisé</span>

@@ -49,7 +49,7 @@ export default function TrackOrderPage() {
               <div className="border-b border-line pb-4">
                 <p className="font-bold mb-2">4 · Livraison</p>
                 <p className="text-muted">
-                  3-5 jours ouvrés en Suisse, 5-10 dans l&apos;UE.{' '}
+                  1 à 2 semaines ouvrées après l&apos;expédition.{' '}
                   <Link href="/livraison" className="underline hover:opacity-60">
                     Voir tous les délais
                   </Link>

@@ -22,11 +22,11 @@ export default function DropTabs() {
                 href={`/shop/${product.id}`}
                 className="group"
               >
-                <div className="relative bg-surface overflow-hidden mb-4 aspect-square">
+                <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4]">
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                   />
                   {product.stock < 10 && (
                     <div className="absolute top-3 left-3 bg-foreground text-background text-xs px-2 py-1">

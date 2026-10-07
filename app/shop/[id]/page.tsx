@@ -94,11 +94,11 @@ export default function ProductPage() {
           {/* GALERIE — 2 colonnes d'images */}
           <div className="lg:col-span-1 space-y-4">
             {/* Image principale */}
-            <div className="bg-surface aspect-square overflow-hidden group">
+            <div className="bg-surface aspect-[3/4] overflow-hidden group">
               <img
                 src={product.images[imageIndex]}
                 alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                className="w-full h-full object-cover object-[center_30%] group-hover:scale-[1.02] transition-transform duration-500"
               />
             </div>
 
@@ -302,11 +302,11 @@ export default function ProductPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
               {relatedProducts.map((p) => (
                 <Link key={p.id} href={`/shop/${p.id}`} className="group">
-                  <div className="relative bg-surface overflow-hidden mb-4 aspect-square">
+                  <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4]">
                     <img
                       src={p.images[0]}
                       alt={p.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <h3 className="ui-label text-sm mb-2 group-hover:opacity-60 transition-opacity">{p.name}</h3>

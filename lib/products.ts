@@ -42,7 +42,7 @@ export const products: Product[] = [
     material: TRACKSUIT_MATERIAL,
     care: CARE,
     images: [
-      'https://i.ibb.co/tpHNLbTG/IMG-0466.jpg',
+      'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
       'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
     ],
     color: 'Noir',

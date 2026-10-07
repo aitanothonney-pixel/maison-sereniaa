@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import DropTabs from '@/components/DropTabs'
 import Footer from '@/components/Footer'
 
-const HERO = 'https://i.ibb.co/tpHNLbTG/IMG-0466.jpg'
+const HERO = 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg'
 
 export default function Home() {
   return (

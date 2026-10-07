@@ -7,13 +7,13 @@ import Footer from '@/components/Footer'
 const HERO = 'https://i.ibb.co/nqSxtJqD/IMG-0626.jpg'
 
 // `focus` décide quelle partie de la photo survit au recadrage : la bande
-// reste plus large que haute sur écran, donc une photo verticale y perd du
-// haut et du bas. 'center' garde le milieu, '30%' remonte, '70%' descend.
+// reste plus large que haute, donc une photo verticale y perd du haut et du
+// bas. Plus le pourcentage est bas, plus on garde le haut — et les visages.
 const EDITORIAL: { src: string; focus: string }[] = [
-  { src: 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/x8MprMXk/IMG-0435.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/Ppgd5rK/IMG-0420.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/fdcqm9DM/IMG-0342.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg', focus: 'center 20%' },
+  { src: 'https://i.ibb.co/x8MprMXk/IMG-0435.jpg', focus: 'center 20%' },
+  { src: 'https://i.ibb.co/Ppgd5rK/IMG-0420.jpg', focus: 'center 20%' },
+  { src: 'https://i.ibb.co/fdcqm9DM/IMG-0342.jpg', focus: 'center 20%' },
 ]
 
 export default function Home() {

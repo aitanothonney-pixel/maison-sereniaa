@@ -49,7 +49,7 @@ export default function DropTabs() {
 
             {/* Video Section */}
             <div className="hidden lg:flex flex-col">
-              <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4] border-2 border-foreground">
+              <div className="relative bg-surface overflow-hidden mb-4 aspect-[4/3] border-2 border-foreground">
                 <video
                   autoPlay
                   muted
@@ -60,7 +60,7 @@ export default function DropTabs() {
                   <source src="" type="video/mp4" />
                 </video>
               </div>
-              <div className="h-12"></div>
+              <div className="h-16"></div>
             </div>
           </div>
         )}

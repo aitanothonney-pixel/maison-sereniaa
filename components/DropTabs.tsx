@@ -16,7 +16,7 @@ export default function DropTabs() {
         {products.length === 0 ? (
           <p className="text-muted text-[13px] py-16">Aucune pièce disponible.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-[3fr_3fr_4fr] gap-4 lg:gap-6">
             {products.map((product) => (
               <Link
                 key={product.id}

@@ -25,7 +25,7 @@ export interface Product {
 }
 
 const IMAGES = {
-  black: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&q=80',
+  grey: 'https://images.unsplash.com/photo-1556821552-7f41c5d440db?w=1200&q=80',
   blue: 'https://images.unsplash.com/photo-1506629082632-a8b9db8b5c4c?w=1200&q=80',
   red: 'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=1200&q=80',
 }
@@ -38,10 +38,7 @@ export const products: Product[] = [
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
-    images: [
-      'https://i.ibb.co/tpHNLbTG/IMG-0466.jpg',
-      'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
-    ],
+    images: [IMAGES.grey, IMAGES.grey],
     color: 'Gris',
     swatch: '#9b9b9b',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
@@ -56,7 +53,10 @@ export const products: Product[] = [
     description: 'Ensemble jogging premium TEMPORED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.',
     material: 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio',
     care: 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.',
-    images: [IMAGES.black, IMAGES.black],
+    images: [
+      'https://i.ibb.co/tpHNLbTG/IMG-0466.jpg',
+      'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
+    ],
     color: 'Noir',
     swatch: '#1a1a1a',
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],

@@ -102,7 +102,7 @@ export default function ProductPage() {
                     i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
                   }`}
                 >
-                  <Image src={img} alt="" fill sizes="120px" unoptimized className="object-cover" />
+                  <Image src={img} alt="" fill sizes="120px" unoptimized quality={100} className="object-cover" />
                 </button>
               ))}
             </div>
@@ -126,7 +126,7 @@ export default function ProductPage() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 unoptimized
-                quality={90}
+                quality={100}
                 className="object-cover object-[center_30%]"
               />
               {product.images.length > 1 && (
@@ -338,6 +338,7 @@ export default function ProductPage() {
                       fill
                       sizes="(max-width: 640px) 50vw, 25vw"
                       unoptimized
+                      quality={100}
                       className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>

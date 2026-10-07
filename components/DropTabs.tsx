@@ -61,6 +61,7 @@ export default function DropTabs() {
                 </video>
               </div>
               <h3 className="ui-label text-sm mb-2">VIDÉO</h3>
+              <p className="text-xs text-muted">-</p>
             </div>
           </div>
         )}

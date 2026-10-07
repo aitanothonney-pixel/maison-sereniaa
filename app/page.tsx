@@ -10,10 +10,10 @@ const HERO = 'https://i.ibb.co/nqSxtJqD/IMG-0626.jpg'
 // reste plus large que haute sur écran, donc une photo verticale y perd du
 // haut et du bas. 'center' garde le milieu, '30%' remonte, '70%' descend.
 const EDITORIAL: { src: string; focus: string }[] = [
-  { src: 'https://i.ibb.co/1t314nKQ/IMG-5755.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/qFMJK90v/IMG-5753.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/V0HX0qKC/IMG-5979.jpg', focus: 'center' },
-  { src: 'https://i.ibb.co/0jpr3MQP/IMG-5924.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/x8MprMXk/IMG-0435.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/Ppgd5rK/IMG-0420.jpg', focus: 'center' },
+  { src: 'https://i.ibb.co/fdcqm9DM/IMG-0342.jpg', focus: 'center' },
 ]
 
 export default function Home() {

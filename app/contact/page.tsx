@@ -123,7 +123,7 @@ export default function ContactPage() {
           <div className="space-y-12">
             <div>
               <h2 className="display text-2xl mb-4">NOUS ÉCRIRE</h2>
-              <a href="mailto:contact@tempored.com" className="display text-xl hover:opacity-60 transition-opacity inline-block mb-4">
+              <a href="mailto:contact@tempored.com" className="display text-xl hover:opacity-60 transition-opacity inline-block mb-4 py-2 -my-2">
                 contact@tempored.com
               </a>
               <p className="text-sm text-muted">Réponse sous 24h (jours ouvrés).</p>
@@ -150,13 +150,13 @@ export default function ContactPage() {
             <div>
               <h2 className="ui-label mb-4">RÉSEAUX</h2>
               <div className="flex gap-6">
-                <a href="https://www.instagram.com/temperedgarments/" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">
+                <a href="https://www.instagram.com/temperedgarments/" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors py-2 -my-2 inline-block">
                   Instagram
                 </a>
-                <a href="https://twitter.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">
+                <a href="https://twitter.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors py-2 -my-2 inline-block">
                   Twitter
                 </a>
-                <a href="https://discord.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors">
+                <a href="https://discord.com" target="_blank" rel="noopener" className="text-muted hover:text-foreground transition-colors py-2 -my-2 inline-block">
                   Discord
                 </a>
               </div>

@@ -86,7 +86,7 @@ export default function ProductPage() {
       <SiteHeader />
 
       <main className="px-5 lg:px-8 py-8 lg:py-12">
-        <Link href="/shop" className="ui-label text-muted hover:text-foreground mb-12 inline-block transition-opacity">
+        <Link href="/shop" className="ui-label text-muted hover:text-foreground mb-8 inline-block py-2 -my-2 transition-opacity">
           ← RETOUR À LA BOUTIQUE
         </Link>
 
@@ -243,7 +243,7 @@ export default function ProductPage() {
               ))}
             </div>
 
-            <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block">
+            <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block py-2 -my-2">
               Consulter le guide des tailles →
             </Link>
 

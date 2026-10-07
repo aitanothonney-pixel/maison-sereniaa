@@ -42,10 +42,10 @@ export default function Footer() {
           {COLUMNS.map((col) => (
             <div key={col.title}>
               <p className="ui-label mb-4">{col.title}</p>
-              <ul className="space-y-2.5">
+              <ul>
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-[13px] text-muted hover:text-foreground transition-colors">
+                    <Link href={l.href} className="block py-2 text-[13px] text-muted hover:text-foreground transition-colors">
                       {l.label}
                     </Link>
                   </li>
@@ -62,7 +62,7 @@ export default function Footer() {
           <div className="flex items-center gap-5">
             <Link
               href="/conditions"
-              className="text-[12px] text-dim hover:text-foreground transition-colors"
+              className="text-[12px] text-dim hover:text-foreground transition-colors py-2 -my-2"
             >
               Conditions générales
             </Link>

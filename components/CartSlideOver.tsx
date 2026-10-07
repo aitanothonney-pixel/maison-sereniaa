@@ -14,7 +14,7 @@ export default function CartSlideOver() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="relative hover:opacity-60 transition-opacity"
+        className="relative p-2.5 -m-2.5 hover:opacity-60 transition-opacity"
         aria-label="Panier"
       >
         <IconBag />
@@ -44,7 +44,7 @@ export default function CartSlideOver() {
           <h2 className="display text-xl">PANIER</h2>
           <button
             onClick={() => setOpen(false)}
-            className="text-foreground hover:opacity-60 transition-opacity"
+            className="text-foreground hover:opacity-60 transition-opacity p-2.5 -m-2.5"
             aria-label="Fermer"
           >
             ✕
@@ -76,20 +76,20 @@ export default function CartSlideOver() {
                     <div className="flex items-center gap-2 mt-3">
                       <button
                         onClick={() => updateQuantity(key, item.quantity - 1)}
-                        className="w-6 h-6 border border-line flex items-center justify-center text-xs hover:bg-surface"
+                        className="w-9 h-9 border border-line flex items-center justify-center text-sm hover:bg-surface"
                       >
                         −
                       </button>
                       <span className="w-8 text-center text-sm">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(key, item.quantity + 1)}
-                        className="w-6 h-6 border border-line flex items-center justify-center text-xs hover:bg-surface"
+                        className="w-9 h-9 border border-line flex items-center justify-center text-sm hover:bg-surface"
                       >
                         +
                       </button>
                       <button
                         onClick={() => removeItem(key)}
-                        className="ml-auto text-xs text-muted hover:text-foreground"
+                        className="ml-auto text-xs text-muted hover:text-foreground p-2 -m-2"
                       >
                         Retirer
                       </button>

@@ -55,7 +55,7 @@ export default function SiteSearch() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Rechercher"
-        className="hover:opacity-60 transition-opacity"
+        className="p-2.5 -m-2.5 hover:opacity-60 transition-opacity"
       >
         <IconSearch />
       </button>
@@ -78,12 +78,12 @@ export default function SiteSearch() {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       placeholder="Rechercher une pièce, une couleur…"
-                      className="search-field flex-1 bg-transparent text-base placeholder:text-dim"
+                      className="search-field flex-1 bg-transparent text-base py-2 placeholder:text-dim"
                     />
                     <button
                       type="button"
                       onClick={close}
-                      className="ui-label text-muted hover:text-foreground transition-colors shrink-0"
+                      className="ui-label text-muted hover:text-foreground transition-colors shrink-0 p-2 -m-2"
                     >
                       Fermer
                     </button>
@@ -91,7 +91,7 @@ export default function SiteSearch() {
                 </form>
 
                 <div className="pt-5 pb-1">
-                  <p className="ui-label text-[11px] text-dim mb-1">
+                  <p className="ui-label text-xs text-dim mb-1">
                     {trimmed
                       ? `${results.length} résultat${results.length > 1 ? 's' : ''}`
                       : 'Toutes les pièces'}

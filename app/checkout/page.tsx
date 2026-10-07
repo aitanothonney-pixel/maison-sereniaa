@@ -71,7 +71,7 @@ export default function CheckoutPage() {
         <SiteHeader />
         <main className="px-5 lg:px-8 py-12 text-center">
           <p className="mb-6">Votre panier est vide</p>
-          <Link href="/shop" className="ui-label hover:opacity-60">
+          <Link href="/shop" className="ui-label hover:opacity-60 inline-block py-2">
             Retour à la boutique
           </Link>
         </main>

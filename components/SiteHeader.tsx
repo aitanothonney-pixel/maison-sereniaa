@@ -47,7 +47,7 @@ export default function SiteHeader() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Ouvrir le menu"
-            className="lg:hidden flex flex-col gap-[5px] w-6 justify-self-start"
+            className="lg:hidden flex flex-col gap-[5px] justify-self-start py-3 -my-3 pr-3 -mr-3"
           >
             <span className="block h-[2px] w-6 bg-foreground" />
             <span className="block h-[2px] w-6 bg-foreground" />
@@ -55,7 +55,7 @@ export default function SiteHeader() {
           </button>
 
           {/* Centre — nom */}
-          <Link href="/" aria-label="Tempered — accueil" className="justify-self-center">
+          <Link href="/" aria-label="Tempered — accueil" className="justify-self-center py-2 -my-2">
             <span className="display text-xl sm:text-2xl">Tempered</span>
           </Link>
 
@@ -68,7 +68,7 @@ export default function SiteHeader() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="hover:opacity-60 transition-opacity"
+              className="p-2.5 -m-2.5 hover:opacity-60 transition-opacity"
             >
               <IconInstagram />
             </a>
@@ -91,7 +91,7 @@ export default function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="display text-3xl"
+                className="display text-3xl py-1"
               >
                 {item.label}
               </Link>

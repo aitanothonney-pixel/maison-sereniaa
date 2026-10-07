@@ -48,8 +48,8 @@ export default function DropTabs() {
             ))}
 
             {/* Video Section */}
-            <div className="hidden lg:flex flex-col">
-              <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4] border-2 border-foreground">
+            <div className="hidden lg:block">
+              <div className="relative bg-surface overflow-hidden aspect-[3/4] border-2 border-foreground">
                 <video
                   autoPlay
                   muted
@@ -60,8 +60,6 @@ export default function DropTabs() {
                   <source src="" type="video/mp4" />
                 </video>
               </div>
-              <h3 className="ui-label text-sm mb-2">VIDÉO</h3>
-              <p className="text-xs text-muted">-</p>
             </div>
           </div>
         )}

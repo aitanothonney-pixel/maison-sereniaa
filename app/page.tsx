@@ -30,9 +30,12 @@ export default function Home() {
       {/* 2 — Les pièces, filtrables par drop */}
       <DropTabs />
 
-      {/* 3 — Galerie photo */}
+      {/* 3 — Galerie photo preview */}
       <section className="py-12 lg:py-24 border-t border-line">
-        <ImageGallery />
+        <div className="px-5 lg:px-8 mb-8">
+          <h2 className="display text-2xl sm:text-3xl">Nos créations</h2>
+        </div>
+        <ImageGallery imageCount={9} showViewMore={true} />
       </section>
 
       <Footer />

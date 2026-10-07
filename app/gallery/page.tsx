@@ -15,7 +15,10 @@ export default function GalleryPage() {
       <Marquee />
       <SiteHeader />
       <main>
-        <ImageGallery />
+        <div className="px-5 lg:px-8 pt-12 pb-8 border-b border-line">
+          <h1 className="display text-3xl sm:text-4xl">Nos créations</h1>
+        </div>
+        <ImageGallery imageCount={60} showViewMore={false} />
       </main>
       <Footer />
     </>

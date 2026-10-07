@@ -127,7 +127,8 @@ export default function ProductPage() {
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 unoptimized
                 quality={100}
-                className="object-cover object-[center_30%]"
+                priority
+                className="object-cover object-center"
               />
               {product.images.length > 1 && (
                 <>

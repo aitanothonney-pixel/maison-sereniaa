@@ -33,6 +33,7 @@ export default function ShopPage() {
                   alt={product.name}
                   fill
                   sizes="(max-width: 640px) 50vw, 25vw"
+                  unoptimized
                   className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                 />
                 {product.stock < 10 && (

@@ -94,17 +94,15 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
           {/* GALERIE — 2 colonnes d'images */}
           <div className="lg:col-span-1 space-y-4">
-            {/* Image principale — `contain` : les photos vont du portrait au
-                plan large, et les recadrer forcerait un agrandissement qui
-                les rend floues. */}
+            {/* Image principale */}
             <div className="relative bg-surface aspect-[3/4] overflow-hidden">
               <Image
                 src={product.images[imageIndex]}
                 alt={product.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
-                quality={90}
-                className="object-contain"
+                unoptimized
+                className="object-cover object-[center_30%]"
               />
             </div>
 
@@ -119,7 +117,7 @@ export default function ProductPage() {
                       i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
                     }`}
                   >
-                    <Image src={img} alt="" fill sizes="120px" className="object-cover" />
+                    <Image src={img} alt="" fill sizes="120px" unoptimized className="object-cover" />
                   </button>
                 ))}
               </div>
@@ -314,6 +312,7 @@ export default function ProductPage() {
                       alt={p.name}
                       fill
                       sizes="(max-width: 640px) 50vw, 25vw"
+                      unoptimized
                       className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>

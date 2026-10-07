@@ -20,6 +20,7 @@ export default function Home() {
           fill
           sizes="100vw"
           quality={90}
+          unoptimized
           preload
           className="object-cover object-[center_20%]"
         />

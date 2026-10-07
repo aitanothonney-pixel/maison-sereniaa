@@ -7,7 +7,7 @@ import { products, fromPrice } from '@/lib/products'
 export default function DropTabs() {
   return (
     <section className="pt-14 sm:pt-20">
-      <div className="px-5 lg:px-8 border-b border-line pb-8 mb-8">
+      <div className="px-5 lg:px-8 border-b border-line pb-12 mb-8">
         <h2 className="display text-2xl sm:text-3xl">Pièces en vente</h2>
       </div>
 

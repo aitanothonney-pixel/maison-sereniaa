@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import DropTabs from '@/components/DropTabs'
+import { ImageGallery } from '@/components/ui/image-gallery'
 import Footer from '@/components/Footer'
 
 const HERO = 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg'
@@ -28,6 +29,11 @@ export default function Home() {
 
       {/* 2 — Les pièces, filtrables par drop */}
       <DropTabs />
+
+      {/* 3 — Galerie photo */}
+      <section className="py-12 lg:py-24 border-t border-line">
+        <ImageGallery />
+      </section>
 
       <Footer />
     </>

@@ -37,7 +37,7 @@ export const products: Product[] = [
   {
     id: 'tracksuit-black',
     name: 'Tracksuit Noir',
-    prices: { set: 195, hoodie: 120, pants: 95 },
+    prices: { set: 195 },
     description: TRACKSUIT_DESCRIPTION,
     material: TRACKSUIT_MATERIAL,
     care: CARE,

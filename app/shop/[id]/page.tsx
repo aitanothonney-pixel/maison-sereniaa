@@ -26,6 +26,7 @@ export default function ProductPage() {
   const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [imageIndex, setImageIndex] = useState(0)
+  const [touchX, setTouchX] = useState<number | null>(null)
   const [added, setAdded] = useState(false)
 
   if (!product) {
@@ -46,6 +47,9 @@ export default function ProductPage() {
       </>
     )
   }
+
+  const showImage = (step: number) =>
+    setImageIndex((i) => (i + step + product.images.length) % product.images.length)
 
   const variants = productVariants(product)
   const selected = variant ?? variants[0]
@@ -90,7 +94,16 @@ export default function ProductPage() {
           {/* GALERIE — 2 colonnes d'images */}
           <div className="lg:col-span-1 space-y-4">
             {/* Image principale */}
-            <div className="relative bg-surface aspect-[3/4] overflow-hidden">
+            <div
+              className="relative bg-surface aspect-[3/4] overflow-hidden touch-pan-y"
+              onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
+              onTouchEnd={(e) => {
+                if (touchX === null) return
+                const dx = e.changedTouches[0].clientX - touchX
+                if (Math.abs(dx) > 40) showImage(dx < 0 ? 1 : -1)
+                setTouchX(null)
+              }}
+            >
               <Image
                 src={product.images[imageIndex]}
                 alt={product.name}
@@ -99,6 +112,31 @@ export default function ProductPage() {
                 unoptimized
                 className="object-cover object-[center_30%]"
               />
+              {product.images.length > 1 && (
+                <>
+                  <button
+                    onClick={() => showImage(-1)}
+                    aria-label="Photo précédente"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background/80 hover:bg-background transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5" aria-hidden>
+                      <path d="m15 18-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => showImage(1)}
+                    aria-label="Photo suivante"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background/80 hover:bg-background transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5" aria-hidden>
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </button>
+                  <span className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-background/80 px-2 py-0.5 text-xs tabular-nums">
+                    {imageIndex + 1} / {product.images.length}
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Thumbnails */}

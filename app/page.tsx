@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader'
 import DropTabs from '@/components/DropTabs'
 import Footer from '@/components/Footer'
 
-const HERO = 'https://i.ibb.co/F4wstw24/IMG-0405.jpg'
+const HERO = 'https://i.ibb.co/nqSxtJqD/IMG-0626.jpg'
 
 // `focus` décide quelle partie de la photo survit au recadrage : la bande
 // reste plus large que haute sur écran, donc une photo verticale y perd du

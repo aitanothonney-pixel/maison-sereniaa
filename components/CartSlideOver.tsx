@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCart, cartItemKey } from '@/lib/cart-context'
-import { VARIANT_LABELS } from '@/lib/products'
+import { VARIANT_LABELS, PIECE_LABELS, type Piece } from '@/lib/products'
 import { IconBag } from '@/components/Icons'
 
 export default function CartSlideOver() {
@@ -68,11 +68,8 @@ export default function CartSlideOver() {
                       {VARIANT_LABELS[item.variant]} · {item.color}
                     </p>
                     <p className="text-xs text-muted">
-                      {[
-                        item.hoodieSize && `Pull: ${item.hoodieSize}`,
-                        item.pantsSize && `Jogging: ${item.pantsSize}`,
-                      ]
-                        .filter(Boolean)
+                      {Object.entries(item.sizes)
+                        .map(([piece, size]) => `${PIECE_LABELS[piece as Piece]}: ${size}`)
                         .join(' / ')}
                     </p>
                     <p className="text-sm font-bold mt-2">{item.price * item.quantity} CHF</p>

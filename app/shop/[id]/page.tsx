@@ -6,19 +6,26 @@ import { useParams } from 'next/navigation'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
-import { getProduct, products, fromPrice, VARIANT_LABELS, type Variant } from '@/lib/products'
+import {
+  getProduct,
+  products,
+  fromPrice,
+  productVariants,
+  VARIANT_LABELS,
+  VARIANT_PIECES,
+  PIECE_LABELS,
+  type Variant,
+  type Piece,
+} from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
-
-const VARIANT_ORDER: Variant[] = ['set', 'hoodie', 'pants']
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>()
   const product = getProduct(id)
   const { addItem } = useCart()
 
-  const [variant, setVariant] = useState<Variant>('set')
-  const [hoodieSize, setHoodieSize] = useState('')
-  const [pantsSize, setPantsSize] = useState('')
+  const [variant, setVariant] = useState<Variant | null>(null)
+  const [sizes, setSizes] = useState<Partial<Record<Piece, string>>>({})
   const [quantity, setQuantity] = useState(1)
   const [imageIndex, setImageIndex] = useState(0)
   const [added, setAdded] = useState(false)
@@ -42,26 +49,25 @@ export default function ProductPage() {
     )
   }
 
-  const needsHoodieSize = variant === 'set' || variant === 'hoodie'
-  const needsPantsSize = variant === 'set' || variant === 'pants'
+  const variants = productVariants(product)
+  const selected = variant ?? variants[0]
+  const pieces = VARIANT_PIECES[selected]
+  const price = product.prices[selected] ?? fromPrice(product)
+  const sameCategory = products.filter((p) => p.category === product.category)
 
   const handleAddToCart = () => {
-    if (needsHoodieSize && !hoodieSize) {
-      alert('Sélectionnez la taille du pull')
-      return
-    }
-    if (needsPantsSize && !pantsSize) {
-      alert('Sélectionnez la taille du jogging')
+    const missing = pieces.find((piece) => !sizes[piece])
+    if (missing) {
+      alert(`Sélectionnez la taille : ${PIECE_LABELS[missing]}`)
       return
     }
 
     addItem({
       id: product.id,
       name: product.name,
-      price: product.prices[variant],
-      variant,
-      hoodieSize: needsHoodieSize ? hoodieSize : undefined,
-      pantsSize: needsPantsSize ? pantsSize : undefined,
+      price,
+      variant: selected,
+      sizes: Object.fromEntries(pieces.map((piece) => [piece, sizes[piece]])),
       color: product.color,
       quantity,
       image: product.images[0],
@@ -124,7 +130,7 @@ export default function ProductPage() {
               </div>
 
               <div className="flex items-baseline gap-6 mb-6 pt-4 border-t border-line">
-                <p className="text-3xl lg:text-4xl font-bold">{product.prices[variant]} CHF</p>
+                <p className="text-3xl lg:text-4xl font-bold">{price} CHF</p>
                 {product.stock > 0 && (
                   <span className="text-xs text-green-600 font-medium">● En stock • Livraison 1 à 2 semaines</span>
                 )}
@@ -137,76 +143,88 @@ export default function ProductPage() {
             </div>
 
             {/* Couleurs — chaque teinte est une fiche distincte */}
-            <div>
-              <p className="text-xs tracking-widest ui-label mb-3">
-                COULEUR — <span className="text-muted">{product.color}</span>
-              </p>
-              <div className="flex gap-3 items-center">
-                {products.map((p) =>
-                  p.id === product.id ? (
-                    <span
-                      key={p.id}
-                      aria-current="true"
-                      title={p.color}
-                      style={{ backgroundColor: p.swatch }}
-                      className="w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
-                    />
-                  ) : (
-                    <Link
-                      key={p.id}
-                      href={`/shop/${p.id}`}
-                      aria-label={`Voir le tracksuit ${p.color}`}
-                      title={p.color}
-                      style={{ backgroundColor: p.swatch }}
-                      className="w-10 h-10 ring-1 ring-line hover:ring-foreground transition-shadow"
-                    />
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* Pull seul, jogging seul ou l'ensemble */}
-            <div>
-              <p className="text-xs tracking-widest ui-label mb-3">VOTRE CHOIX</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                {VARIANT_ORDER.map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setVariant(v)}
-                    className={`p-4 text-left border-2 transition-all ${
-                      variant === v
-                        ? 'border-foreground bg-foreground text-background'
-                        : 'border-line hover:border-foreground'
-                    }`}
-                  >
-                    <span className="block text-sm font-bold">{VARIANT_LABELS[v]}</span>
-                    <span className="block text-xs mt-1 opacity-70">{product.prices[v]} CHF</span>
-                  </button>
-                ))}
-              </div>
-              {variant === 'set' && (
-                <p className="text-xs text-muted mt-3">
-                  Économie de {product.prices.hoodie + product.prices.pants - product.prices.set} CHF
-                  par rapport aux pièces achetées séparément.
+            {sameCategory.length > 1 && (
+              <div>
+                <p className="text-xs tracking-widest ui-label mb-3">
+                  COULEUR — <span className="text-muted">{product.color}</span>
                 </p>
-              )}
-            </div>
+                <div className="flex gap-3 items-center">
+                  {sameCategory.map((p) =>
+                    p.id === product.id ? (
+                      <span
+                        key={p.id}
+                        aria-current="true"
+                        title={p.color}
+                        style={{ backgroundColor: p.swatch }}
+                        className="w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
+                      />
+                    ) : (
+                      <Link
+                        key={p.id}
+                        href={`/shop/${p.id}`}
+                        aria-label={`Voir ${p.name}`}
+                        title={p.color}
+                        style={{ backgroundColor: p.swatch }}
+                        className="w-10 h-10 ring-1 ring-line hover:ring-foreground transition-shadow"
+                      />
+                    )
+                  )}
+                </div>
+              </div>
+            )}
 
-            {/* Tailles — seulement celles que la sélection demande */}
+            {/* Options proposées par ce produit */}
+            {variants.length > 1 && (
+              <div>
+                <p className="text-xs tracking-widest ui-label mb-3">VOTRE CHOIX</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {variants.map((v) => (
+                    <button
+                      key={v}
+                      onClick={() => setVariant(v)}
+                      className={`p-4 text-left border-2 transition-all ${
+                        selected === v
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-line hover:border-foreground'
+                      }`}
+                    >
+                      <span className="block text-sm font-bold">{VARIANT_LABELS[v]}</span>
+                      <span className="block text-xs mt-1 opacity-70">{product.prices[v]} CHF</span>
+                    </button>
+                  ))}
+                </div>
+                {selected === 'set' &&
+                  product.prices.hoodie !== undefined &&
+                  product.prices.pants !== undefined &&
+                  product.prices.set !== undefined && (
+                    <p className="text-xs text-muted mt-3">
+                      Économie de{' '}
+                      {product.prices.hoodie + product.prices.pants - product.prices.set} CHF par
+                      rapport aux pièces achetées séparément.
+                    </p>
+                  )}
+              </div>
+            )}
+
+            {/* Tailles — une par pièce commandée */}
             <div className="space-y-8">
-              {needsHoodieSize && (
-                <div>
+              {pieces.map((piece) => (
+                <div key={piece}>
                   <div className="flex items-baseline justify-between mb-3">
-                    <p className="text-xs tracking-widest ui-label">TAILLE PULL</p>
-                    {hoodieSize && <p className="text-xs text-muted">Sélectionné: {hoodieSize}</p>}
+                    <p className="text-xs tracking-widest ui-label">
+                      {pieces.length > 1 ? `TAILLE ${PIECE_LABELS[piece].toUpperCase()}` : 'TAILLE'}
+                    </p>
+                    {sizes[piece] && (
+                      <p className="text-xs text-muted">Sélectionné: {sizes[piece]}</p>
+                    )}
                   </div>
                   <div className="grid grid-cols-6 gap-2">
                     {product.sizes.map((size) => (
                       <button
-                        key={`hoodie-${size}`}
-                        onClick={() => setHoodieSize(size)}
+                        key={`${piece}-${size}`}
+                        onClick={() => setSizes((prev) => ({ ...prev, [piece]: size }))}
                         className={`py-3 text-sm font-bold border-2 transition-all ${
-                          hoodieSize === size
+                          sizes[piece] === size
                             ? 'border-foreground bg-foreground text-background'
                             : 'border-line hover:border-foreground'
                         }`}
@@ -216,31 +234,7 @@ export default function ProductPage() {
                     ))}
                   </div>
                 </div>
-              )}
-
-              {needsPantsSize && (
-                <div>
-                  <div className="flex items-baseline justify-between mb-3">
-                    <p className="text-xs tracking-widest ui-label">TAILLE JOGGING</p>
-                    {pantsSize && <p className="text-xs text-muted">Sélectionné: {pantsSize}</p>}
-                  </div>
-                  <div className="grid grid-cols-6 gap-2">
-                    {product.sizes.map((size) => (
-                      <button
-                        key={`pants-${size}`}
-                        onClick={() => setPantsSize(size)}
-                        className={`py-3 text-sm font-bold border-2 transition-all ${
-                          pantsSize === size
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-line hover:border-foreground'
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              ))}
             </div>
 
             <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block">

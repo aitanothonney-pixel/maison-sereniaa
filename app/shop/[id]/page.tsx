@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
@@ -93,12 +94,17 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
           {/* GALERIE — 2 colonnes d'images */}
           <div className="lg:col-span-1 space-y-4">
-            {/* Image principale */}
-            <div className="bg-surface aspect-[2/3] overflow-hidden group">
-              <img
+            {/* Image principale — `contain` : les photos vont du portrait au
+                plan large, et les recadrer forcerait un agrandissement qui
+                les rend floues. */}
+            <div className="relative bg-surface aspect-[3/4] overflow-hidden">
+              <Image
                 src={product.images[imageIndex]}
                 alt={product.name}
-                className="w-full h-full object-cover object-[center_35%] group-hover:scale-[1.02] transition-transform duration-500"
+                fill
+                sizes="(max-width: 1024px) 100vw, 33vw"
+                quality={90}
+                className="object-contain"
               />
             </div>
 
@@ -109,11 +115,11 @@ export default function ProductPage() {
                   <button
                     key={i}
                     onClick={() => setImageIndex(i)}
-                    className={`aspect-square bg-surface overflow-hidden border-2 transition-all ${
+                    className={`relative aspect-square bg-surface overflow-hidden border-2 transition-all ${
                       i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <Image src={img} alt="" fill sizes="120px" className="object-cover" />
                   </button>
                 ))}
               </div>
@@ -303,10 +309,12 @@ export default function ProductPage() {
               {relatedProducts.map((p) => (
                 <Link key={p.id} href={`/shop/${p.id}`} className="group">
                   <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4]">
-                    <img
+                    <Image
                       src={p.images[0]}
                       alt={p.name}
-                      className="w-full h-full object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
+                      fill
+                      sizes="(max-width: 640px) 50vw, 25vw"
+                      className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <h3 className="ui-label text-sm mb-2 group-hover:opacity-60 transition-opacity">{p.name}</h3>

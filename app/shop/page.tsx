@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
@@ -27,10 +28,12 @@ export default function ShopPage() {
               className="group"
             >
               <div className="relative bg-surface overflow-hidden mb-4 aspect-[3/4]">
-                <img
+                <Image
                   src={product.images[0]}
                   alt={product.name}
-                  className="w-full h-full object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                 />
                 {product.stock < 10 && (
                   <div className="absolute top-3 left-3 bg-foreground text-background text-xs px-2 py-1">

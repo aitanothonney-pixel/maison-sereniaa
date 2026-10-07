@@ -30,7 +30,8 @@ export default function DropTabs() {
                     fill
                     sizes="(max-width: 640px) 50vw, 25vw"
                     unoptimized
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    quality={90}
+                    className="object-cover object-[center_30%] group-hover:scale-105 transition-transform duration-300"
                   />
                   {product.stock < 10 && (
                     <div className="absolute top-3 left-3 bg-foreground text-background text-xs px-2 py-1">

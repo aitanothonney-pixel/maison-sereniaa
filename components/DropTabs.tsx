@@ -16,7 +16,7 @@ export default function DropTabs() {
         {products.length === 0 ? (
           <p className="text-muted text-[13px] py-16">Aucune pièce disponible.</p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-[3fr_3fr_4fr] gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {products.map((product) => (
               <Link
                 key={product.id}
@@ -46,22 +46,6 @@ export default function DropTabs() {
                 </div>
               </Link>
             ))}
-
-            {/* Video Section */}
-            <div className="hidden lg:flex flex-col">
-              <div className="relative bg-surface overflow-hidden mb-4 aspect-[4/3] border-2 border-foreground">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover object-center"
-                >
-                  <source src="" type="video/mp4" />
-                </video>
-              </div>
-              <div className="h-16"></div>
-            </div>
           </div>
         )}
       </div>

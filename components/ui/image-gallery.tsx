@@ -60,13 +60,13 @@ function AnimatedImage({ alt, src, ratio, placeholder }: AnimatedImageProps) {
 		<AspectRatio
 			ref={ref}
 			ratio={ratio}
-			className="bg-accent relative size-full rounded-lg border"
+			className="bg-surface relative size-full border-0"
 		>
 			<img
 				alt={alt}
 				src={imgSrc}
 				className={cn(
-					'size-full rounded-lg object-cover opacity-0 transition-all duration-1000 ease-in-out',
+					'size-full object-cover opacity-0 transition-opacity duration-1000 ease-in-out',
 					{
 						'opacity-100': isInView && !isLoading,
 					},

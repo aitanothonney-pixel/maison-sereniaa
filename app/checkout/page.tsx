@@ -6,7 +6,7 @@ import Marquee from '@/components/Marquee'
 import SiteHeader from '@/components/SiteHeader'
 import Footer from '@/components/Footer'
 import { useCart, cartItemKey } from '@/lib/cart-context'
-import { VARIANT_LABELS, PIECE_LABELS, type Piece } from '@/lib/products'
+import { VARIANT_LABELS } from '@/lib/products'
 
 export default function CheckoutPage() {
   const { items, total, clearCart } = useCart()
@@ -202,9 +202,7 @@ export default function CheckoutPage() {
                       <p className="font-bold">{item.name}</p>
                       <p className="text-xs text-muted">{VARIANT_LABELS[item.variant]} · {item.color}</p>
                       <p className="text-xs text-muted">
-                        {Object.entries(item.sizes)
-                          .map(([piece, size]) => `${PIECE_LABELS[piece as Piece]}: ${size}`)
-                          .join(' / ')}
+                        Taille {item.size}
                       </p>
                       <p className="text-xs text-muted">x{item.quantity}</p>
                     </div>

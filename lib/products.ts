@@ -10,23 +10,6 @@ export const VARIANT_LABELS: Record<Variant, string> = {
 // Ordre d'affichage des options sur la fiche produit.
 export const VARIANT_ORDER: Variant[] = ['set', 'hoodie', 'pants', 'tee']
 
-export type Piece = 'hoodie' | 'pants' | 'tee'
-
-export const PIECE_LABELS: Record<Piece, string> = {
-  hoodie: 'Pull',
-  pants: 'Jogging',
-  tee: 'T-shirt',
-}
-
-// Les pièces à tailler pour chaque option : un ensemble se commande en deux
-// tailles indépendantes, une pièce seule en une.
-export const VARIANT_PIECES: Record<Variant, Piece[]> = {
-  set: ['hoodie', 'pants'],
-  hoodie: ['hoodie'],
-  pants: ['pants'],
-  tee: ['tee'],
-}
-
 export interface Product {
   id: string
   name: string
@@ -46,7 +29,7 @@ export interface Product {
 }
 
 const TRACKSUIT_DESCRIPTION =
-  'Ensemble jogging premium TEMPERED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM. Chaque pièce peut avoir sa propre taille.'
+  'Ensemble jogging premium TEMPERED. Comprend un pull hoodie oversize et un jogging ample en French terry 450 GSM.'
 const TRACKSUIT_MATERIAL = 'French Terry Brushed Fleece 450-500 GSM, 100% Coton Bio'
 const CARE = 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage délicat.'
 

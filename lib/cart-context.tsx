@@ -1,26 +1,21 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import type { Variant, Piece } from '@/lib/products'
+import type { Variant } from '@/lib/products'
 
 export interface CartItem {
   id: string
   name: string
   price: number
   variant: Variant
-  // Une taille par pièce commandée : deux pour un ensemble, une sinon.
-  sizes: Partial<Record<Piece, string>>
+  size: string
   color: string
   quantity: number
   image: string
 }
 
 export function cartItemKey(item: CartItem): string {
-  const sizes = Object.entries(item.sizes)
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([piece, size]) => `${piece}:${size}`)
-    .join(',')
-  return [item.id, item.variant, sizes, item.color].join('|')
+  return [item.id, item.variant, item.size, item.color].join('|')
 }
 
 interface CartContextType {
@@ -38,14 +33,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('tempered-cart-v3')
+    const savedCart = localStorage.getItem('tempered-cart-v4')
     if (savedCart) {
       setItems(JSON.parse(savedCart))
     }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('tempered-cart-v3', JSON.stringify(items))
+    localStorage.setItem('tempered-cart-v4', JSON.stringify(items))
   }, [items])
 
   const addItem = (newItem: CartItem) => {

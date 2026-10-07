@@ -13,10 +13,7 @@ import {
   fromPrice,
   productVariants,
   VARIANT_LABELS,
-  VARIANT_PIECES,
-  PIECE_LABELS,
   type Variant,
-  type Piece,
 } from '@/lib/products'
 import { useCart } from '@/lib/cart-context'
 
@@ -26,7 +23,7 @@ export default function ProductPage() {
   const { addItem } = useCart()
 
   const [variant, setVariant] = useState<Variant | null>(null)
-  const [sizes, setSizes] = useState<Partial<Record<Piece, string>>>({})
+  const [size, setSize] = useState('')
   const [quantity, setQuantity] = useState(1)
   const [imageIndex, setImageIndex] = useState(0)
   const [added, setAdded] = useState(false)
@@ -52,14 +49,12 @@ export default function ProductPage() {
 
   const variants = productVariants(product)
   const selected = variant ?? variants[0]
-  const pieces = VARIANT_PIECES[selected]
   const price = product.prices[selected] ?? fromPrice(product)
   const sameCategory = products.filter((p) => p.category === product.category)
 
   const handleAddToCart = () => {
-    const missing = pieces.find((piece) => !sizes[piece])
-    if (missing) {
-      alert(`Sélectionnez la taille : ${PIECE_LABELS[missing]}`)
+    if (!size) {
+      alert('Sélectionnez une taille')
       return
     }
 
@@ -68,7 +63,7 @@ export default function ProductPage() {
       name: product.name,
       price,
       variant: selected,
-      sizes: Object.fromEntries(pieces.map((piece) => [piece, sizes[piece]])),
+      size,
       color: product.color,
       quantity,
       image: product.images[0],
@@ -210,35 +205,27 @@ export default function ProductPage() {
               </div>
             )}
 
-            {/* Tailles — une par pièce commandée */}
-            <div className="space-y-8">
-              {pieces.map((piece) => (
-                <div key={piece}>
-                  <div className="flex items-baseline justify-between mb-3">
-                    <p className="text-xs tracking-widest ui-label">
-                      {pieces.length > 1 ? `TAILLE ${PIECE_LABELS[piece].toUpperCase()}` : 'TAILLE'}
-                    </p>
-                    {sizes[piece] && (
-                      <p className="text-xs text-muted">Sélectionné: {sizes[piece]}</p>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-6 gap-2">
-                    {product.sizes.map((size) => (
-                      <button
-                        key={`${piece}-${size}`}
-                        onClick={() => setSizes((prev) => ({ ...prev, [piece]: size }))}
-                        className={`py-3 text-sm font-bold border-2 transition-all ${
-                          sizes[piece] === size
-                            ? 'border-foreground bg-foreground text-background'
-                            : 'border-line hover:border-foreground'
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
+            {/* Taille — unique, elle vaut pour l'article entier */}
+            <div>
+              <div className="flex items-baseline justify-between mb-3">
+                <p className="text-xs tracking-widest ui-label">TAILLE</p>
+                {size && <p className="text-xs text-muted">Sélectionné: {size}</p>}
+              </div>
+              <div className="grid grid-cols-6 gap-2">
+                {product.sizes.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setSize(s)}
+                    className={`py-3 text-sm font-bold border-2 transition-all ${
+                      size === s
+                        ? 'border-foreground bg-foreground text-background'
+                        : 'border-line hover:border-foreground'
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <Link href="/tailles" className="text-xs text-muted hover:text-foreground transition-colors inline-block py-2 -my-2">

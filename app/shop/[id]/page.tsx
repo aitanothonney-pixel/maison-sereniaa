@@ -89,11 +89,27 @@ export default function ProductPage() {
           ← RETOUR À LA BOUTIQUE
         </Link>
 
-        {/* Grille principale — Images côte à côte + Infos */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16">
-          {/* GALERIE — 2 colonnes d'images */}
-          <div className="lg:col-span-1 space-y-4">
-            {/* Image principale */}
+        {/* Grille principale — Thumbnails | Image principale | Infos */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-8">
+          {/* THUMBNAILS GAUCHE */}
+          {product.images.length > 1 && (
+            <div className="lg:col-span-1 flex lg:flex-col gap-2">
+              {product.images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setImageIndex(i)}
+                  className={`relative aspect-square bg-surface overflow-hidden border-2 transition-all flex-1 lg:flex-none ${
+                    i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
+                  }`}
+                >
+                  <Image src={img} alt="" fill sizes="120px" unoptimized className="object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* IMAGE PRINCIPALE CENTRE */}
+          <div className={product.images.length > 1 ? "lg:col-span-2" : "lg:col-span-2"}>
             <div
               className="relative bg-surface aspect-[3/4] overflow-hidden touch-pan-y"
               onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
@@ -110,7 +126,7 @@ export default function ProductPage() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 33vw"
                 unoptimized
-                className="object-cover object-[center_30%]"
+                className="object-cover object-center"
               />
               {product.images.length > 1 && (
                 <>
@@ -138,26 +154,9 @@ export default function ProductPage() {
                 </>
               )}
             </div>
-
-            {/* Thumbnails */}
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-2">
-                {product.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setImageIndex(i)}
-                    className={`relative aspect-square bg-surface overflow-hidden border-2 transition-all ${
-                      i === imageIndex ? 'border-foreground' : 'border-transparent hover:border-line'
-                    }`}
-                  >
-                    <Image src={img} alt="" fill sizes="120px" unoptimized className="object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
-          {/* INFOS PRODUIT — Design Premium */}
+          {/* INFOS PRODUIT DROITE */}
           <div className="lg:col-span-2 space-y-8">
             {/* Header */}
             <div>

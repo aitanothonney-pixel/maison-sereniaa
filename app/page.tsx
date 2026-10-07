@@ -6,16 +6,6 @@ import Footer from '@/components/Footer'
 
 const HERO = 'https://i.ibb.co/nqSxtJqD/IMG-0626.jpg'
 
-// `focus` décide quelle partie de la photo survit au recadrage : la bande
-// reste plus large que haute, donc une photo verticale y perd du haut et du
-// bas. Plus le pourcentage est bas, plus on garde le haut — et les visages.
-const EDITORIAL: { src: string; focus: string }[] = [
-  { src: 'https://i.ibb.co/ymHvhhHH/IMG-0288.jpg', focus: 'center 20%' },
-  { src: 'https://i.ibb.co/x8MprMXk/IMG-0435.jpg', focus: 'center 20%' },
-  { src: 'https://i.ibb.co/Ppgd5rK/IMG-0420.jpg', focus: 'center 20%' },
-  { src: 'https://i.ibb.co/fdcqm9DM/IMG-0342.jpg', focus: 'center 20%' },
-]
-
 export default function Home() {
   return (
     <>
@@ -37,33 +27,6 @@ export default function Home() {
 
       {/* 2 — Les pièces, filtrables par drop */}
       <DropTabs />
-
-      {/* 3 — Série éditoriale : aperçu des pièces à venir */}
-      <div className="mt-20">
-        {EDITORIAL.map(({ src, focus }, i) => (
-          <section
-            key={src}
-            className="relative w-full h-[58vh] md:h-[calc(100vh-7.5rem)] min-h-[380px] bg-surface"
-          >
-            <Image
-              src={src}
-              alt=""
-              fill
-              sizes="100vw"
-              quality={90}
-              style={{ objectPosition: focus }}
-              className="object-cover"
-            />
-            {/* Adoucit la jointure : deux photos sans rapport se coupent net. */}
-            {i > 0 && (
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-t from-transparent to-black/20" />
-            )}
-            {i < EDITORIAL.length - 1 && (
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-black/20" />
-            )}
-          </section>
-        ))}
-      </div>
 
       <Footer />
     </>

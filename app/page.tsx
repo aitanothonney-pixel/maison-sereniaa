@@ -14,17 +14,16 @@ export default function Home() {
       <SiteHeader />
 
       {/* 1 — Ouverture : un seul visuel plein cadre */}
-      <section className="relative h-[58vh] md:h-[calc(100vh-7.5rem)] min-h-[380px] bg-surface">
-        <Image
-          src={HERO}
-          alt=""
-          fill
-          sizes="100vw"
-          quality={100}
-          unoptimized
-          preload
-          className="object-cover object-[center_20%]"
-        />
+      <section className="relative h-[58vh] md:h-[calc(100vh-7.5rem)] min-h-[380px] bg-surface overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover object-[center_20%]"
+        >
+          <source src="" type="video/mp4" />
+        </video>
       </section>
 
       {/* 2 — Les pièces, filtrables par drop */}

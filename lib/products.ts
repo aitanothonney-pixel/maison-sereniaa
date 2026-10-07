@@ -62,7 +62,7 @@ export const products: Product[] = [
     care: CARE,
     images: [
       'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
-      'https://i.ibb.co/xtt7291K/IMG-0400.jpg',
+      'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
     ],
     color: 'Noir',
     swatch: '#1a1a1a',

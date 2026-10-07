@@ -21,7 +21,7 @@ export default function Home() {
           sizes="100vw"
           quality={90}
           preload
-          className="object-cover object-center"
+          className="object-cover object-[center_20%]"
         />
       </section>
 

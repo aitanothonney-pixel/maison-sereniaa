@@ -22,7 +22,7 @@ export default function Home() {
           playsInline
           className="w-full h-full object-cover object-[center_20%]"
         >
-          <source src="" type="video/mp4" />
+          <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
       </section>
 

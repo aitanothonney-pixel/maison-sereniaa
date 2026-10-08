@@ -23,7 +23,7 @@ export default function DropTabs() {
                 href={`/shop/${product.id}`}
                 className="group"
               >
-                <div className="relative bg-surface overflow-hidden mb-6 aspect-[3/4]">
+                <div className="relative bg-surface overflow-hidden mb-6 aspect-[4/5]">
                   <Image
                     src={product.images[0]}
                     alt={product.name}

@@ -60,10 +60,11 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={160}
-              height={50}
+              width={140}
+              height={45}
               unoptimized
               quality={100}
+              style={{ objectFit: 'contain' }}
             />
           </Link>
 
@@ -91,10 +92,11 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={140}
-              height={45}
+              width={120}
+              height={40}
               unoptimized
               quality={100}
+              style={{ objectFit: 'contain' }}
             />
             <button onClick={() => setOpen(false)} className="ui-label" aria-label="Fermer le menu">
               Fermer

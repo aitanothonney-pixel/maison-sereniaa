@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import CartSlideOver from '@/components/CartSlideOver'
 import SiteSearch from '@/components/SiteSearch'
 import { IconInstagram } from '@/components/Icons'
@@ -54,9 +55,16 @@ export default function SiteHeader() {
             <span className="block h-[2px] w-4 bg-foreground" />
           </button>
 
-          {/* Centre — nom */}
+          {/* Centre — logo */}
           <Link href="/" aria-label="Tempered — accueil" className="justify-self-center py-2 -my-2">
-            <span className="display text-xl sm:text-2xl">Tempered</span>
+            <Image
+              src="https://ibb.co/JjdHNgCc"
+              alt="Tempered logo"
+              width={120}
+              height={40}
+              unoptimized
+              quality={100}
+            />
           </Link>
 
           {/* Droite — recherche, panier, réseaux */}
@@ -80,7 +88,14 @@ export default function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-background lg:hidden flex flex-col">
           <div className="flex items-center justify-between h-16 px-5 border-b border-line">
-            <span className="display text-xl">Tempered</span>
+            <Image
+              src="https://ibb.co/JjdHNgCc"
+              alt="Tempered logo"
+              width={100}
+              height={35}
+              unoptimized
+              quality={100}
+            />
             <button onClick={() => setOpen(false)} className="ui-label" aria-label="Fermer le menu">
               Fermer
             </button>

@@ -30,10 +30,10 @@ export default function SiteHeader() {
 
   return (
     <>
-      <header className="bg-background border-b border-line sticky top-0 z-40">
-        <div className="grid grid-cols-3 items-center px-5 lg:px-8 h-20">
+      <header className="bg-background border-b border-line">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 lg:px-8 h-20">
           {/* Gauche — navigation */}
-          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8 justify-self-start">
+          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8">
             {NAV.map((item) => (
               <Link
                 key={item.label}
@@ -57,7 +57,7 @@ export default function SiteHeader() {
           </button>
 
           {/* Centre — logo */}
-          <Link href="/" aria-label="Tempered — accueil" className="justify-self-center place-self-center py-2 -my-2">
+          <Link href="/" aria-label="Tempered — accueil" className="justify-self-center py-2 -my-2">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
@@ -71,7 +71,7 @@ export default function SiteHeader() {
           </Link>
 
           {/* Droite — recherche, panier, réseaux */}
-          <div className="flex items-center justify-end gap-5 justify-self-end">
+          <div className="flex items-center justify-end gap-5">
             <SiteSearch />
             <CartSlideOver />
             <a

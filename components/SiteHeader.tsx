@@ -61,9 +61,9 @@ export default function SiteHeader() {
             <Image
               src="/logo-tempered.png"
               alt="Tempered logo"
-              width={132}
-              height={93}
-              className="h-[72px] w-auto"
+              width={163}
+              height={83}
+              className="h-[60px] w-auto"
               unoptimized
               quality={100}
               priority
@@ -95,9 +95,9 @@ export default function SiteHeader() {
             <Image
               src="/logo-tempered.png"
               alt="Tempered logo"
-              width={132}
-              height={93}
-              className="h-[72px] w-auto"
+              width={163}
+              height={83}
+              className="h-[60px] w-auto"
               unoptimized
               quality={100}
               priority

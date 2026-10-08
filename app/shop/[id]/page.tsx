@@ -128,7 +128,7 @@ export default function ProductPage() {
                 unoptimized
                 quality={100}
                 priority
-                className="object-contain"
+                className="object-cover object-[center_30%]"
               />
               {product.images.length > 1 && (
                 <>

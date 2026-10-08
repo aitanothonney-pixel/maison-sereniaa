@@ -33,12 +33,12 @@ export default function SiteHeader() {
       <header className="bg-background border-b border-line">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 lg:px-8 h-20">
           {/* Gauche — navigation */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8">
             {NAV.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="ui-label whitespace-nowrap hover:opacity-60 transition-opacity"
+                className="text-xs tracking-widest uppercase hover:opacity-60 transition-opacity font-medium"
               >
                 {item.label}
               </Link>
@@ -60,10 +60,11 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={140}
-              height={45}
+              width={150}
+              height={50}
               unoptimized
               quality={100}
+              priority
               style={{ objectFit: 'contain' }}
             />
           </Link>
@@ -92,10 +93,11 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={120}
-              height={40}
+              width={140}
+              height={48}
               unoptimized
               quality={100}
+              priority
               style={{ objectFit: 'contain' }}
             />
             <button onClick={() => setOpen(false)} className="ui-label" aria-label="Fermer le menu">

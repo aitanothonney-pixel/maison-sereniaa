@@ -31,7 +31,7 @@ export default function SiteHeader() {
   return (
     <>
       <header className="bg-background border-b border-line">
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 lg:px-8 h-16">
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 lg:px-8 h-20">
           {/* Gauche — navigation */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {NAV.map((item) => (
@@ -88,7 +88,7 @@ export default function SiteHeader() {
       {/* Panneau mobile */}
       {open && (
         <div className="fixed inset-0 z-50 bg-background lg:hidden flex flex-col">
-          <div className="flex items-center justify-between h-16 px-5 border-b border-line">
+          <div className="flex items-center justify-between h-20 px-5 border-b border-line">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"

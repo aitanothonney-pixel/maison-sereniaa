@@ -57,12 +57,12 @@ export default function SiteHeader() {
           </button>
 
           {/* Centre — logo */}
-          <Link href="/" aria-label="Tempered — accueil" className="flex-1 flex justify-center py-2 -my-2">
+          <Link href="/" aria-label="Tempered — accueil" className="flex-1 flex justify-center">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={170}
-              height={56}
+              width={140}
+              height={46}
               unoptimized
               quality={100}
               priority

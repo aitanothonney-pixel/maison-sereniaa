@@ -33,7 +33,7 @@ export default function SiteHeader() {
       <header className="bg-background border-b border-line sticky top-0 z-40">
         <div className="grid grid-cols-3 items-center px-5 lg:px-8 h-20">
           {/* Gauche — navigation */}
-          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8 justify-self-start">
             {NAV.map((item) => (
               <Link
                 key={item.label}
@@ -49,20 +49,20 @@ export default function SiteHeader() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Ouvrir le menu"
-            className="lg:hidden flex flex-col gap-[5px] py-3 -my-3"
+            className="lg:hidden flex flex-col gap-[5px] justify-self-start py-3 -my-3 pr-3 -mr-3"
           >
             <span className="block h-[2px] w-6 bg-foreground" />
             <span className="block h-[2px] w-6 bg-foreground" />
             <span className="block h-[2px] w-4 bg-foreground" />
           </button>
 
-          {/* Centre — logo parfaitement centré */}
-          <Link href="/" aria-label="Tempered — accueil" className="flex justify-center py-1">
+          {/* Centre — logo */}
+          <Link href="/" aria-label="Tempered — accueil" className="justify-self-center place-self-center py-2 -my-2">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={120}
-              height={40}
+              width={150}
+              height={50}
               unoptimized
               quality={100}
               priority
@@ -71,7 +71,7 @@ export default function SiteHeader() {
           </Link>
 
           {/* Droite — recherche, panier, réseaux */}
-          <div className="flex items-center justify-end gap-5">
+          <div className="flex items-center justify-end gap-5 justify-self-end">
             <SiteSearch />
             <CartSlideOver />
             <a

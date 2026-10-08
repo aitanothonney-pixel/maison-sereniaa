@@ -36,7 +36,7 @@ const CARE = 'Laver à 30°C à l\'envers. Ne pas sécher en machine. Repassage 
 export const products: Product[] = [
   {
     id: 'tshirt-black',
-    name: 'T-shirt Noir',
+    name: 'Switzerland on the map',
     prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',
@@ -54,7 +54,7 @@ export const products: Product[] = [
   },
   {
     id: 'tshirt-white',
-    name: 'T-shirt Blanc',
+    name: 'Trust temperedgarments®',
     prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',
@@ -73,7 +73,7 @@ export const products: Product[] = [
   },
   {
     id: 'tshirt-grey',
-    name: 'T-shirt Gris',
+    name: 'Trust the process Military',
     prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',

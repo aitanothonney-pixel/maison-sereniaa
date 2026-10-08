@@ -163,7 +163,7 @@ export default function ProductPage() {
             <div>
               <div className="mb-4">
                 <p className="text-xs tracking-widest text-muted mb-2">{product.category.toUpperCase()}</p>
-                <h1 className="display text-4xl lg:text-5xl leading-tight">{product.name}</h1>
+                <h1 className="display text-[clamp(1.5rem,2.8vw,3rem)] leading-tight">{product.name}</h1>
               </div>
 
               <div className="flex items-baseline gap-6 mb-6 pt-4 border-t border-line">

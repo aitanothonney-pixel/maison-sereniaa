@@ -54,7 +54,6 @@ export default function ProductPage() {
   const variants = productVariants(product)
   const selected = variant ?? variants[0]
   const price = product.prices[selected] ?? fromPrice(product)
-  const sameCategory = products.filter((p) => p.category === product.category)
 
   const handleAddToCart = () => {
     if (!size) {
@@ -180,36 +179,16 @@ export default function ProductPage() {
               <p className="text-sm leading-relaxed text-muted max-w-md">{product.description}</p>
             </div>
 
-            {/* Couleurs — chaque teinte est une fiche distincte */}
-            {sameCategory.length > 1 && (
-              <div>
-                <p className="text-xs tracking-widest ui-label mb-3">
-                  COULEUR — <span className="text-muted">{product.color}</span>
-                </p>
-                <div className="flex gap-3 items-center">
-                  {sameCategory.map((p) =>
-                    p.id === product.id ? (
-                      <span
-                        key={p.id}
-                        aria-current="true"
-                        title={p.color}
-                        style={{ backgroundColor: p.swatch }}
-                        className="w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
-                      />
-                    ) : (
-                      <Link
-                        key={p.id}
-                        href={`/shop/${p.id}`}
-                        aria-label={`Voir ${p.name}`}
-                        title={p.color}
-                        style={{ backgroundColor: p.swatch }}
-                        className="w-10 h-10 ring-1 ring-line hover:ring-foreground transition-shadow"
-                      />
-                    )
-                  )}
-                </div>
-              </div>
-            )}
+            <div>
+              <p className="text-xs tracking-widest ui-label mb-3">
+                COULEUR — <span className="text-muted">{product.color}</span>
+              </p>
+              <span
+                title={product.color}
+                style={{ backgroundColor: product.swatch }}
+                className="block w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
+              />
+            </div>
 
             {/* Options proposées par ce produit */}
             {variants.length > 1 && (

@@ -3,6 +3,13 @@ import { Playfair_Display, Cormorant_Garamond, Bodoni_Moda, Cinzel, Fraunces, Ab
 import { CartProvider } from '@/lib/cart-context'
 import './globals.css'
 
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-nav',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+})
+
 const bodoniMain = Bodoni_Moda({
   subsets: ['latin'],
   variable: '--font-display',
@@ -122,7 +129,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={`${bodoniMain.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
+    <html lang="fr" className={`${playfair.variable} ${bodoniMain.variable} ${bodoni.variable} ${cinzel.variable} ${fraunces.variable} ${abrilFatface.variable} ${ebGaramond.variable} ${libreBaskerille.variable} ${dmSerif.variable} ${tangerine.variable} ${greatVibes.variable} ${parisienne.variable} ${allura.variable} ${satisfy.variable} ${cormorant.variable}`}>
       <body>
         <CartProvider>{children}</CartProvider>
       </body>

@@ -63,7 +63,7 @@ export default function SiteHeader() {
               alt="Tempered logo"
               width={150}
               height={50}
-              className="h-[52px] w-auto"
+              className="h-16 w-auto"
               unoptimized
               quality={100}
               priority

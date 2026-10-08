@@ -31,9 +31,9 @@ export default function SiteHeader() {
   return (
     <>
       <header className="bg-background border-b border-line sticky top-0 z-40">
-        <div className="flex flex-col items-center justify-center px-5 lg:px-8 py-4 min-h-20">
-          {/* Navigation */}
-          <nav className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 mb-2">
+        <div className="flex items-center justify-between px-5 lg:px-8 h-20">
+          {/* Gauche — navigation */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {NAV.map((item) => (
               <Link
                 key={item.label}
@@ -49,15 +49,15 @@ export default function SiteHeader() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Ouvrir le menu"
-            className="lg:hidden absolute left-5 top-1/2 -translate-y-1/2 flex flex-col gap-[5px] py-3 -my-3"
+            className="lg:hidden flex flex-col gap-[5px] py-3 -my-3"
           >
             <span className="block h-[2px] w-6 bg-foreground" />
             <span className="block h-[2px] w-6 bg-foreground" />
             <span className="block h-[2px] w-4 bg-foreground" />
           </button>
 
-          {/* Logo — centré */}
-          <Link href="/" aria-label="Tempered — accueil" className="py-1 -my-1">
+          {/* Centre — logo */}
+          <Link href="/" aria-label="Tempered — accueil" className="flex-1 flex justify-center py-2 -my-2">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
@@ -70,8 +70,8 @@ export default function SiteHeader() {
             />
           </Link>
 
-          {/* Icônes — centrées en bas, ou à droite sur desktop */}
-          <div className="flex items-center justify-center gap-5 mt-2 lg:absolute lg:right-5 lg:top-1/2 lg:-translate-y-1/2 lg:mt-0">
+          {/* Droite — recherche, panier, réseaux */}
+          <div className="flex items-center justify-end gap-5">
             <SiteSearch />
             <CartSlideOver />
             <a

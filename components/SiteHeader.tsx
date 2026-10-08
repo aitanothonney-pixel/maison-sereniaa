@@ -60,8 +60,8 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={120}
-              height={40}
+              width={160}
+              height={50}
               unoptimized
               quality={100}
             />
@@ -91,8 +91,8 @@ export default function SiteHeader() {
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"
-              width={100}
-              height={35}
+              width={140}
+              height={45}
               unoptimized
               quality={100}
             />

@@ -37,7 +37,7 @@ export const products: Product[] = [
   {
     id: 'tshirt-black',
     name: 'T-shirt Noir',
-    prices: { tee: 65 },
+    prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',
     material: 'Jersey 240 GSM, 100% Coton Bio',
@@ -55,7 +55,7 @@ export const products: Product[] = [
   {
     id: 'tshirt-white',
     name: 'T-shirt Blanc',
-    prices: { tee: 65 },
+    prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',
     material: 'Jersey 240 GSM, 100% Coton Bio',
@@ -74,7 +74,7 @@ export const products: Product[] = [
   {
     id: 'tshirt-grey',
     name: 'T-shirt Gris',
-    prices: { tee: 65 },
+    prices: { tee: 29.99 },
     description:
       'T-shirt TEMPERED en jersey lourd, coupe droite légèrement oversize. Col côtelé renforcé et épaules tombantes.',
     material: 'Jersey 240 GSM, 100% Coton Bio',

@@ -179,17 +179,6 @@ export default function ProductPage() {
               <p className="text-sm leading-relaxed text-muted max-w-md">{product.description}</p>
             </div>
 
-            <div>
-              <p className="text-xs tracking-widest ui-label mb-3">
-                COULEUR — <span className="text-muted">{product.color}</span>
-              </p>
-              <span
-                title={product.color}
-                style={{ backgroundColor: product.swatch }}
-                className="block w-10 h-10 ring-2 ring-foreground ring-offset-2 ring-offset-background"
-              />
-            </div>
-
             {/* Options proposées par ce produit */}
             {variants.length > 1 && (
               <div>

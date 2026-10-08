@@ -111,7 +111,7 @@ export default function ProductPage() {
           {/* IMAGE PRINCIPALE CENTRE */}
           <div className={product.images.length > 1 ? "lg:col-span-2" : "lg:col-span-2"}>
             <div
-              className="relative bg-surface aspect-[3/4] overflow-hidden touch-pan-y"
+              className="relative bg-surface aspect-[4/5] overflow-hidden touch-pan-y"
               onTouchStart={(e) => setTouchX(e.touches[0].clientX)}
               onTouchEnd={(e) => {
                 if (touchX === null) return

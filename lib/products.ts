@@ -43,7 +43,7 @@ export const products: Product[] = [
     material: 'Jersey 240 GSM, 100% Coton Bio',
     care: CARE,
     images: [
-      'https://i.ibb.co/vC7GtZb3/IMG-0414.jpg',
+      'https://i.ibb.co/Xrkw1DqR/C9958-D8-B-907-B-4-C08-BA6-F-433-D6-ACFD725.jpg',
       'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
     ],
     color: 'Noir',

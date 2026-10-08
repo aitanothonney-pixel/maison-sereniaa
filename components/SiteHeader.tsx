@@ -31,9 +31,9 @@ export default function SiteHeader() {
   return (
     <>
       <header className="bg-background border-b border-line sticky top-0 z-40">
-        <div className="flex items-center justify-between px-5 lg:px-8 h-20">
+        <div className="grid grid-cols-3 items-center px-5 lg:px-8 h-20 gap-4">
           {/* Gauche — navigation */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8">
             {NAV.map((item) => (
               <Link
                 key={item.label}
@@ -56,8 +56,8 @@ export default function SiteHeader() {
             <span className="block h-[2px] w-4 bg-foreground" />
           </button>
 
-          {/* Centre — logo */}
-          <Link href="/" aria-label="Tempered — accueil" className="flex-1 flex justify-center">
+          {/* Centre — logo parfaitement centré */}
+          <Link href="/" aria-label="Tempered — accueil" className="flex justify-center">
             <Image
               src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
               alt="Tempered logo"

@@ -59,11 +59,11 @@ export default function SiteHeader() {
           {/* Centre — logo */}
           <Link href="/" aria-label="Tempered — accueil" className="justify-self-center py-2 -my-2">
             <Image
-              src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
+              src="/logo-tempered.png"
               alt="Tempered logo"
-              width={150}
-              height={50}
-              className="h-16 w-auto"
+              width={132}
+              height={93}
+              className="h-[72px] w-auto"
               unoptimized
               quality={100}
               priority
@@ -93,11 +93,11 @@ export default function SiteHeader() {
         <div className="fixed inset-0 z-50 bg-background lg:hidden flex flex-col">
           <div className="flex items-center justify-between h-20 px-5 border-b border-line">
             <Image
-              src="https://i.ibb.co/YBWh6wbN/FEB407-B9-897-E-409-F-BE5-F-41-AE612-E83-FF.png"
+              src="/logo-tempered.png"
               alt="Tempered logo"
-              width={140}
-              height={48}
-              className="h-12 w-auto"
+              width={132}
+              height={93}
+              className="h-[72px] w-auto"
               unoptimized
               quality={100}
               priority

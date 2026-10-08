@@ -44,7 +44,6 @@ export const products: Product[] = [
     care: CARE,
     images: [
       'https://i.ibb.co/Xrkw1DqR/C9958-D8-B-907-B-4-C08-BA6-F-433-D6-ACFD725.jpg',
-      'https://i.ibb.co/x8MprMXk/IMG-0435.jpg',
     ],
     color: 'Noir',
     swatch: '#1a1a1a',
@@ -81,7 +80,6 @@ export const products: Product[] = [
     material: 'Jersey 240 GSM, 100% Coton Bio',
     care: CARE,
     images: [
-      'https://i.ibb.co/35HqF5Gq/65-E707-E6-5122-4-E56-9-A28-6-CFDF9-CD3-D44.jpg',
       'https://i.ibb.co/35HqF5Gq/65-E707-E6-5122-4-E56-9-A28-6-CFDF9-CD3-D44.jpg',
     ],
     color: 'Gris',

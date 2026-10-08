@@ -31,7 +31,7 @@ export default function SiteHeader() {
   return (
     <>
       <header className="bg-background border-b border-line sticky top-0 z-40">
-        <div className="grid grid-cols-3 items-center px-5 lg:px-8 h-20 gap-4">
+        <div className="grid grid-cols-3 items-center px-5 lg:px-8 h-20">
           {/* Gauche — navigation */}
           <nav className="hidden lg:flex items-center justify-start gap-6 xl:gap-8">
             {NAV.map((item) => (

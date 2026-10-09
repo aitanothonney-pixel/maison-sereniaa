@@ -39,7 +39,7 @@ export default function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 className="text-sm tracking-wide hover:opacity-60 transition-opacity font-medium"
-                style={{ fontFamily: 'var(--font-nav)' }}
+                style={{ fontFamily: 'var(--font-display)' }}
               >
                 {item.label}
               </Link>

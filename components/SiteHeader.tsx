@@ -38,8 +38,8 @@ export default function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm tracking-wide hover:opacity-60 transition-opacity font-bold"
-                style={{ fontFamily: 'var(--font-display)' }}
+                className="text-sm tracking-wide uppercase hover:opacity-60 transition-opacity font-bold"
+                style={{ fontFamily: 'var(--font-display-alt6)' }}
               >
                 {item.label}
               </Link>
